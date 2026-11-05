@@ -1,0 +1,257 @@
+/* Investors and founders on campus (TestimonialSection): the Why SSB breaker's treatment, from its
+   own classes (why.css), one person to a slide. Here only what a carousel adds: the slides
+   stacked, each slide's media, the plate, the controls. */
+
+/* The page around it is white, so the media melts into white at the foot (as the Why breaker's does
+   since 2026-10-07; it melted into grey before). A sideways swipe changes the slide; vertical ones still scroll. */
+.oc-breaker {
+  --why-ground: var(--surface-page);
+  touch-action: pan-y;
+}
+
+/* ---- The media: each slide's fills the stage. The one coming on fades in over the last, which
+   stays whole under it until it is covered (two half-faded layers would let the page through). ---- */
+.oc-shot {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0s linear var(--motion-duration-slowest),
+    visibility 0s linear var(--motion-duration-slowest);
+}
+.oc-shot[data-on] {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--motion-duration-slowest) var(--motion-easing-productive-in-out);
+}
+.oc-frame {
+  position: absolute;
+  inset: 0;
+}
+/* Phone: framed as the breaker's clip is, a little taller than the screen, centred on the face
+   (`--oc-face` across the file) and raised 10%, its foot melting into the copy under it. */
+.oc-clip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: block;
+  width: calc(var(--why-clip) * 1.1 * var(--oc-ratio));
+  height: calc(var(--why-clip) * 1.1);
+  max-width: none;
+  object-fit: cover;
+  translate: calc(var(--oc-face) * -100%) -10%;
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 90%);
+}
+/* Phone: the clip's first frame covering the band under it, blurred by the copy's frost
+   (.why-breaker-copy::before), as the breaker's blurred copy is. */
+.oc-haze {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+/* Desktop: the clip covers the band from its left edge, so the person keeps their place in the
+   file (the left third) and the generated room runs under the words. */
+@media (width >= 1056px) {
+  .oc-clip {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    translate: none;
+    object-position: 0% 30%;
+    mask-image: none;
+  }
+  .oc-haze {
+    display: none;
+  }
+}
+/* A bright clip (Warikoo's white tent, about 200 of 255 under the words, where Mittal's room is
+   86 and Kamath's 126): the frost under the words darker while it is on (45% to 70% on desktop,
+   55% to 75% on a phone), so the white words read as on the others. It turns with the slide. */
+.oc-breaker .why-breaker-blur,
+.oc-breaker .why-breaker-copy::before {
+  transition: background-color var(--motion-duration-slowest) var(--motion-easing-productive-in-out);
+}
+@media (width >= 1056px) {
+  .oc-breaker[data-bright] .why-breaker-blur {
+    background-color: color-mix(in oklab, var(--why-shade) 70%, transparent);
+  }
+}
+@media (width < 1056px) {
+  .oc-breaker[data-bright] .why-breaker-copy::before {
+    background-color: color-mix(in oklab, var(--why-shade) 75%, transparent);
+  }
+}
+
+/* No media yet: the internship cards' dark plate, the person's initial where the face would be. */
+.oc-plate {
+  position: absolute;
+  inset: 0;
+  background: #1f1e1c url('/internship/plate.webp') center / cover no-repeat;
+}
+.oc-initial {
+  position: absolute;
+  top: calc(var(--why-clip) * 0.24);
+  left: 50%;
+  translate: -50% -50%;
+  font-size: clamp(4rem, 9vw, 7.5rem);
+  line-height: 1;
+  font-weight: var(--font-weight-medium);
+  color: color-mix(in oklab, var(--on-image-ink) 82%, transparent);
+}
+@media (width >= 1056px) {
+  .oc-initial {
+    top: 50%;
+    left: 24%;
+  }
+}
+
+/* ---- The words: every slide's in one cell, so the band is as tall as the longest. The old ones
+   fade out quickly; then the new one shows, its parts held back by their own entrance. ---- */
+.oc-says {
+  display: grid;
+}
+.oc-say {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--motion-duration-slow) var(--motion-easing-productive-exit),
+    visibility 0s linear var(--motion-duration-slow);
+}
+.oc-say[data-on] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0s linear var(--motion-duration-slow);
+}
+/* The one coming on: its words, then who it is, slide in a step from the side the band turned
+   from (on: the right; back: the left) as they fade up, one after the other (the team's ask,
+   2026-10-07: a little flair, very subtle). Only once the band has turned (`data-turned`), so the
+   first paint and the breaker's scroll entrance are left alone; and only inner elements (.oc-in)
+   move, never the [data-breaker-part]s that entrance tweens (GSAP and CSS on one property fight).
+   A keyframe, not a transition: it starts from the side the band turns from each time. */
+.why-breaker-words > .oc-in {
+  display: block;
+}
+.oc-profile {
+  --oc-i: 1;
+}
+.oc-breaker[data-turned] .oc-say[data-on] .oc-in {
+  animation: oc-in var(--motion-duration-slower) var(--motion-easing-expressive-entrance) both;
+  animation-delay: calc(var(--motion-duration-slow) + var(--oc-i, 0) * var(--motion-stagger-base) * 2);
+}
+@keyframes oc-in {
+  from {
+    opacity: 0;
+    translate: calc(var(--oc-dir, 1) * var(--motion-offset-enter)) 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oc-breaker[data-turned] .oc-say[data-on] .oc-in {
+    animation: none;
+  }
+}
+
+/* ---- The carousel controls (CarouselNav, dark tone over the frost), where the breaker has its
+   figures, under the profile card: at the copy's left edge, as the words and card are, not
+   centred as under a row of cards. ---- */
+.oc-breaker .cn {
+  justify-content: flex-start;
+}
+/* Glass, not the dark tone's solid grey pills (the team's call, 2026-10-07: "transparent"): the
+   profile card's treatment, a faint white over the frost and a hairline ring (inset, so the 40px
+   size holds). Stronger than the base `[data-tone]` rule, whatever order the sheets load in. */
+.oc-breaker .cn[data-tone] {
+  --cn-pill: color-mix(in oklab, var(--on-image-ink) 9%, transparent);
+  --cn-pill-hover: color-mix(in oklab, var(--on-image-ink) 16%, transparent);
+}
+.oc-breaker .cn-dots,
+.oc-breaker .cn-arrow {
+  box-shadow: inset 0 0 0 var(--border-width-hair) color-mix(in oklab, var(--on-image-ink) 18%, transparent);
+}
+.oc-breaker .oc-foot {
+  margin-top: 0;
+}
+
+/* ---- The profile card under each statement, over the dots: who it is, for readers who don't know the face.
+   A quiet glass panel on the blur: name and credentials, then the logos behind a hairline,
+   white. No backdrop-filter: the breaker's blur already sits under it. ---- */
+.oc-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 100%;
+  /* well clear of the statement, so the two read as words, then who said or did them */
+  margin-top: var(--space-8);
+  padding: var(--space-3) var(--space-5);
+  border: var(--border-width-hair) solid color-mix(in oklab, var(--on-image-ink) 18%, transparent);
+  /* the design system's 8px, as its cards (the team's call, 2026-10-07; it was a pill) */
+  border-radius: var(--radius-lg);
+  background: color-mix(in oklab, var(--on-image-ink) 9%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--on-image-ink) 10%, transparent);
+  color: var(--on-image-ink);
+}
+.oc-who {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.oc-name {
+  font-size: var(--type-body-size);
+  line-height: 1.3;
+  font-weight: var(--font-weight-semibold);
+}
+.oc-credential {
+  font-size: var(--type-body-sm-size);
+  line-height: 1.35;
+  text-wrap: balance;
+  color: var(--on-image-ink-secondary);
+}
+.oc-logos {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-3);
+  align-self: stretch;
+  margin-left: var(--space-2);
+  padding-left: var(--space-5);
+  border-left: var(--border-width-hair) solid color-mix(in oklab, var(--on-image-ink) 22%, transparent);
+}
+.oc-logos img {
+  display: block;
+  width: auto;
+  height: calc(1rem * var(--oc-logo-scale, 1));
+  max-width: 7rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.oc-ex {
+  margin-right: calc(var(--space-2) * -1);
+  font-size: var(--type-body-sm-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-image-ink-secondary);
+}
+/* Phone: the logos on a row of their own under the name, so the card never squeezes it. */
+@media (width < 672px) {
+  .oc-profile {
+    margin-top: var(--space-6);
+    flex-wrap: wrap;
+    row-gap: var(--space-2);
+  }
+  .oc-logos {
+    flex-basis: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+/* (2026-10-27, the user's ask) the statement a step smaller: 30px on desktop (was 36), 22px on a
+   phone (was 28), so it reads as a lead, not a wall */
+.oc-breaker .why-breaker-words { font-size: 1.875rem; line-height: 1.25; }
+@media (width < 672px) { .oc-breaker .why-breaker-words { font-size: 1.375rem; line-height: 1.3; } }
