@@ -6,7 +6,6 @@ import { Container, Heading, Section, Text } from '@kishanscaler/ssx-ui';
 import { alumni as allAlumni, pivotAlumni, type Alumnus } from '@/content/alumni';
 import { useSectionEntrance } from '@/sections/faculty/useSectionEntrance';
 import { ScrollDots } from '@/sections/shared/ScrollDots';
-import { useRows } from '@/sections/shared/useRows';
 import { Title } from '@/sections/shared/Title';
 import { AlumniCard } from './AlumniCard';
 import './alumni.css';
@@ -36,7 +35,8 @@ export function AlumniSection({
   // Same entrance as Faculty: the header, then the cards on screen wiped open.
   useSectionEntrance(sectionRef, { decks: ['.alumni-row > li > article'] });
   // The scrolling grid is the phone's (2026-10-13): two rows, card over card, so the dots count columns.
-  const rows = useRows(2);
+  // Three rows at every width (2026-11-09, the user's ask), so the dots count three-card columns.
+  const rows = 3;
 
 
   return (
@@ -69,7 +69,7 @@ export function AlumniSection({
 
       <ul ref={rowRef} className="alumni-row" aria-label="Alumni">
         {alumni.map((a, i) => (
-          <li key={a.name}>
+          <li key={`${a.name}-${i}`}>
             <AlumniCard alumnus={a} priority={i < 3} />
           </li>
         ))}
@@ -90,8 +90,8 @@ export function AlumniSection({
             <div key={r} className="alumni-drift-row" data-dir={r ? 'back' : undefined} style={{ '--n': mine.length } as React.CSSProperties}>
               {[0, 1].map((copy) => (
                 <ul key={copy} className="alumni-drift-set" aria-label={copy ? undefined : 'Alumni'} aria-hidden={copy ? true : undefined}>
-                  {mine.map((a) => (
-                    <li key={a.name}>
+                  {mine.map((a, i) => (
+                    <li key={`${a.name}-${i}`}>
                       <AlumniCard alumnus={a} />
                     </li>
                   ))}

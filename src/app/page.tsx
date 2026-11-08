@@ -94,7 +94,9 @@ export default function V8Page() {
             eyebrow={deckAlumni.eyebrow}
             title={deckAlumni.title}
             sub={deckAlumni.sub}
-            people={deckAlumni.people}
+            // PLACEHOLDER (2026-11-09, the user's ask): the eight alumni three times over, to see the
+            // three-row grid full; back to deckAlumni.people once the real alumni are in
+            people={[...deckAlumni.people, ...deckAlumni.people, ...deckAlumni.people]}
             peers={<PeersTicker title={deckAlumni.peersTitle} />}
           />
         </Tone>
