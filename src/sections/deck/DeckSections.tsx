@@ -53,8 +53,9 @@ import './deck.css';
  * one gentle entrance (useSectionEntrance). Copy in src/content/deck.ts.
  */
 
-/** The page's section header, as RowSection's: eyebrow, title, line. */
-function Header({ id, eyebrow, title, sub }: { id: string; eyebrow?: string; title: string; sub?: string }) {
+/** The page's section header, as RowSection's: eyebrow, title, line. Exported for the other pages'
+ *  sections (the admission page's timeline). */
+export function Header({ id, eyebrow, title, sub }: { id: string; eyebrow?: string; title: string; sub?: string }) {
   return (
     <div data-enter="header" className="flex max-w-(--size-measure-max) flex-col gap-3">
       {eyebrow ? (

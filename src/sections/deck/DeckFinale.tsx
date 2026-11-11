@@ -7,6 +7,7 @@ import { ArrowRight } from '@phosphor-icons/react';
 import { deckClose, deckFaqs } from '@/content/deck';
 import { useSectionEntrance } from '@/sections/faculty/useSectionEntrance';
 import { CtaIcon } from '@/sections/hero/CtaIcon';
+import type { CtaIconName } from '@/sections/hero/types';
 import { Title } from '@/sections/shared/Title';
 import './deck-finale.css';
 
@@ -104,10 +105,20 @@ export function DeckFaqSection() {
  * in white, the deadline chip, the title at the hero's size, its line, the design system's two buttons
  * and the three facts. Static. Phones: the photo above, the frost rising behind the copy at the foot.
  */
-export function DeckCloseSection() {
-  const c = deckClose;
+export type CloseContent = Pick<typeof deckClose, 'title' | 'line' | 'image' | 'imageSmall' | 'imageAlt'> & {
+  /** optional: a band with no chip over its title */
+  eyebrow?: string;
+  /** optional: a band with no facts ends at its actions */
+  facts?: typeof deckClose.facts;
+  primaryCta: { label: string; href: string; icon?: CtaIconName };
+  secondaryCta: { label: string; href: string; icon?: CtaIconName };
+};
+
+/** `content`, `id` (the admission page, 2026-11-11: its request-a-callback band); each CTA may name its
+ *  icon (by default an arrow on the primary, a download on the secondary). */
+export function DeckCloseSection({ content: c = deckClose, id = 'dk-close' }: { content?: CloseContent; id?: string } = {}) {
   return (
-    <Section density="roomy" aria-labelledby="dk-close-title" className="dkc">
+    <Section id={id === 'dk-close' ? undefined : id} density="roomy" aria-labelledby={`${id}-title`} className="dkc">
       <Container>
         <div className="dkc-card" data-brand="ssb" data-theme="dark">
           {/* eslint-disable-next-line @next/next/no-img-element -- fills its box */}
@@ -124,11 +135,13 @@ export function DeckCloseSection() {
           <img className="dkc-photo dkc-photo-blur" src={c.imageSmall} alt="" aria-hidden="true" loading="lazy" decoding="async" />
           <span className="dkc-scrim" aria-hidden="true" />
           <div className="dkc-copy">
-            <p className="dkc-eyebrow">
-              <span className="dkc-dot" aria-hidden="true" />
-              {c.eyebrow}
-            </p>
-            <Heading as="h2" size="display" id="dk-close-title" className="dkc-title">
+            {c.eyebrow ? (
+              <p className="dkc-eyebrow">
+                <span className="dkc-dot" aria-hidden="true" />
+                {c.eyebrow}
+              </p>
+            ) : null}
+            <Heading as="h2" size="display" id={`${id}-title`} className="dkc-title">
               {c.title}
             </Heading>
             <Text size="lg" className="dkc-line">
@@ -138,24 +151,26 @@ export function DeckCloseSection() {
               <Button asChild size="lg" variant="primary" className="dkc-apply">
                 <a href={c.primaryCta.href}>
                   {c.primaryCta.label}
-                  <CtaIcon icon="arrow" />
+                  <CtaIcon icon={c.primaryCta.icon ?? 'arrow'} />
                 </a>
               </Button>
               <Button asChild size="lg" variant="secondary" className="dkc-brochure">
                 <a href={c.secondaryCta.href}>
                   {c.secondaryCta.label}
-                  <CtaIcon icon="download" />
+                  <CtaIcon icon={c.secondaryCta.icon ?? 'download'} />
                 </a>
               </Button>
             </div>
-            <dl className="dkc-facts">
-              {c.facts.map((f) => (
-                <div key={f.value}>
-                  <dt>{f.label}</dt>
-                  <dd>{f.value}</dd>
-                </div>
-              ))}
-            </dl>
+            {c.facts?.length ? (
+              <dl className="dkc-facts">
+                {c.facts.map((f) => (
+                  <div key={f.value}>
+                    <dt>{f.label}</dt>
+                    <dd>{f.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
           </div>
         </div>
       </Container>

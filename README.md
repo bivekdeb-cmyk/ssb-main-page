@@ -1,6 +1,6 @@
-# SSB main page
+# SSB pages
 
-The Scaler School of Business main home page, served at `/`.
+Scaler School of Business pages: the home page at `/` and the admission page at `/admission`.
 
 ```bash
 npm install
@@ -8,4 +8,4 @@ npm run dev     # http://localhost:3000
 npm run build
 ```
 
-`CLAUDE.md` still describes other pages and routes that are no longer in this repo.
+`CLAUDE.md` covers the architecture, the styling and motion rules, and the content conventions.

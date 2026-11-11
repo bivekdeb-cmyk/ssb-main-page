@@ -35,8 +35,9 @@ const SSB = 'https://www.scaler.com/school-of-business';
 export const SSB_NAV: NavContent = {
   menus: [],
   links: [
-    { label: 'Home', href: '#top' },
-    { label: 'Admission & Fees', href: `${SSB}/admission/` },
+    // '/…' (2026-11-11): the site has more than one page now, so the home page's anchors carry its path
+    { label: 'Home', href: '/#top' },
+    { label: 'Admission & Fees', href: '/admission' },
     { label: 'Program', href: `${SSB}/program/` },
     { label: 'Internship', href: `${SSB}/internship/` },
     { label: 'Campus Life', href: `${SSB}/campus-life/` },
