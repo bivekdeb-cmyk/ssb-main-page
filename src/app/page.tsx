@@ -36,7 +36,7 @@ import { InternshipSection } from '@/sections/internship/InternshipSection';
 import { LiveProjectsSection } from '@/sections/live-projects/LiveProjectsSection';
 import { PeopleTabsSection } from '@/sections/people-tabs/PeopleTabsSection';
 import { PressSection } from '@/sections/press/PressSection';
-import { TestimonialSection } from '@/sections/testimonial/TestimonialSection';
+import { DeckFounders } from '@/sections/deck/DeckFounders';
 import { BottomNav } from '@/sections/site/BottomNav';
 import { CalmEntrance } from '@/sections/shared/CalmEntrance';
 import { Tone } from '@/sections/tone/Tone';
@@ -102,7 +102,8 @@ export default function V8Page() {
         </Tone>
         {/* 6 beyond placements: startups by our students, on vFinal's Built at SSB cards (the deck's two rows) */}
         <Tone dark>
-          <BuiltCards content={deckStartups} variant="deck" />
+          {/* no sector, and two rows of smaller, wider cards on a phone (2026-11-11, the user's ask) */}
+          <BuiltCards content={deckStartups} variant="deck" hideSector phoneRows={2} />
         </Tone>
         {/* 7 investors and founders on campus (Sidhant Goyal's words and the VC events after it came off, 2026-10-28, the user's ask) */}
         {/* on the faculty and mentors' card (2026-10-28, the user's ask): the same size, the company's mark, no "Meet" */}
@@ -117,11 +118,10 @@ export default function V8Page() {
         {/* 8 the Shark Tank judge (Anupam Mittal) and Ankur Warikoo on campus */}
         {/* vFinal's band (2026-10-28, the user's ask): Anupam Mittal's offer, Ankur Warikoo's convocation;
             framed as the first fold, as Kamath's (deck.css, .dk-frame) */}
-        {/* on the light tone (2026-10-28, the user's ask: no black frame round it), the band its own dark panel */}
+        {/* three cards in the Kamath card's look (2026-11-11, the user's ask): Anupam Mittal, Ankur Warikoo,
+            Ashneer Grover, in place of the band (<div className="dk-frame"><TestimonialSection /></div>) */}
         <Tone>
-          <div className="dk-frame">
-            <TestimonialSection />
-          </div>
+          <DeckFounders />
         </Tone>
         {/* 9–12 the four USPs (2026-10-28, the user's ask): vFinal's "How you learn" header and numbered
             side navigation, in the deck's order, each block tagged with its number */}
@@ -175,6 +175,19 @@ export default function V8Page() {
             ]}
           />
         </Tone>
+        {/* the future-proof curriculum (the five terms, each opening its courses), career prep and the AI
+            journey, just under the four USPs (2026-11-11, the user's ask; they sat after the mentors): the
+            terms, the deck's figures 2 × 2 dark, then the 150-hour AI curriculum */}
+        <Tone>
+          <Curriculum part="terms" termsStack termsVersion={4} deck />
+        </Tone>
+        <Tone dark>
+          <DeckCareerPrep />
+        </Tone>
+        <Tone>
+          {/* 23 the 150-hour AI curriculum */}
+          <Curriculum part="ai" aiCarousel deck />
+        </Tone>
         {/* 13 the Scaler Innovation Lab: its five figures and four startups */}
         {/* the deck's figures band; the startups as vFinal has them, its heading and every startup (2026-10-28, the user's ask) */}
         {/* the startups on the student startups' cards (2026-10-28, the user's ask), every field kept */}
@@ -194,18 +207,8 @@ export default function V8Page() {
         <Tone>
           <SuperMentorsSection />
         </Tone>
-        {/* 17–22 the curriculum: the five terms (each opens its courses), then the AI journey (career prep came off, 2026-10-28, the user's ask: "not looking good") */}
-        <Tone>
-          <Curriculum part="terms" termsStack termsVersion={4} deck />
-        </Tone>
-        {/* career prep back, above the AI curriculum (2026-10-28, the user's ask): the deck's figures 2 × 2, dark */}
-        <Tone dark>
-          <DeckCareerPrep />
-        </Tone>
-        <Tone>
-          {/* 23 the 150-hour AI curriculum */}
-          <Curriculum part="ai" aiCarousel deck />
-        </Tone>
+        {/* (the curriculum's terms moved up, under "How you learn", 2026-11-11) */}
+        {/* (career prep and the AI curriculum moved up, under "How you learn", 2026-11-11) */}
         {/* 24 internship statistics */}
         {/* the students' videos inside the internship section, framed, no heading (2026-10-28, the user's ask) */}
         <Tone>

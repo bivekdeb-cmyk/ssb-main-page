@@ -318,6 +318,13 @@ export const foundingTeamSection = {
       logo: { name: 'Kearney', src: '/logos/kearney.svg' },
     },
     {
+      // (2026-11-11, the user's ask; the review call's "add Stefan": spelled as the user gave it, to confirm)
+      name: 'Stephan',
+      role: 'PnL Head and Director, Scaler School of Business',
+      image: '/people/stephan.jpg',
+      logo: { name: 'Scaler School of Business', src: '/logos/ssb.svg' },
+    },
+    {
       name: 'Adhiraj Arora',
       role: 'Program Director, Ex-BCG, ISB',
       image: '/people/adhiraj-arora.webp',

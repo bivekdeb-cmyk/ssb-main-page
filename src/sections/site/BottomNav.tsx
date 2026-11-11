@@ -60,7 +60,14 @@ export function BottomNav({ items = bottomNav.items, instant = false }: { items?
           : window.scrollY > vh;
       // the footer is uncovered once the sheet the page lifts off it has risen above the window's foot
       const sheet = document.querySelector('.sf-lift');
-      const footer = sheet ? sheet.getBoundingClientRect().bottom < vh - 24 : false;
+      // the deck pages' own footer (DeckFooter, .dkft; 2026-11-11, the user's ask: the strip hung over it
+      // on a phone): uncovered once its top has risen into the window
+      const deckFooter = document.querySelector('.dkft');
+      const footer = sheet
+        ? sheet.getBoundingClientRect().bottom < vh - 24
+        : deckFooter
+          ? deckFooter.getBoundingClientRect().top < vh - 24
+          : false;
       // phones: the curriculum's own bar sits at the window's foot while its section is on screen
       const rail = document.querySelector('.cr');
       const phone = window.matchMedia('(max-width: 1055px)').matches;

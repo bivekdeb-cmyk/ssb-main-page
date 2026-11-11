@@ -30,6 +30,8 @@ import { useOpenYear } from './shared';
 import { StageSheet, TermCounts } from './stage-sheet';
 import { MONTHS, PHOTO } from './stage';
 import './row.css';
+// the term chips on phones are the global immersion's day chips (.dkg-day, its phone rules)
+import '@/sections/deck/deck-global.css';
 
 /**
  * The terms as one plain row of equal cards (2026-10-27, the user's ask: "simple scroll, not small and
@@ -45,9 +47,53 @@ export function RowJourney({ j, width, portal, deck = false }: { j: Journey; wid
   const rowRef = React.useRef<HTMLUListElement>(null);
   const { open, setOpen, close } = useOpenYear(null);
 
+  // phones (2026-11-11, the user's ask): the AI journey's term slider over these cards too (its styles,
+  // curriculum-page.css .sj-ai-tabs: phones only): the term in view filled in, a tap brings its card in
+  const [at, setAt] = React.useState(0);
+  const tabsRef = React.useRef<HTMLDivElement>(null);
+  const sync = React.useCallback(() => {
+    const el = rowRef.current;
+    if (!el) return;
+    const cards = Array.from(el.children) as HTMLElement[];
+    if (!cards.length) return;
+    const left = el.getBoundingClientRect().left + parseFloat(getComputedStyle(el).scrollPaddingLeft || '0');
+    let best = 0;
+    cards.forEach((c, i) => {
+      if (Math.abs(c.getBoundingClientRect().left - left) < Math.abs(cards[best].getBoundingClientRect().left - left)) best = i;
+    });
+    if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) best = cards.length - 1;
+    setAt(best);
+  }, []);
+  const go = (i: number) => {
+    const el = rowRef.current;
+    const card = el?.children[i] as HTMLElement | undefined;
+    if (!el || !card) return;
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const pad = parseFloat(getComputedStyle(el).scrollPaddingLeft || '0');
+    const left = el.scrollLeft + card.getBoundingClientRect().left - el.getBoundingClientRect().left - pad;
+    el.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' });
+  };
+  React.useEffect(() => {
+    const row = tabsRef.current;
+    const b = row?.children[at] as HTMLElement | undefined;
+    if (row && b && row.scrollWidth > row.clientWidth) row.scrollTo({ left: b.offsetLeft - (row.clientWidth - b.offsetWidth) / 2, behavior: 'smooth' });
+  }, [at]);
+
   return (
     <div className="tr" data-deck={deck || undefined}>
-      <ul ref={rowRef} className="tr-row" aria-label="Programme terms">
+      {deck ? (
+        <div ref={tabsRef} className="sj-ai-tabs tr-tabs" role="tablist" aria-label="Terms">
+          {years.map((y, i) => (
+            <button key={y.year} type="button" role="tab" aria-selected={i === at} className="sj-ai-tab dkg-day" onClick={() => go(i)}>
+              <span className="dkg-day-n">Term</span>
+              <span className="dkg-day-text">
+                <b>{String(y.year).padStart(2, '0')}</b>
+              </span>
+            </button>
+          ))}
+        </div>
+      ) : null}
+      <ul ref={rowRef} className="tr-row" aria-label="Programme terms" onScroll={sync}>
         {years.map((y, i) => {
           const flagship = y.projects.find((p) => p.flagship);
           const photo = PHOTO[y.year];

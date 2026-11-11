@@ -27,6 +27,7 @@ import {
   deckWhyFigures,
 } from '@/content/deck';
 import { why } from '@/content/why';
+import { DeckKamath } from './DeckKamath';
 import { creators, domesticImmersions } from '@/content/immersions';
 import { CreatorCard } from '@/sections/immersions/ImmersionsSection';
 import { useSectionEntrance } from '@/sections/faculty/useSectionEntrance';
@@ -78,12 +79,9 @@ function Header({ id, eyebrow, title, sub }: { id: string; eyebrow?: string; tit
  * the stakeholders' words: the title and its line, his remark as a small note, the roles as pills.
  */
 export function DeckWhySection() {
-  return (
-    <div className="dk-frame">
-      {/* the figures back with the 4b copy, the second simplified (2026-10-28, the user's ask) */}
-      <WhyBreaker quote={why.quote} figures={deckWhyFigures} copy={deckWhy} />
-    </div>
-  );
+  // one card, the copy beside the YouTube video (2026-11-11, the user's sketch; was the full-width
+  // breaker: <div className="dk-frame"><WhyBreaker quote={why.quote} figures={deckWhyFigures} copy={deckWhy} /></div>)
+  return <DeckKamath />;
 }
 
 /**

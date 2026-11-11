@@ -35,8 +35,16 @@ export function AlumniSection({
   // Same entrance as Faculty: the header, then the cards on screen wiped open.
   useSectionEntrance(sectionRef, { decks: ['.alumni-row > li > article'] });
   // The scrolling grid is the phone's (2026-10-13): two rows, card over card, so the dots count columns.
-  // Three rows at every width (2026-11-09, the user's ask), so the dots count three-card columns.
-  const rows = 3;
+  // Two rows from the tablet up, three on a phone (2026-11-11, the user's ask), so the dots count
+  // columns of that many cards.
+  const [rows, setRows] = React.useState(2);
+  React.useEffect(() => {
+    const mq = window.matchMedia('(min-width: 672px)');
+    const set = () => setRows(mq.matches ? 2 : 3);
+    set();
+    mq.addEventListener('change', set);
+    return () => mq.removeEventListener('change', set);
+  }, []);
 
 
   return (
