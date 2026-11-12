@@ -2,21 +2,19 @@ import type { Metadata } from 'next';
 import { admissionDeadline } from '@/content/admission';
 import {
   internshipCallback,
-  internshipCompanies,
-  internshipKnow,
+  internshipHero,
+  internshipHighlights,
   internshipNav,
   internshipRoles,
   internshipStories,
-  internshipTop,
 } from '@/content/internship';
-import { AdmissionTop } from '@/sections/admission/AdmissionTop';
-import { DeckCareerPrep } from '@/sections/deck/DeckCareerPrep';
 import { DeckCloseSection } from '@/sections/deck/DeckFinale';
 import { DeckFooter } from '@/sections/deck/DeckFooter';
+import { DeckOutcomes } from '@/sections/deck/DeckOutcomes';
 import { HeroFrameDeadline } from '@/sections/hero/frame/HeroFrame';
 import { HomeNav, ScrollRefresh } from '@/sections/home/client';
-import { InternshipCompanies } from '@/sections/internship-page/InternshipCompanies';
-import { InternshipRoles } from '@/sections/internship-page/InternshipRoles';
+import { InternshipHero } from '@/sections/internship-page/InternshipHero';
+import { InternshipRolesCard } from '@/sections/internship-page/InternshipRolesCard';
 import { InternshipStories } from '@/sections/internship-page/InternshipStories';
 import { CalmEntrance } from '@/sections/shared/CalmEntrance';
 import { BottomNav } from '@/sections/site/BottomNav';
@@ -26,18 +24,18 @@ import '@/sections/deck/tokens.css';
 export const metadata: Metadata = {
   title: 'Internship | Scaler School of Business',
   description:
-    'Scaler School of Business internship outcomes: full-time internships, stipends, the companies our learners intern at, their stories and roles.',
+    'Scaler School of Business internship outcomes: full-time internships, stipends, the companies our learners intern at, their roles and their stories.',
 };
 
 /**
- * /internship (2026-11-12, the user's ask: the live internship page, built the admission page's way):
- * the live page (scaler.com/school-of-business/internship/) rebuilt from the home page's and the
- * admission page's sections, in the live page's order. Its numbers first, in the admission page's
- * short green first fold (SSB's cohort photo, not the arch, so the page reads as its own); the
- * companies in the home page's logo tiles; "Did you know?" dark, on the career prep's cards; the five
- * students' stories with the live covers and videos; the role split as bars (an image on the live
- * page); the request-a-callback band last before the footer. The early bird's countdown is the site's
- * top strip, as on /admission. Copy and its open questions: src/content/internship.ts.
+ * /internship (2026-11-12, the user's asks): the live internship page
+ * (scaler.com/school-of-business/internship/) rebuilt from the home page's sections, short and light.
+ * The first fold shows the companies our learners intern at, flipping (the home page's "Your peers
+ * come from" grid, on the site's green panel); then the figures and the role split in one section, on
+ * the home page's placement highlights (its ticker card and figure tiles; a roles card with the cohort
+ * photo in the press card's place; no recruiters); the five students' stories, a tap to play; the
+ * request-a-callback band before the footer. The early bird's countdown is the site's top strip, as on
+ * /admission. Copy and its open questions: src/content/internship.ts.
  */
 export default function InternshipPage() {
   return (
@@ -54,25 +52,23 @@ export default function InternshipPage() {
         <HeroFrameDeadline deadline={admissionDeadline} />
         <HomeNav light followTone pinned />
         <BottomNav instant hero="#int-top" items={internshipNav} />
-        {/* "Pre-Placement Season Outcomes" and its three figures (and the offers line) in one box */}
+        {/* the title and the companies our learners intern at */}
         <Tone>
-          <AdmissionTop content={internshipTop} id="int-top" />
+          <InternshipHero content={internshipHero} />
         </Tone>
-        {/* "Our Learners Are Now Creating Impact At": the twelve logos */}
+        {/* the figures and the role split, one section */}
         <Tone>
-          <InternshipCompanies content={internshipCompanies} />
-        </Tone>
-        {/* "Did you know?": the students' startups' revenue and the IIM-C win, dark */}
-        <Tone dark>
-          <DeckCareerPrep content={internshipKnow} id="know" />
+          <DeckOutcomes
+            ticker
+            recruiters={false}
+            content={internshipHighlights}
+            id="highlights"
+            aside={<InternshipRolesCard content={internshipRoles} />}
+          />
         </Tone>
         {/* "What Our Students Are Saying": the five stories, a tap to play */}
         <Tone>
           <InternshipStories content={internshipStories} />
-        </Tone>
-        {/* "Land High Impact Roles": the role split */}
-        <Tone>
-          <InternshipRoles content={internshipRoles} />
         </Tone>
         {/* request a callback, the last thing before the footer */}
         <Tone>

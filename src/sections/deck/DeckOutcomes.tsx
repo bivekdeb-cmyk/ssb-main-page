@@ -16,15 +16,37 @@ import './deck-outcomes.css';
  * hairline cells, in the brand green; at the right the press card, as vFinal's article card (the
  * paper and date, headline, byline, a large photo beside the opening lines, the CTA in its foot).
  * Then the recruiters' flip grid.
+ * `content`, `id`, `aside` (the internship page, 2026-11-12: its own figures and ticker line, and its
+ * roles card in the press card's place); the defaults are the home page's.
  */
+export type OutcomesContent = {
+  eyebrow: string;
+  title: string;
+  /** the ticker strip's words (by default "Placement highlights") */
+  ticker?: string;
+  figures: { value: string; label: string; note: string; short: string }[];
+};
+
 export function DeckOutcomes({
   glass = false,
   strip = false,
   ticker = false,
   recruiters = true,
-}: { glass?: boolean; strip?: boolean; ticker?: boolean; recruiters?: boolean } = {}) {
-  const c = deckOutcomes;
-  const press = c.press;
+  content,
+  id = 'placements-showcase',
+  aside,
+}: {
+  glass?: boolean;
+  strip?: boolean;
+  ticker?: boolean;
+  recruiters?: boolean;
+  content?: OutcomesContent;
+  id?: string;
+  aside?: React.ReactNode;
+} = {}) {
+  const c = { ...deckOutcomes, ...content };
+  const press = deckOutcomes.press;
+  const tickerLabel = content?.ticker ?? 'Placement highlights';
   const figs = (
     <dl className="dko-figs">
       {c.figures.map((f, i) => (
@@ -39,7 +61,7 @@ export function DeckOutcomes({
       ))}
     </dl>
   );
-  const pressCard = (
+  const pressCard = aside ?? (
     <>
       {/* the press card, as vFinal's article card (2026-10-28, the user's reference): the paper and
         the date, the headline, the byline, a rule, then a large photo beside the opening lines,
@@ -77,13 +99,13 @@ export function DeckOutcomes({
     </>
   );
   return (
-    <Section density="roomy" aria-labelledby="placements-showcase-title" className="dko">
+    <Section density="roomy" aria-labelledby={`${id}-title`} className="dko">
       <Container>
         <div className="dko-head">
           <Heading as="p" size="eyebrow" className="text-content-brand">
             {c.eyebrow}
           </Heading>
-          <Heading as="h2" size="display" id="placements-showcase-title">
+          <Heading as="h2" size="display" id={`${id}-title`}>
             <Title text={c.title} />
           </Heading>
         </div>
@@ -97,7 +119,7 @@ export function DeckOutcomes({
             <div className="dko-ticker" aria-hidden>
               <div className="dko-ticker-track">
                 {Array.from({ length: 12 }, (_, i) => (
-                  <span key={i}>Placement highlights</span>
+                  <span key={i}>{tickerLabel}</span>
                 ))}
               </div>
             </div>

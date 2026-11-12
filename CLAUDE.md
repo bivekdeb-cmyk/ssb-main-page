@@ -114,18 +114,20 @@ the old `/v8`**: `/v7`'s sections in the deck's order, each wrapped in a light o
   this page's first fold.
 - **`/internship`** (`src/app/internship/page.tsx`, copy in `content/internship.ts`, its own sections
   in `sections/internship-page/`; `sections/internship/` is the home page's section): the live
-  scaler.com internship page in its order, built the admission page's way. The early bird's strip
-  (`admissionDeadline`, shared with `/admission`) > `AdmissionTop id="int-top"` with the cohort photo
-  and the live page's four numbers > `InternshipCompanies` (the home page's `LogoGrid` with the live
-  page's twelve, in the /v7 tiles) > "Did you know?" (`DeckCareerPrep content id="know"`, dark, two
-  cards) > `InternshipStories` (`RowSection` of the live page's covers; a tap plays the live MP4 in
-  `Lightbox src poster portrait`; the files are 40-50 MB each, so nothing autoplays) >
-  `InternshipRoles` (the live page's role-split poster rebuilt as bars that grow with `scaleX`) > the
-  callback band (`DeckCloseSection id="callback"`, which picks up `admission.css`'s `#callback`
-  rules) > `DeckFooter`. `BottomNav hero="#int-top"`.
+  scaler.com internship page, short and light, on the home page's pieces. The early bird's strip
+  (`admissionDeadline`, shared with `/admission`) > `InternshipHero`: the site's green panel
+  (`admission.css` classes) with the companies beside the copy on the home page's "Your peers come
+  from" grid (`PeersFlip cells={12}`, flipping through 24 logos) > `DeckOutcomes ticker
+  recruiters={false} content id="highlights" aside`: the placement highlights' ticker card and six
+  figure tiles with the internship figures, and `InternshipRolesCard` (the role split as one bar and
+  a legend, with the cohort photo) in the press card's place > `InternshipStories` (`RowSection` of the
+  live page's covers; a tap plays the live MP4 in `Lightbox src poster portrait`; the files are 40-50
+  MB each, so nothing autoplays) > the callback band (`DeckCloseSection id="callback"`, which picks
+  up `admission.css`'s `#callback` rules) > `DeckFooter`. `BottomNav hero="#int-top"`.
 - **Building another page:** reuse the home page's sections and give them the page's copy through
   optional props that default to the home page's (`content`, `id`, `parts`, `children`), as
-  `DeckUspHead`, `DeckCloseSection`, `DeckCareerPrep` and `AdmissionsV4` do; don't fork a section.
+  `DeckUspHead`, `DeckCloseSection`, `DeckOutcomes`, `PeersFlip` and `AdmissionsV4` do; don't fork a
+  section.
   Pass a fresh `id` wherever a section appears twice (its heading id is derived from it). Shared
   nav, footer and phone-tab links to home-page anchors are written `/#anchor`, so they work from
   every route.

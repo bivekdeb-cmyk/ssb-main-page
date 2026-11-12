@@ -1,15 +1,18 @@
 import type { BottomNavItem } from '@/content/bottom-nav';
 import { bottomNav } from '@/content/bottom-nav';
 import { deckClose } from '@/content/deck';
-import type { TopContent } from '@/content/admission';
+import type { OutcomesContent } from '@/sections/deck/DeckOutcomes';
 import type { CloseContent } from '@/sections/deck/DeckFinale';
+import type { HeroLogo } from '@/sections/hero/types';
 
 /*
  * The internship page (/internship, 2026-11-12), rebuilt from the live page
- * (scaler.com/school-of-business/internship/, read that day) in the home page's components, the
- * admission page's way: the live page's sections in its order, its numbers in the first fold, a
- * request-a-callback band before the footer. The copy is the live page's, set in the components'
- * patterns (sentence case, no exclamation marks); nothing is added that the live page doesn't say.
+ * (scaler.com/school-of-business/internship/, read that day) in the home page's components: the
+ * companies in the first fold, on the home page's flipping logo grid; the figures and the role split
+ * in one section, on the home page's placement highlights (its ticker card and figure tiles, a roles
+ * card in the press card's place); the students' stories; the request-a-callback band. The copy is
+ * the live page's, set in the components' patterns (sentence case, no exclamation marks); nothing is
+ * added that the live page doesn't say.
  *
  * TO CONFIRM before this ships: the live page's figures are its "pre-placement season" (70% with
  * full-time internships 2 months early, ₹60,000 highest and ₹40,000 median monthly stipend, offers
@@ -22,59 +25,97 @@ const APPLY = 'https://www.scaler.com/school-of-business/application';
 const BROCHURE =
   'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/164/923/original/brochure-nov-compressed.pdf?1763005202';
 
-/** The first fold (the admission page's, AdmissionTop): the footer's forest green, SSB's photo melting
- *  into it, the live page's title and line, then its numbers in one box, split by rules. */
-export const internshipTop: TopContent = {
+/** Where our learners intern: the live internship page's twelve first, in its order, then the rest of
+ *  the live home page's "Our learners are now creating impact at" (the home page's files,
+ *  public/internship/logos). The first fold shows twelve at a time and flips through all of them. */
+const COMPANIES = [
+  'Razorpay',
+  'MPL',
+  'Chai Point',
+  'Aeos Labs',
+  'SpotDraft',
+  'WNS Vuram',
+  'Vaani',
+  'Emergent',
+  'Neosapien',
+  'Clientell',
+  'BharatPe',
+  'Onsurity',
+  'BCCI',
+  'The Whole Truth',
+  'apna',
+  'LoEstro',
+  'Airtribe',
+  'Slikk',
+  'Ninjacart',
+  'BorderPlus',
+  'ToolJet',
+  'FirstClub',
+  'LimeChat',
+  'Reckitt',
+];
+
+/** The first fold: the title and the live page's line, the actions, and the companies. */
+export const internshipHero = {
   chip: 'Pre-placement season',
   title: 'Internship outcomes',
-  // the live page's line: "Just halfway through the program, great impact already, and a lot more to come."
-  sub: 'Halfway through the programme: great impact already, and a lot more to come.',
+  // the live page's line ("Just halfway through the program, great impact already, and a lot more
+  // to come.") with its first figure ("70% secured full-time internships 2 months early")
+  sub: 'Halfway through the programme, 70% have secured full-time internships, two months early.',
   primaryCta: { label: 'Apply Now', href: APPLY },
   secondaryCta: { label: 'Download Brochure', href: BROCHURE },
-  // SSB's own photo: the cohort in a classroom under the school's banners
+  logosLabel: 'Our learners intern at',
+  logos: COMPANIES.map((name): HeroLogo => ({
+    name,
+    wordmark: name,
+    logoUrl: `/internship/logos/${name.toLowerCase().replace(/ /g, '-')}.png`,
+  })),
+};
+
+/** The figures, on the home page's placement highlights (DeckOutcomes): the live page's three, its
+ *  "offers within 10 months" line, and its two "Did you know?" facts. */
+export const internshipHighlights: OutcomesContent = {
+  eyebrow: 'Outcomes',
+  title: 'Internship highlights.|Great impact already, and more to come.',
+  ticker: 'Internship highlights',
+  figures: [
+    {
+      value: '70%',
+      label: 'Full-time internships',
+      note: 'Secured 2 months early',
+      short: 'Full-time interns',
+    },
+    { value: '₹60,000', label: 'Highest stipend', note: 'A month', short: 'Highest stipend' },
+    { value: '₹40,000', label: 'Median stipend', note: 'A month, full-time', short: 'Median stipend' },
+    { value: '10', label: 'Months to offers', note: 'Full-time, and counting', short: 'Months to offers' },
+    {
+      value: '₹10L+',
+      label: 'Startup revenue',
+      note: 'Real sales, student startups',
+      short: 'Startup revenue',
+    },
+    { value: 'IIM-C', label: 'Competition winners', note: 'A team from our cohort', short: 'IIM-C winners' },
+  ],
+};
+
+/** The role split (the live page's "Land High Impact Roles" poster), in the press card's place: the
+ *  placement section's cohort photo, then one bar split by function, largest first. */
+export const internshipRoles = {
+  title: 'Land high-impact roles',
+  sub: 'Learners now shaping businesses as professionals.',
+  label: 'Internship roles by function',
   photo: {
-    src: '/media/cohort-group.webp',
-    alt: 'An SSB cohort together in a classroom under the school’s banners',
-    position: '50% 40%',
+    src: '/media/cohort-group-800.webp',
+    srcSet: '/media/cohort-group-800.webp 800w, /media/cohort-group.webp 1600w',
+    alt: 'An SSB cohort together on campus',
   },
-  // the live page's three figures, and its line under them ("full-time internship offers within 10
-  // months, and the number keeps growing") as the fourth
-  facts: [
-    { value: '70%', label: 'Full-time internships', note: '2 months early', icon: 'briefcase' },
-    { value: '₹60,000', label: 'Highest stipend', note: 'A month', icon: 'trend' },
-    { value: '₹40,000', label: 'Median stipend', note: 'A month', icon: 'wallet' },
-    { value: '10 months', label: 'Offers within', note: 'And counting', icon: 'clock' },
-  ],
-};
-
-/** "Our learners are now creating impact at": the live page's twelve, in its order (the files are the
- *  home page's, public/internship/logos). */
-export const internshipCompanies = {
-  eyebrow: 'Companies',
-  title: 'Where our learners intern.',
-  names: [
-    'Razorpay',
-    'MPL',
-    'Chai Point',
-    'Aeos Labs',
-    'SpotDraft',
-    'WNS Vuram',
-    'Vaani',
-    'Emergent',
-    'Neosapien',
-    'Clientell',
-    'BharatPe',
-    'Onsurity',
-  ],
-};
-
-/** "Did you know?": the live page's two facts, on the home page's career prep (DeckCareerPrep). */
-export const internshipKnow = {
-  eyebrow: 'Did you know?',
-  title: 'Beyond internships.|Startups and wins.',
-  stats: [
-    { value: '₹10L+', label: 'Revenue from real sales at our students’ startups' },
-    { value: 'IIM-C', label: 'Winners: a team from our cohort won the competition' },
+  roles: [
+    { name: 'Marketing', share: 38 },
+    { name: 'Product', share: 21 },
+    { name: 'Strategy', share: 15 },
+    { name: 'Founder’s Office', share: 15 },
+    { name: 'Operations', share: 6 },
+    { name: 'Finance', share: 5 },
   ],
 };
 
@@ -129,23 +170,7 @@ export const internshipStories = {
   ] satisfies InternshipStory[],
 };
 
-/** "Land high-impact roles": the live page's poster (an image there), as bars, largest first. */
-export const internshipRoles = {
-  eyebrow: 'Roles',
-  title: 'Land high-impact roles.',
-  sub: 'Learners now shaping businesses as professionals.',
-  label: 'Internship roles by function',
-  roles: [
-    { name: 'Marketing', share: 38 },
-    { name: 'Product', share: 21 },
-    { name: 'Strategy', share: 15 },
-    { name: 'Founder’s Office', share: 15 },
-    { name: 'Operations', share: 6 },
-    { name: 'Finance', share: 5 },
-  ],
-};
-
-/** The request-a-callback band, last before the footer (the admission page's), the four figures again. */
+/** The request-a-callback band, last before the footer (the admission page's), the key figures again. */
 export const internshipCallback: CloseContent = {
   ...deckClose,
   eyebrow: undefined,
@@ -169,8 +194,7 @@ export const internshipCallback: CloseContent = {
 /** The bottom navigation: this page's sections. Each target is a section's heading id (or the first
  *  fold's own); a target resolves to its closest section. */
 export const internshipNav: BottomNavItem[] = [
-  { label: 'Outcomes', target: 'int-top' },
-  { label: 'Companies', target: 'companies-title' },
+  { label: 'Companies', target: 'int-top' },
+  { label: 'Highlights', target: 'highlights-title' },
   { label: 'Stories', target: 'stories-title' },
-  { label: 'Roles', target: 'roles-title' },
 ];
