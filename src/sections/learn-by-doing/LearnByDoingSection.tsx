@@ -84,23 +84,7 @@ function ChallengeCard({ item, onPlay }: { item: Item; onPlay: () => void }) {
 }
 
 /** The video, large, over the page; Esc, the close button or a click outside closes it. */
-/** `src` (the internship page, 2026-11-12): a video file in place of the YouTube id, played with its
- *  controls, `poster` shown while it loads; `portrait` frames it 9:16 (the students' stories). */
-export function Lightbox({
-  id,
-  src,
-  poster,
-  portrait = false,
-  title,
-  onClose,
-}: {
-  id?: string;
-  src?: string;
-  poster?: string;
-  portrait?: boolean;
-  title: string;
-  onClose: () => void;
-}) {
+export function Lightbox({ id, title, onClose }: { id: string; title: string; onClose: () => void }) {
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', onKey);
@@ -108,17 +92,13 @@ export function Lightbox({
   }, [onClose]);
   return (
     <div className="lb-box" role="dialog" aria-modal="true" aria-label={title} onClick={onClose}>
-      <div className="lb-box-frame" data-portrait={portrait || undefined} onClick={(e) => e.stopPropagation()}>
-        {src ? (
-          <video src={src} poster={poster} title={title} controls autoPlay playsInline preload="auto" />
-        ) : (
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
-            title={title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
-        )}
+      <div className="lb-box-frame" onClick={(e) => e.stopPropagation()}>
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
       </div>
       <button type="button" className="lb-box-close" onClick={onClose} aria-label="Close video">
         <X weight="bold" aria-hidden />

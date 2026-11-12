@@ -4,13 +4,14 @@ import { deckClose } from '@/content/deck';
 import type { OutcomesContent } from '@/sections/deck/DeckOutcomes';
 import type { CloseContent } from '@/sections/deck/DeckFinale';
 import type { HeroLogo } from '@/sections/hero/types';
+import type { Reel } from '@/sections/internship/StoryReels';
 
 /*
  * The internship page (/internship, 2026-11-12), rebuilt from the live page
  * (scaler.com/school-of-business/internship/, read that day) in the home page's components: the
  * companies in the first fold, on the home page's flipping logo grid; the figures and the role split
  * in one section, on the home page's placement highlights (its ticker card and figure tiles, a roles
- * card in the press card's place); the students' stories; the request-a-callback band. The copy is
+ * card in the press card's place); the students' videos on the home page's reel row; the request-a-callback band. The copy is
  * the live page's, set in the components' patterns (sentence case, no exclamation marks); nothing is
  * added that the live page doesn't say.
  *
@@ -99,16 +100,11 @@ export const internshipHighlights: OutcomesContent = {
 };
 
 /** The role split (the live page's "Land High Impact Roles" poster), in the press card's place: the
- *  placement section's cohort photo, then one bar split by function, largest first. */
+ *  six shares, largest first, and one bar split by function. */
 export const internshipRoles = {
   title: 'Land high-impact roles',
   sub: 'Learners now shaping businesses as professionals.',
   label: 'Internship roles by function',
-  photo: {
-    src: '/media/cohort-group-800.webp',
-    srcSet: '/media/cohort-group-800.webp 800w, /media/cohort-group.webp 1600w',
-    alt: 'An SSB cohort together on campus',
-  },
   roles: [
     { name: 'Marketing', share: 38 },
     { name: 'Product', share: 21 },
@@ -119,55 +115,82 @@ export const internshipRoles = {
   ],
 };
 
-export type InternshipStory = {
-  name: string;
-  /** the student's line, the live card's (sentence case) */
-  quote: string;
-  /** the live page's cover (its headline and play mark are in the picture) */
-  cover: string;
-  /** the live page's video: vertical, 9:16, 40–50 MB each, so it plays on a tap only */
-  video: string;
+/** The same figures as one crisp card (2026-11-12, the user's ask: another section beside the current
+ *  one, after his earlier numbered-blocks layout): 01 the role split as a donut and its legend, 02 the
+ *  median and highest stipends on one scale, 03 the season's other figures in a row. */
+export const internshipNumbers = {
+  eyebrow: 'At a glance',
+  title: 'Pre-placement internship outcomes.|By the numbers.',
+  roles: { num: '01', title: 'Internship roles by function', items: internshipRoles.roles },
+  // the two figures on one scale (2026-11-12, the user's note: they are points on one range, not two
+  // categories): ₹0 to ₹80,000, the median and the highest marked on the same track
+  stipends: {
+    num: '02',
+    title: 'Monthly stipends',
+    max: 80000,
+    ticks: [
+      { value: 0, label: '₹0' },
+      { value: 20000, label: '₹20K' },
+      { value: 40000, label: '₹40K' },
+      { value: 60000, label: '₹60K' },
+      { value: 80000, label: '₹80K' },
+    ],
+    median: { label: 'Median', value: 40000, display: '₹40,000' },
+    highest: { label: 'Highest', value: 60000, display: '₹60,000' },
+  },
+  season: {
+    num: '03',
+    title: 'Pre-placement season',
+    items: [
+      { value: '70%', label: 'Full-time internships, 2 months early' },
+      { value: '10 months', label: 'To full-time internship offers' },
+      { value: '₹10L+', label: 'Revenue from student startups' },
+      { value: 'IIM-C', label: 'Competition winners' },
+    ],
+  },
 };
 
 const CDN = 'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000';
 
-/** "What our students are saying": the five stories, each its cover and video from the live page. */
-export const internshipStories = {
+/** "What our students are saying", on the home page's reel row: the five students' videos from the
+ *  live page (vertical, 9:16, 40–50 MB each; the row plays only the one most on screen), each with
+ *  the line the home page's reels give it (its cover's headline). `start`: past the first, blank
+ *  frame. */
+export const internshipStories: { eyebrow: string; title: string; reels: Reel[] } = {
   eyebrow: 'Student stories',
   title: 'What our students are saying.|In their own words.',
-  items: [
+  reels: [
     {
       name: 'Akarsh',
-      quote: 'I went from Senior Analyst at Uber to crafting a GTM strategy for US market penetration.',
-      cover: '/internship/stories/akarsh.webp',
-      video: `${CDN}/138/535/original/akarsh.mp4?1752238085`,
+      line: 'Created a GTM strategy for BSLR Technologies',
+      clip: `${CDN}/138/535/original/akarsh.mp4?1752238085`,
+      start: 0.1,
     },
     {
       name: 'Yukthi',
-      quote: 'I work with a $100M fund partner to discover SaaS companies with an ARR of $1 million.',
-      cover: '/internship/stories/yukthi.webp',
-      video: `${CDN}/138/859/original/yukhti_compressed.mp4?1752568638`,
+      line: 'Career pivot from operations to strategy',
+      clip: `${CDN}/138/859/original/yukhti_compressed.mp4?1752568638`,
+      start: 0.1,
     },
     {
       name: 'Moh',
-      quote: 'I’m managing a $40M fund for India’s next breakout startups.',
-      cover: '/internship/stories/moh.webp',
-      video: `${CDN}/138/217/original/Script_6_Moh_2_9-16_%281%29.mp4?1752057825`,
+      line: 'Building a Shark Tank funded startup',
+      clip: `${CDN}/138/217/original/Script_6_Moh_2_9-16_%281%29.mp4?1752057825`,
+      start: 0.1,
     },
     {
       name: 'Ayush',
-      quote: 'I went from CA to working directly with a private equity fund manager.',
-      cover: '/internship/stories/ayush.webp',
-      video: `${CDN}/138/536/original/ayush.mp4?1752238172`,
+      line: 'From CA to private equity',
+      clip: `${CDN}/138/536/original/ayush.mp4?1752238172`,
+      start: 0.1,
     },
     {
       name: 'Yash',
-      quote:
-        'Building an AI startup that cuts UPSC paper correction costs by 10x, while interning at a YC-backed fintech.',
-      cover: '/internship/stories/yash.webp',
-      video: `${CDN}/138/537/original/yash.mp4?1752238269`,
+      line: 'From fintech intern to Founder’s Office',
+      clip: `${CDN}/138/537/original/yash.mp4?1752238269`,
+      start: 0.1,
     },
-  ] satisfies InternshipStory[],
+  ],
 };
 
 /** The request-a-callback band, last before the footer (the admission page's), the key figures again. */

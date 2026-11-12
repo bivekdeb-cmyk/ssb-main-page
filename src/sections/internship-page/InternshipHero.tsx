@@ -16,7 +16,8 @@ import './internship-page.css';
  * page's photo and facts). The site's short forest-green panel (admission.css: the chip, the title, the
  * footer's two buttons) with the companies our learners intern at beside the copy, on the home page's
  * "Your peers come from" grid (PeersFlip): white tiles, one turning over to a company not on show every
- * second. Twelve tiles on desktop (4 × 3), eight on a tablet, six on a phone, over twenty-four logos.
+ * second. Fifteen tiles on desktop (5 × 3, the user's ask), ten on a tablet, six on a phone, over
+ * twenty-four logos.
  * Server-only (sizes the logo files).
  */
 export async function InternshipHero({ content: c }: { content: typeof internshipHero }) {
@@ -55,7 +56,7 @@ export async function InternshipHero({ content: c }: { content: typeof internshi
             <div className="int-hero-logos">
               <p className="int-hero-logos-k">{c.logosLabel}</p>
               <div data-brand="ssb" data-theme="light">
-                <PeersFlip logos={logos} label={c.logosLabel} cells={12} className="int-hero-flip" />
+                <PeersFlip logos={logos} label={c.logosLabel} cells={15} className="int-hero-flip" />
               </div>
             </div>
           </div>

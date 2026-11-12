@@ -5,6 +5,7 @@ import {
   internshipHero,
   internshipHighlights,
   internshipNav,
+  internshipNumbers,
   internshipRoles,
   internshipStories,
 } from '@/content/internship';
@@ -14,8 +15,9 @@ import { DeckOutcomes } from '@/sections/deck/DeckOutcomes';
 import { HeroFrameDeadline } from '@/sections/hero/frame/HeroFrame';
 import { HomeNav, ScrollRefresh } from '@/sections/home/client';
 import { InternshipHero } from '@/sections/internship-page/InternshipHero';
+import { InternshipNumbers } from '@/sections/internship-page/InternshipNumbers';
 import { InternshipRolesCard } from '@/sections/internship-page/InternshipRolesCard';
-import { InternshipStories } from '@/sections/internship-page/InternshipStories';
+import { InternshipReels } from '@/sections/internship-page/InternshipReels';
 import { CalmEntrance } from '@/sections/shared/CalmEntrance';
 import { BottomNav } from '@/sections/site/BottomNav';
 import { Tone } from '@/sections/tone/Tone';
@@ -33,7 +35,7 @@ export const metadata: Metadata = {
  * The first fold shows the companies our learners intern at, flipping (the home page's "Your peers
  * come from" grid, on the site's green panel); then the figures and the role split in one section, on
  * the home page's placement highlights (its ticker card and figure tiles; a roles card with the cohort
- * photo in the press card's place; no recruiters); the five students' stories, a tap to play; the
+ * in the press card's place; no recruiters); the five students' videos on the home page's reel row; the
  * request-a-callback band before the footer. The early bird's countdown is the site's top strip, as on
  * /admission. Copy and its open questions: src/content/internship.ts.
  */
@@ -66,9 +68,13 @@ export default function InternshipPage() {
             aside={<InternshipRolesCard content={internshipRoles} />}
           />
         </Tone>
-        {/* "What Our Students Are Saying": the five stories, a tap to play */}
+        {/* the same figures as one crisp card (2026-11-12, the user's ask: another take, beside the one above) */}
         <Tone>
-          <InternshipStories content={internshipStories} />
+          <InternshipNumbers content={internshipNumbers} />
+        </Tone>
+        {/* "What Our Students Are Saying": the five students' videos on the home page's reel row */}
+        <Tone>
+          <InternshipReels content={internshipStories} />
         </Tone>
         {/* request a callback, the last thing before the footer */}
         <Tone>

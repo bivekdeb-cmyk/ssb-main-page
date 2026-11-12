@@ -117,13 +117,15 @@ the old `/v8`**: `/v7`'s sections in the deck's order, each wrapped in a light o
   scaler.com internship page, short and light, on the home page's pieces. The early bird's strip
   (`admissionDeadline`, shared with `/admission`) > `InternshipHero`: the site's green panel
   (`admission.css` classes) with the companies beside the copy on the home page's "Your peers come
-  from" grid (`PeersFlip cells={12}`, flipping through 24 logos) > `DeckOutcomes ticker
+  from" grid (`PeersFlip cells={15}`, 5 × 3, flipping through 24 logos) > `DeckOutcomes ticker
   recruiters={false} content id="highlights" aside`: the placement highlights' ticker card and six
-  figure tiles with the internship figures, and `InternshipRolesCard` (the role split as one bar and
-  a legend, with the cohort photo) in the press card's place > `InternshipStories` (`RowSection` of the
-  live page's covers; a tap plays the live MP4 in `Lightbox src poster portrait`; the files are 40-50
-  MB each, so nothing autoplays) > the callback band (`DeckCloseSection id="callback"`, which picks
-  up `admission.css`'s `#callback` rules) > `DeckFooter`. `BottomNav hero="#int-top"`.
+  figure tiles with the internship figures, and `InternshipRolesCard` (the six role shares and a split
+  bar) in the press card's place > `InternshipNumbers` (a second take on the same figures, kept side by
+  side for review: one card of numbered blocks, the role donut, the median and highest stipend on one
+  scale, the season's figures in a row) > `InternshipReels` (the home page's `StoryReels` row with the
+  five students' own MP4s from the live page, 40-50 MB each; it plays only the one most on screen) >
+  the callback band (`DeckCloseSection id="callback"`, which picks up `admission.css`'s `#callback`
+  rules) > `DeckFooter`. `BottomNav hero="#int-top"`.
 - **Building another page:** reuse the home page's sections and give them the page's copy through
   optional props that default to the home page's (`content`, `id`, `parts`, `children`), as
   `DeckUspHead`, `DeckCloseSection`, `DeckOutcomes`, `PeersFlip` and `AdmissionsV4` do; don't fork a
