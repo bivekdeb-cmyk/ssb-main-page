@@ -1,5 +1,5 @@
 /* The internship page (2026-11-12): its first fold (InternshipHero), the roles card in the placement
-   highlights (InternshipRolesCard) and the students' reels (InternshipReels). Built on the home
+   outcomes (InternshipStats, InternshipCloser) and the students' reels (InternshipReels). Built on the home
    page's vocabulary: the admission page's green panel (admission.css), the "Your peers come from"
    flip grid (alumni.css, deck-outcomes.css `peers-flip`), the placement highlights' press card
    (deck-outcomes.css `dko-press`), the internship section's reels (internship.css).
@@ -107,128 +107,76 @@ main[data-page='v7'] .int-hero-flip .peers-flip-logo[style] {
   }
 }
 
-/* ── The roles card, in the placement highlights' press card place (2026-11-12, the user's ask: the
-   shares less cramped): its top line, title and line over a rule; the six shares 3 × 2 (2 × 3 on a
-   phone), each its key colour and name over the figure; one slim split bar in the foot ──────────── */
-.int-roles-k {
-  font-size: var(--type-label-size);
-  line-height: 1.2;
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.02em;
-  color: var(--color-ssb-light-9);
-}
-.int-shares {
+/* ── The outcomes (AlumniSection with a lead and the closer look, 2026-11-12, after the user's
+   reference: the figures, then the profiles, then a closer look) ─────────────────────────────────── */
+/* the three figures: boxes of the page's in a row under the header, the figure in the brand green over
+   its label in small capitals */
+.int-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-6) var(--space-5);
-  flex: 1;
-  align-content: center;
-  margin: 0;
-  padding: var(--space-6);
+  gap: var(--space-4);
+  margin: 0 0 var(--space-10);
 }
-.int-share {
+.int-stats > div {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  min-width: 0;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: 1px solid var(--border-decorative);
+  border-radius: var(--radius-lg);
+  background: var(--surface-default);
 }
-.int-share dt {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: var(--type-label-size);
-  line-height: 1.3;
-  color: var(--content-secondary);
-}
-.int-share dd {
+.int-stats dd {
   margin: 0;
-  font-size: clamp(1.625rem, 2.2vw, 2rem);
+  font-size: clamp(1.875rem, 2.6vw, 2.375rem);
   line-height: 1;
   letter-spacing: -0.03em;
   font-weight: var(--font-weight-medium);
   font-variant-numeric: tabular-nums;
-  color: var(--content-primary);
+  color: var(--color-ssb-light-9);
 }
-.int-key {
-  flex: none;
-  width: 0.625rem;
-  height: 0.625rem;
-  border-radius: 2px;
-  background: var(--int-step);
-}
-/* the brand green's steps, largest share darkest */
-:is(.int-roles, .int-num) [data-step='0'] {
-  --int-step: var(--color-ssb-light-11);
-}
-:is(.int-roles, .int-num) [data-step='1'] {
-  --int-step: var(--color-ssb-light-10);
-}
-:is(.int-roles, .int-num) [data-step='2'] {
-  --int-step: var(--color-ssb-light-9);
-}
-:is(.int-roles, .int-num) [data-step='3'] {
-  --int-step: var(--color-ssb-light-8);
-}
-:is(.int-roles, .int-num) [data-step='4'] {
-  --int-step: var(--color-ssb-light-7);
-}
-:is(.int-roles, .int-num) [data-step='5'] {
-  --int-step: var(--color-ssb-light-6);
-}
-/* the bar: one slim row split by share, 2px apart; it wipes open from the left */
-.int-split {
-  display: flex;
-  gap: 2px;
-  height: 0.75rem;
-  overflow: hidden;
-  border-radius: var(--radius-md);
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 1100ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.int-roles[data-in] .int-split {
-  clip-path: inset(0 0 0 0);
-}
-.int-split > span {
-  min-width: 0;
-  background: var(--int-step);
-}
-@media (prefers-reduced-motion: reduce) {
-  .int-split {
-    clip-path: none;
-    transition: none;
-  }
+.int-stats dt {
+  font-size: var(--type-caption-size);
+  line-height: 1.35;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--content-secondary);
 }
 @media (width < 672px) {
-  .int-shares {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-5) var(--space-4);
-    padding: var(--space-5);
+  .int-stats {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
   }
-  .int-share dd {
+  .int-stats > div {
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+  }
+  .int-stats dd {
+    font-size: 1.75rem;
+  }
+}
+
+/* the closer look's heading, the brand green's bar beside it */
+.int-closer-title {
+  margin: 0;
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--color-ssb-light-9);
+  font-size: var(--tp-title, 2.25rem);
+  line-height: var(--tp-title-lh, 1.15);
+  font-weight: var(--font-weight-medium);
+  color: var(--content-primary);
+}
+@media (width < 672px) {
+  .int-closer-title {
     font-size: 1.5rem;
+    padding-left: var(--space-3);
   }
 }
 
-/* ── The reels (the home page's row): the students' videos carry their own captions in their lower
-   third, so here the shade runs deeper and the line a step smaller, to keep ours clear of theirs ── */
-.int-reels .in-reel-shade {
-  background: linear-gradient(
-    to bottom,
-    rgb(0 0 0 / 0.25) 0%,
-    transparent 22%,
-    transparent 50%,
-    rgb(0 0 0 / 0.6) 64%,
-    rgb(0 0 0 / 0.92) 78%,
-    rgb(0 0 0 / 0.95) 100%
-  );
-}
-html body .int-reels .in-reel-line {
-  font-size: var(--tp-item, 1.25rem) !important;
-  line-height: 1.25 !important;
-}
-
-/* ── At a glance (InternshipNumbers, 2026-11-12, the user's ask: another take, after his earlier
-   numbered-blocks card): one white card split by hairlines; 01 and 02 side by side from 1056px, 03
+/* ── A closer look (InternshipCloser, 2026-11-12, after the user's reference: his earlier "Take a look
+   at cohort distribution"): one white card split by hairlines; 01 and 02 side by side from 1056px, 03
    across the foot ────────────────────────────────────────────────────────────────────────────────── */
 .int-num-card {
   margin-top: var(--space-10);
@@ -260,7 +208,7 @@ html body .int-reels .in-reel-line {
   min-width: 0;
   padding: var(--space-8) var(--space-10);
 }
-.int-num-season {
+.int-num-foot {
   border-top: 1px solid var(--border-decorative);
 }
 .int-num-title {
@@ -327,160 +275,103 @@ html body .int-reels .in-reel-line {
   border-radius: 50%;
 }
 
-/* 02: the median and the highest on one scale (the user's note: one range, not two categories). Each
-   readout hangs over its mark on the track by a hairline stem: the median's to the left of its mark,
-   the highest's to the right. The track: solid green to the median, lighter on to the highest, grey
-   to the scale's end; the ticks under it. */
-.int-scale {
+/* the brand green's steps, largest share darkest */
+.int-num-card [data-step='0'] {
+  --int-step: var(--color-ssb-light-11);
+}
+.int-num-card [data-step='1'] {
+  --int-step: var(--color-ssb-light-10);
+}
+.int-num-card [data-step='2'] {
+  --int-step: var(--color-ssb-light-9);
+}
+.int-num-card [data-step='3'] {
+  --int-step: var(--color-ssb-light-8);
+}
+.int-num-card [data-step='4'] {
+  --int-step: var(--color-ssb-light-7);
+}
+.int-num-card [data-step='5'] {
+  --int-step: var(--color-ssb-light-6);
+}
+.int-key {
+  flex: none;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 2px;
+  background: var(--int-step);
+}
+
+/* 02: the two facts, each its icon on a tint, the figure, its line */
+.int-facts {
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
+  gap: var(--space-8);
+  margin: 0;
 }
-.int-scale-plot {
-  --plot-top: 6.5rem;
-  position: relative;
-  padding-top: var(--plot-top);
+.int-facts > div {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: var(--space-5);
+  row-gap: var(--space-1);
+  align-items: center;
 }
-.int-scale-call {
-  position: absolute;
-  bottom: calc(100% - var(--plot-top) + 0.375rem);
-  left: calc(var(--at) * 100%);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding-bottom: var(--space-4);
-  opacity: 0;
-  transition: opacity 400ms ease 700ms;
+.int-fact-icon {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface-brand-subtle);
+  color: var(--color-ssb-light-9);
 }
-.int-scale-call[data-side='left'] {
-  align-items: flex-end;
-  padding-right: var(--space-3);
-  border-right: 1px solid var(--border-strong);
-  translate: -100% 0;
-  text-align: right;
+.int-fact-icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
 }
-.int-scale-call[data-side='right'] {
-  align-items: flex-start;
-  padding-left: var(--space-3);
-  border-left: 1px solid var(--border-strong);
-}
-.int-scale-value {
+.int-facts dd {
+  margin: 0;
   font-size: clamp(1.75rem, 2.4vw, 2.25rem);
   line-height: 1;
   letter-spacing: -0.03em;
   font-weight: var(--font-weight-medium);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-ssb-light-9);
-  white-space: nowrap;
-}
-.int-scale-label {
-  font-size: var(--type-caption-size);
-  line-height: 1.2;
-  font-weight: var(--font-weight-medium);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--content-secondary);
-}
-.int-scale-track {
-  position: relative;
-  height: 0.75rem;
-  border-radius: 999px;
-  background: var(--surface-sunken);
-}
-.int-scale-fill,
-.int-scale-range {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  transform-origin: left center;
-  transform: scaleX(0);
-  transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.int-scale-fill {
-  left: 0;
-  width: calc(var(--to) * 100%);
-  border-radius: 999px 0 0 999px;
-  background: var(--color-ssb-light-9);
-}
-.int-scale-range {
-  left: calc(var(--from) * 100%);
-  width: calc((var(--to) - var(--from)) * 100%);
-  border-radius: 0 999px 999px 0;
-  background: var(--color-ssb-light-8);
-  transition-delay: 350ms;
-}
-.int-scale-pin {
-  position: absolute;
-  top: 50%;
-  left: calc(var(--at) * 100%);
-  width: 1.125rem;
-  height: 1.125rem;
-  border: 3px solid var(--color-ssb-light-9);
-  border-radius: 50%;
-  background: var(--surface-default);
-  translate: -50% -50%;
-  opacity: 0;
-  transition: opacity 300ms ease 600ms;
-}
-.int-num-card[data-in] :is(.int-scale-fill, .int-scale-range) {
-  transform: none;
-}
-.int-num-card[data-in] :is(.int-scale-pin, .int-scale-call) {
-  opacity: 1;
-}
-.int-scale-ticks {
-  position: relative;
-  height: 1.25rem;
-  margin-top: var(--space-3);
-}
-.int-scale-ticks > span {
-  position: absolute;
-  left: calc(var(--at) * 100%);
-  translate: -50% 0;
-  font-size: var(--type-caption-size);
-  line-height: 1.2;
-  font-variant-numeric: tabular-nums;
-  color: var(--content-secondary);
-}
-.int-scale-ticks > span:first-child {
-  translate: 0 0;
-}
-.int-scale-ticks > span:last-child {
-  translate: -100% 0;
-}
-
-/* 03: the figures in a row, hairlines between, each centred */
-.int-num-row {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 0;
-}
-.int-num-row > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 0 var(--space-4);
-  text-align: center;
-}
-.int-num-row > div + div {
-  border-left: 1px solid var(--border-decorative);
-}
-.int-num-row dd {
-  margin: 0;
-  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  font-weight: var(--font-weight-medium);
-  font-variant-numeric: tabular-nums;
   color: var(--color-ssb-light-9);
 }
-.int-num-row dt {
-  max-width: 14rem;
+.int-facts dt {
   font-size: var(--tp-card, 0.875rem);
   line-height: 1.45;
   color: var(--content-secondary);
+}
+
+/* 03: the companies, bordered tiles, 6 × 2 (3 × 4 on a phone) */
+.int-co-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.int-co-grid > li {
+  display: grid;
+  place-items: center;
+  height: 4.5rem;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--border-decorative);
+  border-radius: var(--radius-md);
+  background: var(--surface-default);
+}
+.int-co-grid img {
+  display: block;
+  max-width: 86%;
+  max-height: 2rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -488,18 +379,15 @@ html body .int-reels .in-reel-line {
     stroke-dasharray: var(--len) var(--c);
     transition: none;
   }
-  :is(.int-scale-fill, .int-scale-range) {
-    transform: none;
-    transition: none;
-  }
-  :is(.int-scale-pin, .int-scale-call) {
-    opacity: 1;
-    transition: none;
+}
+@media (width < 1056px) {
+  .int-co-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 @media (width < 672px) {
   .int-num-card {
-    margin-top: var(--space-8);
+    margin-top: var(--space-6);
   }
   .int-num-block {
     gap: var(--space-6);
@@ -522,36 +410,47 @@ html body .int-reels .in-reel-line {
   .int-donut-legend b {
     min-width: 2.25rem;
   }
-  .int-scale-value {
+  .int-facts {
+    gap: var(--space-6);
+  }
+  .int-fact-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .int-fact-icon svg {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+  .int-facts dd {
     font-size: 1.5rem;
   }
-  .int-num-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: var(--space-6);
+  .int-co-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
   }
-  .int-num-row > div {
-    padding: 0 var(--space-3);
+  .int-co-grid > li {
+    height: 3.75rem;
+    padding: 0 var(--space-2);
   }
-  .int-num-row > div:nth-child(odd) {
-    border-left: 0;
-  }
-  .int-num-row dd {
-    font-size: 1.625rem;
+  .int-co-grid img {
+    max-height: 1.5rem;
   }
 }
 
-/* phones: no room for the highest's readout to the right of its mark, so both hang to the left, the
-   highest a row higher on a longer stem, clear of the median's */
-@media (width < 672px) {
-  .int-scale-plot {
-    --plot-top: 10rem;
-  }
-  .int-scale-call[data-side='right'] {
-    align-items: flex-end;
-    padding: 0 var(--space-3) calc(var(--space-4) + 3.5rem) 0;
-    border-left: 0;
-    border-right: 1px solid var(--border-strong);
-    translate: -100% 0;
-    text-align: right;
-  }
+/* ── The reels (the home page's row): the students' videos carry their own captions in their lower
+   third, so here the shade runs deeper and the line a step smaller, to keep ours clear of theirs ── */
+.int-reels .in-reel-shade {
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0.25) 0%,
+    transparent 22%,
+    transparent 50%,
+    rgb(0 0 0 / 0.6) 64%,
+    rgb(0 0 0 / 0.92) 78%,
+    rgb(0 0 0 / 0.95) 100%
+  );
+}
+html body .int-reels .in-reel-line {
+  font-size: var(--tp-item, 1.25rem) !important;
+  line-height: 1.25 !important;
 }

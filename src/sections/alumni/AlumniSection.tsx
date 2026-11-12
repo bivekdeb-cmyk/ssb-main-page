@@ -15,15 +15,18 @@ import './alumni.css';
 const defaultAlumni = [...allAlumni.filter((a) => a.photo), ...pivotAlumni];
 
 /** `peers` is the logo ticker under the cards (a server component, so it comes in from the page).
- *  `people`, `eyebrow`, `title` ("Lead.|Tail.") and `sub` replace the defaults (the deck variant, /v7). */
+ *  `people`, `eyebrow`, `title` ("Lead.|Tail.") and `sub` replace the defaults (the deck variant, /v7).
+ *  `lead` (the internship page, 2026-11-12): a block between the header and the cards (its figures). */
 export function AlumniSection({
   peers,
+  lead,
   people = defaultAlumni,
   eyebrow = 'Alumni',
   title,
   sub = 'Now in growth, strategy and brand roles at Blinkit, Emergent and more.',
 }: {
   peers?: React.ReactNode;
+  lead?: React.ReactNode;
   people?: Alumnus[];
   eyebrow?: string;
   title?: string;
@@ -73,6 +76,7 @@ export function AlumniSection({
             </Text>
           </div>
         </div>
+        {lead}
       </Container>
 
       <ul ref={rowRef} className="alumni-row" aria-label="Alumni">

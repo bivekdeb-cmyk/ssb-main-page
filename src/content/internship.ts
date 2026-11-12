@@ -1,7 +1,7 @@
 import type { BottomNavItem } from '@/content/bottom-nav';
 import { bottomNav } from '@/content/bottom-nav';
 import { deckClose } from '@/content/deck';
-import type { OutcomesContent } from '@/sections/deck/DeckOutcomes';
+import { alumni, pivotAlumni, type Alumnus } from '@/content/alumni';
 import type { CloseContent } from '@/sections/deck/DeckFinale';
 import type { HeroLogo } from '@/sections/hero/types';
 import type { Reel } from '@/sections/internship/StoryReels';
@@ -9,9 +9,10 @@ import type { Reel } from '@/sections/internship/StoryReels';
 /*
  * The internship page (/internship, 2026-11-12), rebuilt from the live page
  * (scaler.com/school-of-business/internship/, read that day) in the home page's components: the
- * companies in the first fold, on the home page's flipping logo grid; the figures and the role split
- * in one section, on the home page's placement highlights (its ticker card and figure tiles, a roles
- * card in the press card's place); the students' videos on the home page's reel row; the request-a-callback band. The copy is
+ * companies in the first fold, on the home page's flipping logo grid; the outcomes after the user's
+ * reference (three figures, the learners on the home page's alumni cards, a closer look at the role
+ * split, the two facts and the companies); the students' videos on the home page's reel row; the
+ * request-a-callback band. The copy is
  * the live page's, set in the components' patterns (sentence case, no exclamation marks); nothing is
  * added that the live page doesn't say.
  *
@@ -73,80 +74,59 @@ export const internshipHero = {
   })),
 };
 
-/** The figures, on the home page's placement highlights (DeckOutcomes): the live page's three, its
- *  "offers within 10 months" line, and its two "Did you know?" facts. */
-export const internshipHighlights: OutcomesContent = {
+/** The role split (the live page's "Land High Impact Roles" poster, read 2026-11-12), largest first. */
+const ROLES = [
+  { name: 'Marketing', share: 38 },
+  { name: 'Product', share: 21 },
+  { name: 'Strategy', share: 15 },
+  { name: 'Founder’s Office', share: 15 },
+  { name: 'Operations', share: 6 },
+  { name: 'Finance', share: 5 },
+];
+
+/** The outcomes, after the user's reference (2026-11-12: his earlier cohort section, broken up, not
+ *  one card): the header and the live page's line, three figures, the learners' profiles on the home
+ *  page's alumni cards, then a closer look (the role split, the two "Did you know?" facts, the
+ *  companies). */
+export const internshipOutcomes = {
   eyebrow: 'Outcomes',
-  title: 'Internship highlights.|Great impact already, and more to come.',
-  ticker: 'Internship highlights',
-  figures: [
-    {
-      value: '70%',
-      label: 'Full-time internships',
-      note: 'Secured 2 months early',
-      short: 'Full-time interns',
-    },
-    { value: '₹60,000', label: 'Highest stipend', note: 'A month', short: 'Highest stipend' },
-    { value: '₹40,000', label: 'Median stipend', note: 'A month, full-time', short: 'Median stipend' },
-    { value: '10', label: 'Months to offers', note: 'Full-time, and counting', short: 'Months to offers' },
-    {
-      value: '₹10L+',
-      label: 'Startup revenue',
-      note: 'Real sales, student startups',
-      short: 'Startup revenue',
-    },
-    { value: 'IIM-C', label: 'Competition winners', note: 'A team from our cohort', short: 'IIM-C winners' },
+  title: 'Pre-placement outcomes.|Great impact already, and more to come.',
+  // the live page's line under its figures
+  sub: 'Our students got full-time internship offers within 10 months, and the number keeps growing.',
+  stats: [
+    { value: '70%', label: 'Full-time internships, 2 months early' },
+    { value: '₹60,000', label: 'Highest monthly stipend' },
+    { value: '₹40,000', label: 'Median monthly stipend' },
   ],
+  // the live site's "Success stories and pivots" (the home page's internship learners): Uttara Nambiar
+  // and Bharath Ramesh on their alumni cards (they have portraits), then the rest, who don't yet
+  people: [
+    alumni.find((a) => a.name === 'Uttara Nambiar'),
+    alumni.find((a) => a.name === 'Bharath Ramesh'),
+    ...pivotAlumni,
+  ].filter((a): a is Alumnus => Boolean(a)),
 };
 
-/** The role split (the live page's "Land High Impact Roles" poster), in the press card's place: the
- *  six shares, largest first, and one bar split by function. */
-export const internshipRoles = {
-  title: 'Land high-impact roles',
-  sub: 'Learners now shaping businesses as professionals.',
-  label: 'Internship roles by function',
-  roles: [
-    { name: 'Marketing', share: 38 },
-    { name: 'Product', share: 21 },
-    { name: 'Strategy', share: 15 },
-    { name: 'Founder’s Office', share: 15 },
-    { name: 'Operations', share: 6 },
-    { name: 'Finance', share: 5 },
-  ],
-};
-
-/** The same figures as one crisp card (2026-11-12, the user's ask: another section beside the current
- *  one, after his earlier numbered-blocks layout): 01 the role split as a donut and its legend, 02 the
- *  median and highest stipends on one scale, 03 the season's other figures in a row. */
-export const internshipNumbers = {
-  eyebrow: 'At a glance',
-  title: 'Pre-placement internship outcomes.|By the numbers.',
-  roles: { num: '01', title: 'Internship roles by function', items: internshipRoles.roles },
-  // the two figures on one scale (2026-11-12, the user's note: they are points on one range, not two
-  // categories): ₹0 to ₹80,000, the median and the highest marked on the same track
-  stipends: {
+/** "A closer look" (his reference's "Take a look at cohort distribution"): 01 the role split as a donut,
+ *  02 the live page's two "Did you know?" facts, 03 the companies (the live page's twelve). */
+export const internshipCloser = {
+  title: 'A closer look',
+  roles: { num: '01', title: 'Internship roles by function', items: ROLES },
+  facts: {
     num: '02',
-    title: 'Monthly stipends',
-    max: 80000,
-    ticks: [
-      { value: 0, label: '₹0' },
-      { value: 20000, label: '₹20K' },
-      { value: 40000, label: '₹40K' },
-      { value: 60000, label: '₹60K' },
-      { value: 80000, label: '₹80K' },
-    ],
-    median: { label: 'Median', value: 40000, display: '₹40,000' },
-    highest: { label: 'Highest', value: 60000, display: '₹60,000' },
-  },
-  season: {
-    num: '03',
-    title: 'Pre-placement season',
+    title: 'Beyond internships',
     items: [
-      { value: '70%', label: 'Full-time internships, 2 months early' },
-      { value: '10 months', label: 'To full-time internship offers' },
-      { value: '₹10L+', label: 'Revenue from student startups' },
-      { value: 'IIM-C', label: 'Competition winners' },
-    ],
+      { icon: 'revenue', value: '₹10L+', label: 'Revenue from real sales at our students’ startups' },
+      { icon: 'trophy', value: 'IIM-C', label: 'Winners: a team from our cohort won the competition' },
+    ] as { icon: 'revenue' | 'trophy'; value: string; label: string }[],
+  },
+  companies: {
+    num: '03',
+    title: 'Companies our learners intern at',
+    logos: COMPANIES.slice(0, 12).map((name) => ({
+      name,
+      src: `/internship/logos/${name.toLowerCase().replace(/ /g, '-')}.png`,
+    })),
   },
 };
 
@@ -218,6 +198,6 @@ export const internshipCallback: CloseContent = {
  *  fold's own); a target resolves to its closest section. */
 export const internshipNav: BottomNavItem[] = [
   { label: 'Companies', target: 'int-top' },
-  { label: 'Highlights', target: 'highlights-title' },
+  { label: 'Outcomes', target: 'alumni-title' },
   { label: 'Stories', target: 'stories-title' },
 ];
