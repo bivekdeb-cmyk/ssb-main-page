@@ -1,8 +1,10 @@
 import {
   Briefcase,
   CalendarDots,
+  Clock,
   GraduationCap,
   Receipt,
+  TrendUp,
   UserFocus,
   Wallet,
 } from '@phosphor-icons/react/ssr';
@@ -19,4 +21,6 @@ export const ADMISSION_ICONS: Record<AdmissionIcon, Icon> = {
   cap: GraduationCap,
   briefcase: Briefcase,
   profile: UserFocus,
+  trend: TrendUp,
+  clock: Clock,
 };

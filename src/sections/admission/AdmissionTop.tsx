@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Container, Heading, Section, Text } from '@kishanscaler/ssx-ui';
 
-import type { admissionTop } from '@/content/admission';
+import type { TopContent } from '@/content/admission';
 import { CtaIcon } from '@/sections/hero/CtaIcon';
 import { ADMISSION_ICONS } from './icons';
 import '@/sections/admissions/admissions-v4.css';
@@ -18,10 +18,12 @@ import './admission.css';
  * buttons. Under them the four facts in one white box split by rules (2026-11-11, the user's asks),
  * each its icon on a tint, its label, the figure in ink, a note. The deadline counts down in the
  * page's top strip (HeroFrameDeadline). Phones: no photo, the facts two by two.
+ * `id` (the internship page, 2026-11-12: its own first fold, `int-top`); the title's id follows it.
  */
-export function AdmissionTop({ content: c }: { content: typeof admissionTop }) {
+export function AdmissionTop({ content: c, id = 'adm-top' }: { content: TopContent; id?: string }) {
+  const titleId = id === 'adm-top' ? 'adm-title' : `${id}-title`;
   return (
-    <Section id="adm-top" density="roomy" aria-labelledby="adm-title" className="adm-top">
+    <Section id={id} density="roomy" aria-labelledby={titleId} className="adm-top">
       <div className="adm-panel" data-brand="ssb" data-theme="dark">
         {/* eslint-disable-next-line @next/next/no-img-element -- fills the panel */}
         <img
@@ -31,6 +33,7 @@ export function AdmissionTop({ content: c }: { content: typeof admissionTop }) {
           width={1600}
           height={1067}
           decoding="async"
+          style={c.photo.position ? { objectPosition: c.photo.position } : undefined}
         />
         {/* eslint-disable-next-line @next/next/no-img-element -- the blur under the copy */}
         <img
@@ -47,7 +50,7 @@ export function AdmissionTop({ content: c }: { content: typeof admissionTop }) {
               <span className="ad4-dot" aria-hidden="true" />
               {c.chip}
             </p>
-            <Heading as="h1" size="display" id="adm-title" className="adm-title">
+            <Heading as="h1" size="display" id={titleId} className="adm-title">
               {c.title}
             </Heading>
             <Text size="md" className="adm-sub">

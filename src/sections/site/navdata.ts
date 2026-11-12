@@ -39,7 +39,7 @@ export const SSB_NAV: NavContent = {
     { label: 'Home', href: '/#top' },
     { label: 'Admission & Fees', href: '/admission' },
     { label: 'Program', href: `${SSB}/program/` },
-    { label: 'Internship', href: `${SSB}/internship/` },
+    { label: 'Internship', href: '/internship' },
     { label: 'Campus Life', href: `${SSB}/campus-life/` },
     { label: 'Events', href: `${SSB}/events` },
     { label: 'Career Roadmap', href: 'https://interviewbit.typeform.com/career-planning/' },

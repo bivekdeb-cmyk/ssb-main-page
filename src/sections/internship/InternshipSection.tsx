@@ -278,8 +278,9 @@ function Stories() {
  * each rises a little and fades in, one after another along the rows (`data-in` on the grid, set
  * once it is a quarter on screen; the delay is each logo's place in the list). Under reduced
  * motion, and with no observer, they are simply there.
+ * `companies`, `className` (the internship page, 2026-11-12: the live page's twelve, its own columns).
  */
-function LogoGrid() {
+export function LogoGrid({ companies = COMPANIES, className }: { companies?: string[]; className?: string } = {}) {
   const ref = React.useRef<HTMLUListElement>(null);
   const [shown, setShown] = React.useState(false);
   React.useEffect(() => {
@@ -301,8 +302,12 @@ function LogoGrid() {
     return () => io.disconnect();
   }, []);
   return (
-    <ul ref={ref} data-in={shown || undefined} className="in-logos grid grid-cols-3 gap-px overflow-hidden border border-border-subtle bg-border-subtle sm:grid-cols-4 md:grid-cols-6">
-      {COMPANIES.map((name, i) => (
+    <ul
+      ref={ref}
+      data-in={shown || undefined}
+      className={`in-logos grid grid-cols-3 gap-px overflow-hidden border border-border-subtle bg-border-subtle sm:grid-cols-4 md:grid-cols-6${className ? ` ${className}` : ''}`}
+    >
+      {companies.map((name, i) => (
         <li key={name} className="relative h-20 bg-surface sm:h-24" style={{ '--i': i } as React.CSSProperties}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={`/internship/logos/${name.toLowerCase().replace(/ /g, '-')}.png`} alt={name} loading="lazy" />

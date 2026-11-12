@@ -30,7 +30,7 @@ export const bottomNav: {
     tabs: [
       { label: 'Admission & Fees', href: '/admission' },
       { label: 'Program', href: '/#curriculum' },
-      { label: 'Internship', href: '/#internship' },
+      { label: 'Internship', href: '/internship' },
       { label: 'Campus Life', href: '/#campus-title' },
     ],
   },

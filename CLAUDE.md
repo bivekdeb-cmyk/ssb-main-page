@@ -7,13 +7,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 The Scaler School of Business (SSB) site pages, built on the Scaler Design System package
-`@kishanscaler/ssx-ui`: the home page at `/` and the admission page at `/admission`. More SSB (and
-later SST) pages are meant to follow, built from the home page's sections. It is the design build the team reviews on Vercel (upstream deploy:
+`@kishanscaler/ssx-ui`: the home page at `/`, the admission page at `/admission` and the internship
+page at `/internship`. More SSB (and later SST) pages are meant to follow, built from the home page's
+sections. It is the design build the team reviews on Vercel (upstream deploy:
 https://ssb-main-page.vercel.app); the scaler.com SSB page is built separately in Storyblok. No
 Storyblok SDK here: keep section copy in flat, typed content objects so it maps onto bloks later.
 
 This repo is a fork of `bivekdeb-cmyk/ssb-main-page` (Bivek Deb). It is **public**: never commit
 internal material. The stakeholder deck the copy comes from lives in `/ssb-website/`, gitignored.
+
+## Branches and deploys
+
+- Remotes: `origin` is the fork (`Sudhanva5/ssb-pages`), `upstream` is Bivek's repo. Work goes on a
+  branch in the fork, one per page (`/admission` is on `admissions`; `/internship` on `internships`,
+  branched from `admissions` because it reuses that page's first fold); rebase onto `upstream/main`
+  before pushing.
+- Only `upstream/main` deploys: Vercel's GitHub integration builds every push to it at
+  https://ssb-main-page.vercel.app. The fork has no write access upstream and no deploy of its own, so
+  a change reaches the review site through a pull request to `bivekdeb-cmyk/ssb-main-page`. Don't
+  link the fork to a personal Vercel account.
+- Commit messages are one plain sentence saying what changed, by section ("Faculty: three rows on
+  phones"); no type prefixes.
 
 ## Commands
 
@@ -49,9 +63,12 @@ the old `/v8`**: `/v7`'s sections in the deck's order, each wrapped in a light o
   `backers={false}` ...). Each route's `page.tsx` is the source of truth for what renders.
 - Imported but not rendered: `FooterShell` / `SsbFooter` (the page uses `DeckFooter`) and
   `HomeNav`'s dark `heroNav` branch.
-- `src/app/v6.css` (and the v6 branch in `useSectionEntrance`) targets `main[data-page='v6']`, which
-  nothing renders: dead rules. The pages' styles hang off `main[data-page="v7"]` (`deck.css`,
-  `deck-outcomes.css`, `bottom-nav.css`), so every page keeps that attribute, new ones included.
+- Two `DeckCloseSection`s: the one in `DeckFinale.tsx` (takes `content` and `id`) is the one both
+  pages import; the prop-less one still exported from `DeckSections.tsx` is the lab's older band.
+- `src/app/v6.css` (imported by `page.tsx`, and the v6 branch in `useSectionEntrance`) targets
+  `main[data-page='v6']`, which nothing renders: dead rules. The pages' styles hang off
+  `main[data-page="v7"]` (`deck.css`, `deck-outcomes.css`, `bottom-nav.css`), so every page keeps that
+  attribute, new ones included.
 - The previous CLAUDE.md is the lab's full design log (decisions, rejected variants, measurements,
   asset processing): `git show 10df7ee:CLAUDE.md`. Most components it describes are not in this repo.
 
@@ -65,10 +82,13 @@ the old `/v8`**: `/v7`'s sections in the deck's order, each wrapped in a light o
   `HeroFrameDeadline`, `HomeNav light followTone pinned`, `BottomNav instant`), then every section in
   a `<Tone>` or `<Tone dark>`. `DeckFooter` sits after `main`.
 - Order: hero (`HeroFrame`) > outcomes (`DeckOutcomes`) > why (`DeckWhySection`) > alumni >
-  student startups (`BuiltCards`, dark) > investors (`PeopleTabsSection`) > testimonial band >
-  "How you learn", four USPs in `CurriculumRail` > Innovation Lab (dark) > faculty > mentors > super
-  mentors > curriculum terms > career prep (dark) > AI curriculum > internship > campus life > press
-  (dark) > founding team + Impact Foundation > admissions (dark) > FAQ + closing band > footer.
+  student startups (`BuiltCards`, dark) > investors (`PeopleTabsSection`) > `DeckFounders` (Anupam
+  Mittal, Ankur Warikoo, Ashneer Grover as three cards; it replaced the testimonial band) > "How you
+  learn", four USPs in `CurriculumRail` > curriculum terms > career prep (dark) > AI curriculum >
+  Innovation Lab (dark) > faculty > mentors > super mentors > internship > campus life > press
+  (dark) > founding team + Impact Foundation > admissions (dark) > FAQ + closing band > footer. The
+  curriculum, career prep and AI blocks moved up under the USPs on 2026-11-11; the comments in
+  `page.tsx` record each move.
 - `sections/tone/Tone.tsx`: a dark tone is a dark island (`data-brand` + `data-theme="dark"` on one
   element) and carries `data-section-tone`, which the navbar reads (`followTone`) to switch with the
   section under it. Dark-section fixes go in `tone.css`, scoped to `.tn-dark`.
@@ -92,6 +112,17 @@ the old `/v8`**: `/v7`'s sections in the deck's order, each wrapped in a light o
   request-a-callback band (`DeckCloseSection`, no chip, the team's students photo, the four facts
   again) > `DeckFooter`. Icons: `sections/admission/icons.ts`. `BottomNav hero="#adm-top"` waits for
   this page's first fold.
+- **`/internship`** (`src/app/internship/page.tsx`, copy in `content/internship.ts`, its own sections
+  in `sections/internship-page/`; `sections/internship/` is the home page's section): the live
+  scaler.com internship page in its order, built the admission page's way. The early bird's strip
+  (`admissionDeadline`, shared with `/admission`) > `AdmissionTop id="int-top"` with the cohort photo
+  and the live page's four numbers > `InternshipCompanies` (the home page's `LogoGrid` with the live
+  page's twelve, in the /v7 tiles) > "Did you know?" (`DeckCareerPrep content id="know"`, dark, two
+  cards) > `InternshipStories` (`RowSection` of the live page's covers; a tap plays the live MP4 in
+  `Lightbox src poster portrait`; the files are 40-50 MB each, so nothing autoplays) >
+  `InternshipRoles` (the live page's role-split poster rebuilt as bars that grow with `scaleX`) > the
+  callback band (`DeckCloseSection id="callback"`, which picks up `admission.css`'s `#callback`
+  rules) > `DeckFooter`. `BottomNav hero="#int-top"`.
 - **Building another page:** reuse the home page's sections and give them the page's copy through
   optional props that default to the home page's (`content`, `id`, `parts`, `children`), as
   `DeckUspHead`, `DeckCloseSection`, `DeckCareerPrep` and `AdmissionsV4` do; don't fork a section.
@@ -109,8 +140,8 @@ the old `/v8`**: `/v7`'s sections in the deck's order, each wrapped in a light o
   desktop). The page uses it for the four USPs.
 - **Entrances: `CalmEntrance` owns them.** Under `main[data-entrance="calm"]` the sections' own
   entrances stand down (`useSectionEntrance`, `WhyBreaker`, Innovation Lab, `PlacementsMotion` each
-  check `closest('[data-entrance="calm"]')`). `CalmEntrance` finds "cards" by heuristic (radius
-  >= 6px, a fill or border, at least 120 x 80, under 92% of the section's width) and rises/fades each
+  check `closest('[data-entrance="calm"]')`). `CalmEntrance` finds "cards" by heuristic (radius of
+  6px or more, a fill or border, at least 120 x 80, under 92% of the section's width) and rises/fades each
   as it arrives; a section with no cards fades up 16px. Anything on screen at load is left alone, and
   nothing is hidden under reduced motion. A new card-like box gets this automatically; don't add
   per-section entrance animations.
@@ -131,7 +162,16 @@ the old `/v8`**: `/v7`'s sections in the deck's order, each wrapped in a light o
 - **`PLACEHOLDER` marks made-up or unfinished copy**; grep for it before anything ships. Among them:
   the hero's countdown deadline (`home.ts`), CTA hrefs, the alumni list repeated three times in
   `page.tsx` (2026-11-09, to fill the three-row grid), startup names and figures (`community.ts`,
-  `deck.ts`), the deck's own "₹XCr+", the press card.
+  `deck.ts`), the deck's own "₹XCr+", the press card, placement figures and the report link
+  (`placements.ts`), the immersion companies' logos (`immersions.ts`), the faculty cards' courses and
+  bios (`PeopleTabsSection.tsx`), Ashneer Grover's card (`DeckFounders.tsx`).
+- Two admissions files, easy to mix up: `content/admissions.ts` is the home page's admissions section
+  (the deck's slides 27-28); `content/admission.ts` is the `/admission` page, built on top of it.
+- `/internship`'s figures are the live page's as read on 2026-11-12 (70% full-time internships 2
+  months early, ₹60,000 highest and ₹40,000 median monthly stipend, offers within 10 months; roles:
+  Marketing 38%, Product 21%, Strategy 15%, Founder's Office 15%, Operations 6%, Finance 5%). They
+  conflict with the home page's internship section (100% internship placement, stipends up to ₹1
+  lakh, 52%+ in Product and Founder's Office, `deckInternshipStats`); confirm before shipping.
 - `/admission`'s dates and fees are the live page's as read on 2026-11-11 (2027 cohort: early bird
   closes 15 Nov 2026, ₹1,500 application fee, ₹23,00,000 course fee, batch from August 2027). They
   conflict with the home page's (Intake 2 closes 27 Dec 2026, ₹16,00,000); confirm before shipping.
@@ -157,6 +197,13 @@ The cascade, in load order:
    hero, `dk-` deck, `dko-` outcomes, `dkft-` footer, `sj-` curriculum, `cr-` rail, `pt-` people tabs,
    `tn-` tone ...).
 5. `tone.css` for dark sections.
+6. `typography.css` then `corners.css`, imported last in `layout.tsx` (2026-11-11). `typography.css`
+   is the one type scale: seven roles (section title, closing statement, section intro, item title,
+   reading text, card text, meta), each one size per breakpoint, as `--tp-*` variables. It wins by
+   doubling class selectors (`.x.x`), not `!important`. Put new text on one of those roles rather than
+   a new size. `corners.css` gives photos inset in a card `--radius-inset` (4px).
+
+`sections/deck/tokens.css` is imported by each page, not by the layout: import it in a new page too.
 
 Design system and Tailwind traps (these fail silently):
 
@@ -176,8 +223,9 @@ Design system and Tailwind traps (these fail silently):
 - Type by role: `Heading` (`as` is required) and `Text`, or `type-*` utilities; 12px is the floor.
   Section titles are medium weight (`--type-display-weight`); brand text is the logo green
   `--color-ssb-light-9` (#1D925B), both set in `globals.css`.
-- Radii: cards, panels and photos 8px (`--radius-lg`); chips, tags and controls 4px (`--radius-md`);
-  avatars and dots round.
+- Radii: cards, panels and photos 8px (`--radius-lg`); a photo inset from its card's edge 4px
+  (`--radius-inset`, `corners.css`); chips, tags and controls 4px (`--radius-md`); avatars and dots
+  round.
 - Icons are Phosphor; server components import from `@phosphor-icons/react/ssr`. Links styled as
   buttons: `<Button asChild><a href="...">...</a></Button>`. Merge classes with `cn` from the package.
 - Package docs: `node_modules/@kishanscaler/ssx-ui/README.md` (its Status section is out of date);

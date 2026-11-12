@@ -29,14 +29,27 @@ export const admissionDeadline = {
   label: '15 Nov 2026, 11:59 PM IST',
 };
 
-/** The facts' and groups' icons (Phosphor, mapped in the components). */
-export type AdmissionIcon = 'calendar' | 'receipt' | 'wallet' | 'cap' | 'briefcase' | 'profile';
+/** The facts' and groups' icons (Phosphor, mapped in the components). `trend` and `clock`: the
+ *  internship page's facts. */
+export type AdmissionIcon = 'calendar' | 'receipt' | 'wallet' | 'cap' | 'briefcase' | 'profile' | 'trend' | 'clock';
 
 export type AdmissionFact = {
   value: string;
   label: string;
   note?: string;
   icon: AdmissionIcon;
+};
+
+/** A first fold's content (AdmissionTop; the internship page's too). `photo.position`: the photo's
+ *  `object-position` (by default the arch's, 50% 92%). */
+export type TopContent = {
+  chip: string;
+  title: string;
+  sub: string;
+  primaryCta: { label: string; href: string };
+  secondaryCta: { label: string; href: string };
+  photo: { src: string; alt: string; position?: string };
+  facts: AdmissionFact[];
 };
 
 /** The first fold (2026-11-11, the user's asks: the dates and fees right on top; short; not bland; no

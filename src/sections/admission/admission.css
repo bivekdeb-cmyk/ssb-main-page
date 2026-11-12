@@ -83,7 +83,7 @@ main [data-slot='section'][data-density='roomy'].adm-top { padding: var(--space-
   letter-spacing: -0.03em;
   color: var(--pg-white);
 }
-.adm-sub { margin: 0; color: var(--pg-white-a88); }
+.adm-sub { margin: 0; color: var(--pg-white-a88); text-wrap: balance; }
 .adm-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-2); }
 /* the footer's buttons: white with the deep brand green, and an outline */
 .adm-apply,
