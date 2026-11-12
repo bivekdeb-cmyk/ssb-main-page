@@ -108,7 +108,7 @@ export const internshipOutcomes = {
 };
 
 /** "A closer look" (his reference's "Take a look at cohort distribution"): 01 the role split as a donut,
- *  02 the live page's two "Did you know?" facts, 03 the companies (the live page's twelve). */
+ *  02 the live page's two "Did you know?" facts, 03 the companies, flipping. */
 export const internshipCloser = {
   title: 'A closer look',
   roles: { num: '01', title: 'Internship roles by function', items: ROLES },
@@ -120,14 +120,8 @@ export const internshipCloser = {
       { icon: 'trophy', value: 'IIM-C', label: 'Winners: a team from our cohort won the competition' },
     ] as { icon: 'revenue' | 'trophy'; value: string; label: string }[],
   },
-  companies: {
-    num: '03',
-    title: 'Companies our learners intern at',
-    logos: COMPANIES.slice(0, 12).map((name) => ({
-      name,
-      src: `/internship/logos/${name.toLowerCase().replace(/ /g, '-')}.png`,
-    })),
-  },
+  // the companies flip through the first fold's twenty-four (resolved and passed in by the page)
+  companies: { num: '03', title: 'Companies our learners intern at' },
 };
 
 const CDN = 'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000';

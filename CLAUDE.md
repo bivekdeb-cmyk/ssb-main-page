@@ -121,7 +121,7 @@ the old `/v8`**: `/v7`'s sections in the deck's order, each wrapped in a light o
   `AlumniSection` (after the user's reference, 2026-11-12): its header, `lead` = `InternshipStats` (three
   figure boxes), `people` = the live site's internship pivots (`pivotAlumni`, plus Uttara and Bharath
   with portraits), `peers` = `InternshipCloser` ("A closer look": 01 the role donut, 02 the ₹10L+ and
-  IIM-C facts, 03 the live page's twelve logos) > `InternshipReels` (the home page's `StoryReels` row with
+  IIM-C facts, 03 the companies on a second `PeersFlip`, 12 tiles over the 24, resolved in the page) > `InternshipReels` (the home page's `StoryReels` row with
   the five students' own MP4s, 40-50 MB each; it plays only the one most on screen) > the callback band
   (`DeckCloseSection id="callback"`, which picks up `admission.css`'s `#callback` rules) > `DeckFooter`.
   `BottomNav hero="#int-top"`. Earlier takes on the figures (the placement highlights bento, the

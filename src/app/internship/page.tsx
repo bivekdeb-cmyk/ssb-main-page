@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { resolveLogos } from '@/lib/logos';
 import { admissionDeadline } from '@/content/admission';
 import {
   internshipCallback,
@@ -39,8 +40,10 @@ export const metadata: Metadata = {
  * footer. The early bird's countdown is the site's top strip, as on /admission. Copy and its open
  * questions: src/content/internship.ts.
  */
-export default function InternshipPage() {
+export default async function InternshipPage() {
   const o = internshipOutcomes;
+  // the companies, sized once for the closer look's flip grid (the first fold sizes its own)
+  const logos = await resolveLogos(internshipHero.logos);
   return (
     <>
       <main
@@ -67,7 +70,7 @@ export default function InternshipPage() {
             sub={o.sub}
             lead={<InternshipStats stats={o.stats} />}
             people={o.people}
-            peers={<InternshipCloser content={internshipCloser} />}
+            peers={<InternshipCloser content={internshipCloser} logos={logos} />}
           />
         </Tone>
         {/* "What Our Students Are Saying": the five students' videos on the home page's reel row */}

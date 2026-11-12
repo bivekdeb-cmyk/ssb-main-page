@@ -347,42 +347,56 @@ main[data-page='v7'] .int-hero-flip .peers-flip-logo[style] {
   color: var(--content-secondary);
 }
 
-/* 03: the companies, bordered tiles, 6 × 2 (3 × 4 on a phone) */
-.int-co-grid {
-  display: grid;
+/* 03: the companies on the flip grid (2026-11-12, the user's ask: "let it change logos"), bordered
+   tiles, 6 × 2 on desktop, 4 × 3 on a tablet, 3 × 4 on a phone: all twelve cells at every size */
+main[data-page='v7'] .peers-flip.int-co-flip {
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: var(--space-3);
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
-.int-co-grid > li {
-  display: grid;
-  place-items: center;
+main[data-page='v7'] .int-co-flip .peers-flip-cell,
+main[data-page='v7'] .int-co-flip .peers-flip-cell:nth-child(n) {
+  display: block;
   height: 4.5rem;
-  padding: 0 var(--space-4);
-  border: 1px solid var(--border-decorative);
+}
+main[data-page='v7'] .int-co-flip .peers-flip-face {
+  padding: 0 var(--space-3);
   border-radius: var(--radius-md);
   background: var(--surface-default);
+  box-shadow: inset 0 0 0 1px var(--border-decorative);
 }
-.int-co-grid img {
-  display: block;
-  max-width: 86%;
+main[data-page='v7'] .int-co-flip .peers-flip-logo[style] {
+  width: min(calc(var(--w) * 1.05), 100%);
+  max-width: 84%;
   max-height: 2rem;
-  width: auto;
-  height: auto;
-  object-fit: contain;
+}
+@media (width < 1056px) {
+  main[data-page='v7'] .peers-flip.int-co-flip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (width < 672px) {
+  main[data-page='v7'] .peers-flip.int-co-flip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+  main[data-page='v7'] .int-co-flip .peers-flip-cell,
+  main[data-page='v7'] .int-co-flip .peers-flip-cell:nth-child(n) {
+    height: 3.75rem;
+  }
+  main[data-page='v7'] .int-co-flip .peers-flip-face {
+    padding: 0 var(--space-1-5, 6px);
+  }
+  main[data-page='v7'] .int-co-flip .peers-flip-logo[style] {
+    width: min(calc(var(--w) * 0.9), 100%);
+    max-width: 88%;
+    max-height: 1.625rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .int-donut circle {
     stroke-dasharray: var(--len) var(--c);
     transition: none;
-  }
-}
-@media (width < 1056px) {
-  .int-co-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 @media (width < 672px) {
@@ -423,17 +437,6 @@ main[data-page='v7'] .int-hero-flip .peers-flip-logo[style] {
   }
   .int-facts dd {
     font-size: 1.5rem;
-  }
-  .int-co-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-2);
-  }
-  .int-co-grid > li {
-    height: 3.75rem;
-    padding: 0 var(--space-2);
-  }
-  .int-co-grid img {
-    max-height: 1.5rem;
   }
 }
 

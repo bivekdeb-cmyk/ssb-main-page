@@ -4,6 +4,9 @@ import * as React from 'react';
 import { ChartLineUp, Trophy } from '@phosphor-icons/react';
 
 import type { internshipCloser } from '@/content/internship';
+import type { ResolvedLogo } from '@/lib/logos';
+import { PeersFlip } from '@/sections/alumni/PeersFlip';
+import '@/sections/alumni/alumni.css';
 import './internship-page.css';
 
 /** The donut's ring: radius and circumference in the SVG's units (a 120 × 120 box). */
@@ -19,11 +22,20 @@ const ICONS = { revenue: ChartLineUp, trophy: Trophy };
  * at cohort distribution"), under the profiles: a heading with the brand green's bar beside it, then one
  * white card of the page's split by hairlines into numbered blocks. 01 the role split as a donut in the
  * brand green's steps beside its legend; 02 the live page's two "Did you know?" facts, each its icon
- * on a tint, the figure and its line; 03 the companies, the live page's twelve in bordered tiles across
- * the card's foot. The donut draws in once the card is a fifth on screen; under reduced motion it is
- * simply there. Phones: the blocks stacked, the tiles three across.
+ * on a tint, the figure and its line; 03 the companies in bordered tiles across the card's foot, on the
+ * first fold's flip grid (PeersFlip, the user's ask: "let it change logos"): twelve tiles turning
+ * through the twenty-four, starting from the other twelve so the two grids don't mirror. The donut
+ * draws in once the card is a fifth on screen; under reduced motion it is simply there. Phones: the
+ * blocks stacked, the tiles three across.
  */
-export function InternshipCloser({ content: c }: { content: typeof internshipCloser }) {
+export function InternshipCloser({
+  content: c,
+  logos,
+}: {
+  content: typeof internshipCloser;
+  /** the companies, sized by the page (`resolveLogos`, server-only) */
+  logos: ResolvedLogo[];
+}) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [shown, setShown] = React.useState(false);
   React.useEffect(() => {
@@ -128,14 +140,12 @@ export function InternshipCloser({ content: c }: { content: typeof internshipClo
             <span className="int-num-k">{c.companies.num}</span>
             {c.companies.title}
           </h4>
-          <ul className="int-co-grid">
-            {c.companies.logos.map((l) => (
-              <li key={l.name}>
-                {/* eslint-disable-next-line @next/next/no-img-element -- a logo in its tile */}
-                <img src={l.src} alt={l.name} loading="lazy" decoding="async" />
-              </li>
-            ))}
-          </ul>
+          <PeersFlip
+            logos={[...logos.slice(12), ...logos.slice(0, 12)]}
+            label={c.companies.title}
+            cells={12}
+            className="int-co-flip"
+          />
         </div>
       </div>
     </div>
