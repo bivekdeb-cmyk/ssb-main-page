@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" data-brand="ssb" className={`${sans.variable} ${sansItalic.variable} ${mono.variable}`}>
+    <html lang="en" data-brand="ssb" suppressHydrationWarning className={`${sans.variable} ${sansItalic.variable} ${mono.variable}`}>
       <body>{children}</body>
     </html>
   );

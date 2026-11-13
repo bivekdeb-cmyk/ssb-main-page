@@ -38,7 +38,13 @@ const TAB_ICONS: Icon[] = [GraduationCap, BookOpen, Briefcase, Buildings];
 /** `items`: another page's own targets for the same pillars (/v6, whose sections run in another order). */
 /** `instant` (the final page, 2026-10-28, the user's ask): no pop-up entrance; the bars appear as they
  *  are, as soon as the first fold (the hero) has been scrolled past. */
-export function BottomNav({ items = bottomNav.items, instant = false }: { items?: BottomNavItem[]; instant?: boolean } = {}) {
+/** `hero` (the admission page, 2026-11-11): the first fold the bars wait to be scrolled past, when it
+ *  isn't the home page's (`.hf`). */
+export function BottomNav({
+  items = bottomNav.items,
+  instant = false,
+  hero: heroSelector = '.hf',
+}: { items?: BottomNavItem[]; instant?: boolean; hero?: string } = {}) {
   const [shown, setShown] = React.useState(false);
   const [active, setActive] = React.useState(-1);
   // tablets: the bar steps aside while the curriculum's own bar is at the window's foot
@@ -52,7 +58,7 @@ export function BottomNav({ items = bottomNav.items, instant = false }: { items?
       raf = 0;
       const vh = window.innerHeight;
       const first = sectionOf(items[0].target);
-      const hero = instant ? document.querySelector('.hf') : null;
+      const hero = instant ? document.querySelector(heroSelector) : null;
       const pastHero = hero
         ? hero.getBoundingClientRect().bottom < vh * 0.5
         : first
@@ -117,7 +123,7 @@ export function BottomNav({ items = bottomNav.items, instant = false }: { items?
       window.removeEventListener('scroll', on);
       window.removeEventListener('resize', on);
     };
-  }, [instant]);
+  }, [instant, heroSelector]);
 
   // The entrance (bottom-nav.css, after the carousel controls'): the bar opens out of a square at
   // its centre and the call-back slides out from behind it, so the call-back starts this far left
