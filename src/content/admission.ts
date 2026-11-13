@@ -209,29 +209,11 @@ export const admissionVideo = {
  *  scaler.com/school-of-business/admission/ that day. */
 export const admissionFees = {
   eyebrow: 'Dates & fees',
-  title: 'Important dates and fees.|For the 2027 cohort.',
+  title: 'Important dates and fees.|Every intake.',
   sub: 'Admissions run in weekly phases that close every Sunday. Apply early for a better chance of a seat and a scholarship.',
-  chip: 'Early bird open',
-  columns: ['Intake', 'Deadline', 'Application fee', 'Course fee'],
-  rows: [
-    {
-      intake: 'Early Bird Intake',
-      status: 'Open now',
-      deadline: '15 Nov 2026',
-      deadlineIso: '2026-11-15',
-      appFee: '₹1,500',
-      courseFee: '₹23,00,000',
-    },
-  ],
-  apply: { label: 'Apply Now', href: APPLY },
-  notes: [
-    'The application fee is non-refundable',
-    'Course fees may be revised in future, with market conditions, inflation or regulatory requirements',
-    'The batch begins in August 2027',
-  ],
+  // the table is the main page's (admissionsV4.intakes and its fine print, content/admissions.ts)
   brochure: {
-    title: 'Want the detailed fee structure?',
-    line: 'Download the brochure for the full fee structure.',
+    lead: 'Want the detailed fee structure?',
     cta: { label: 'Download Brochure', href: BROCHURE },
   },
 };
