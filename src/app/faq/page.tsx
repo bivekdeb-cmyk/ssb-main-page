@@ -3,7 +3,7 @@ import { heroFrame } from '@/content/home';
 import { faqNav } from '@/content/faq';
 import { DeckCloseSection } from '@/sections/deck/DeckFinale';
 import { DeckFooter } from '@/sections/deck/DeckFooter';
-import { FaqBrowser, FaqHero, FaqRecommended, FaqUsps } from '@/sections/faq/FaqSections';
+import { FaqBrowser, FaqHero, FaqRecommended } from '@/sections/faq/FaqSections';
 import { HeroFrameDeadline } from '@/sections/hero/frame/HeroFrame';
 import { HomeNav, ScrollRefresh } from '@/sections/home/client';
 import { PinLight } from '@/sections/program/PinLight';
@@ -18,11 +18,10 @@ export const metadata: Metadata = {
 };
 
 /**
- * /faq (2026-11-13, the user's ask): the live FAQ page (scaler.com/school-of-business/faq/) in the new
- * pages' design, light only (PinLight, as /program). The first fold on the program page's green panel
- * with the live page's three videos; "Why SSB"; the questions under their eight categories on the home
- * page's FAQ accordion; the twelve recommended videos; the main page's closing band (id "callback", so
- * the page's "Request a callback" links land on it). Copy: content/faq.ts; sections: sections/faq/.
+ * /faq (2026-11-13, the user's asks): the live FAQ page (scaler.com/school-of-business/faq/) in its own
+ * layout and words, in this site's type and icons, light (PinLight, as /program): everything about SSB
+ * (the three videos, the large video and its card), the questions, the recommended videos; only the
+ * closing band is the main page's (DeckCloseSection, id "callback"). Copy: content/faq.ts.
  */
 export default function FaqPage() {
   return (
@@ -36,9 +35,6 @@ export default function FaqPage() {
         <BottomNav instant hero="#fq-top" items={faqNav} />
         <Tone>
           <FaqHero />
-        </Tone>
-        <Tone>
-          <FaqUsps />
         </Tone>
         <Tone>
           <FaqBrowser />
