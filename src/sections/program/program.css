@@ -773,3 +773,43 @@ html body main[data-route='program'] {
     margin-top: var(--space-4);
   }
 }
+
+/* ── "Who are your instructors?" (2026-11-13): the live program page's video banner, as the admission
+   page's video band, on the hero's green; light frame round the thumbnail; the button white with the
+   hero's green text ─────────────────────────────────────────────────────────────────────────────── */
+.pgv-band {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+  padding: var(--space-12);
+  border-radius: var(--radius-lg);
+  background: #134a2f;
+  color: #fff;
+}
+@media (width >= 1056px) { .pgv-band { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-12); } }
+.pgv-copy { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.pgv-k { color: #8affbd !important; }
+.pgv-title { margin: 0; color: #fff !important; text-wrap: balance; }
+.pgv-sub { margin: 0; max-width: 28rem; color: rgb(255 255 255 / 0.88) !important; }
+.pgv-watch,
+.pgv-watch:is(:hover, :focus-visible) {
+  margin-top: var(--space-2);
+  border-color: #fff !important;
+  background: #fff !important;
+  color: var(--color-ssb-light-10) !important;
+}
+.pgv-watch:hover { background: rgb(255 255 255 / 0.9) !important; }
+.pgv-band .pgv-media {
+  margin: 0;
+  border: 4px solid rgb(255 255 255 / 0.9);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 48px -24px rgb(0 0 0 / 0.6);
+}
+@media (width < 1056px) {
+  .pgv-band { padding: var(--space-6); }
+  .pgv-media { order: -1; }
+}
+@media (width < 672px) {
+  .pgv-band { padding: var(--space-4) var(--space-4) var(--space-6); gap: var(--space-6); }
+  .pgv-watch { width: 100%; justify-content: center; }
+}

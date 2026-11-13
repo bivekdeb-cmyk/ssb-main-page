@@ -84,6 +84,20 @@ export const programCompare = {
   ] as CompareRow[],
 };
 
+/** "Who are your Instructors?": the live program page's video band (scaler.com/school-of-business/program,
+ *  read 2026-11-13), its words and its YouTube film (Instructors, Academics and Mentors at SSB). */
+export const programVideo = {
+  eyebrow: 'Watch',
+  title: 'Who are your instructors?',
+  sub: 'Learn business fundamentals from highly reputed instructors and guest faculty.',
+  cta: 'Watch now',
+  video: {
+    id: 'TvRkuAHIGpQ',
+    title: 'Instructors, Academics and Mentors at Scaler School of Business',
+    image: 'https://i.ytimg.com/vi/TvRkuAHIGpQ/maxresdefault.jpg',
+  },
+};
+
 /** A week in the life of an SSB student: the program page's timetable (Term 1). */
 export type SlotKind = 'class' | 'free' | 'workshop' | 'immersion' | 'study' | 'experience';
 export const programWeek = {

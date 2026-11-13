@@ -25,6 +25,7 @@ import { PeopleTabsSection } from '@/sections/people-tabs/PeopleTabsSection';
 import { ProgramCity } from '@/sections/program/ProgramCity';
 import { ProgramCompare, ProgramHero } from '@/sections/program/ProgramSections';
 import { PinLight } from '@/sections/program/PinLight';
+import { ProgramVideo } from '@/sections/program/ProgramVideo';
 import { ProgramWeek } from '@/sections/program/ProgramWeek';
 import { BottomNav } from '@/sections/site/BottomNav';
 import { CalmEntrance } from '@/sections/shared/CalmEntrance';
@@ -124,7 +125,11 @@ export default function ProgramPage() {
         <Tone>
           <SuperMentorsSection />
         </Tone>
-        {/* who are your instructors: faculty, then mentors */}
+        {/* who are your instructors: the live page's video banner (2026-11-13, the user's ask), then the
+            faculty and the mentors */}
+        <Tone>
+          <ProgramVideo />
+        </Tone>
         <Tone>
           <div id="program-faculty">
             <PeopleTabsSection groups={['faculty']} drift />
