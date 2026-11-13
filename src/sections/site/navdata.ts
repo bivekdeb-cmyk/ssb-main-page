@@ -44,7 +44,7 @@ export const SSB_NAV: NavContent = {
     { label: 'Events', href: `${SSB}/events` },
     { label: 'Career Roadmap', href: 'https://interviewbit.typeform.com/career-planning/' },
     { label: 'Guide', href: `${SSB}/guide` },
-    { label: 'FAQs', href: `${SSB}/faq/` },
+    { label: 'FAQs', href: '/faq' },
   ],
   // [CONFIRM] the live Login and Apply Now are buttons that open the site's own forms, not links
   secondary: { label: 'Login', href: 'https://www.scaler.com/users/sign_in/' },

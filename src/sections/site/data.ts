@@ -54,7 +54,7 @@ export const SSB_FOOTER: FooterContent = {
       links: [
         { label: 'Program Details', href: '/program' },
         { label: 'Admission Process', href: '/admission' },
-        { label: 'FAQs', href: '/#faq' },
+        { label: 'FAQs', href: '/faq' },
       ],
     },
   ],
