@@ -491,28 +491,29 @@
     display: block;
     margin-top: var(--space-5);
   }
+  /* the day picker as the main page's Singapore day chips (deck-global.css .dkg-day on phones): a row
+     of 8px chips with a light edge, the chosen one on the pale green with a green edge (it was a
+     solid dark-green pill on a grey track, a slider nowhere else on the site) */
   .pgk-pills {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    gap: var(--space-1);
-    padding: var(--space-1);
-    border-radius: var(--radius-full);
-    background: var(--surface-sunken);
+    gap: var(--space-1-5, 6px);
   }
   .pgk-pills button {
-    padding: var(--space-2) 0;
-    border: 0;
-    border-radius: var(--radius-full);
-    background: none;
+    padding: 8px 0;
+    border: 1px solid var(--border-decorative);
+    border-radius: var(--radius-lg);
+    background: var(--surface-default);
     color: var(--content-secondary);
     font: inherit;
     font-size: var(--type-caption-size);
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
   }
   .pgk-pills button[aria-selected='true'] {
-    background: var(--color-ssb-light-11);
-    color: #fff;
+    border-color: var(--color-ssb-light-6);
+    background: var(--color-ssb-light-2);
+    color: var(--color-ssb-light-11);
   }
   .pgk-list {
     display: grid;
