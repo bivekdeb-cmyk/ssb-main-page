@@ -19,7 +19,6 @@ import { AdmissionTop } from '@/sections/admission/AdmissionTop';
 import { AdmissionVideo } from '@/sections/admission/AdmissionVideo';
 import { AdmissionsV4 } from '@/sections/admissions/AdmissionsV4';
 import { DeckCloseSection, DeckFaqSection } from '@/sections/deck/DeckFinale';
-import { DeckOutcomes } from '@/sections/deck/DeckOutcomes';
 import { DeckFooter } from '@/sections/deck/DeckFooter';
 import { HeroFrameDeadline } from '@/sections/hero/frame/HeroFrame';
 import { HomeNav, ScrollRefresh } from '@/sections/home/client';
@@ -85,11 +84,6 @@ export default function AdmissionPage() {
         {/* "Financing": the pointers and the partners' logos beside the students' photo */}
         <Tone>
           <AdmissionFinancing content={admissionFinancing} />
-        </Tone>
-        {/* the main page's placement highlights and audited report (2026-11-13): where the programme
-            leads, before the questions; the recruiters' grid left to the home page */}
-        <Tone>
-          <DeckOutcomes ticker recruiters={false} />
         </Tone>
         {/* the home page's FAQ, with the admission questions */}
         <Tone>
