@@ -1,6 +1,5 @@
-/* The FAQ page (/faq, 2026-11-13, the user's asks: the live FAQ page's layout exactly, in our font, type
-   scale and icons; light). The live page's black top band is the green the new pages' first folds use
-   (the program hero's #134a2f), white type on it; everything under it is the light page. Type by the
+/* The FAQ page (/faq, 2026-11-13, the user's asks: the live FAQ page's layout, in our font, type scale
+   and icons; light throughout, no band). Type by the
    page's roles: the title at the program hero's size, section titles at display size in the logo green
    (as the live page sets them in its green), item titles at the item size, reading text at body size.
    Icons: Phosphor (caret, check, graduation cap) and the page's play disc. */
@@ -24,19 +23,17 @@
 .fq-thumb .lb-play-disc { position: absolute; inset: 0; margin: auto; }
 .fq-thumb:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 3px; }
 
-/* ── everything about SSB: the band behind the title, the three videos and the top half of the
-   large video and its card ─────────────────────────────────────────────────────────────────────── */
-.fqh { position: relative; overflow: clip; background: #134a2f; }
+/* ── everything about SSB: on the light page (the user's ask: no green band), the breadcrumb and title,
+   the three videos with their number at the head of each title, then the large video and its card ── */
 main [data-slot='section'].fqh { padding-top: var(--space-10); }
-.fqh-crumbs ol { display: flex; align-items: center; gap: var(--space-2); margin: 0; padding: 0; list-style: none; font-size: var(--type-body-sm-size); color: rgb(255 255 255 / 0.78); }
+.fqh-crumbs ol { display: flex; align-items: center; gap: var(--space-2); margin: 0; padding: 0; list-style: none; font-size: var(--type-body-sm-size); color: var(--content-secondary); }
 .fqh-crumbs li { display: inline-flex; align-items: center; gap: var(--space-2); }
 .fqh-crumbs svg { width: 0.75rem; height: 0.75rem; opacity: 0.7; }
 .fqh-crumbs a { color: inherit; text-decoration: none; }
 .fqh-crumbs a:hover,
-.fqh-crumbs [aria-current] { color: #fff; }
+.fqh-crumbs [aria-current] { color: var(--content-primary); }
 .fqh-title {
   margin: var(--space-6) 0 0;
-  color: #fff !important;
   font-size: var(--type-hero-size) !important;
   font-weight: var(--font-weight-medium, 500) !important;
   line-height: 1.15 !important;
@@ -44,46 +41,27 @@ main [data-slot='section'].fqh { padding-top: var(--space-10); }
 }
 @media (width >= 1056px) { .fqh-title { font-size: 2.5rem !important; } }
 
-/* the three: thumbnails in a row, each with its number large in outline at its foot, over the left
-   edge, and the title under it */
-.fqh-three { display: grid; gap: var(--space-8); margin: var(--space-12) 0 0; padding: 0; list-style: none; }
+.fqh-three { display: grid; gap: var(--space-8); margin: var(--space-10) 0 0; padding: 0; list-style: none; }
 @media (width >= 672px) { .fqh-three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); } }
 .fqh-item { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
-.fqh-media { position: relative; padding-left: var(--space-5); }
-.fqh-num {
-  position: absolute;
-  left: 0;
-  bottom: -0.12em;
-  font-size: 5.5rem;
-  font-weight: var(--font-weight-semibold, 600);
-  line-height: 1;
-  z-index: 1;
-  color: transparent;
-  -webkit-text-stroke: 2px #8affbd;
-  pointer-events: none;
-}
 .fqh-item-title {
   margin: 0;
-  color: #fff;
+  color: var(--content-primary);
   font-size: var(--tp-item, 1.25rem);
   font-weight: var(--font-weight-medium, 500);
   line-height: 1.35;
   text-wrap: pretty;
 }
-
-/* the large video and the card: the band stops halfway down them (a light layer from their middle) */
-.fqf { position: relative; isolation: isolate; display: grid; gap: var(--space-4); margin-top: var(--space-12); }
-.fqf::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  bottom: -40rem;
-  left: -100vw;
-  right: -100vw;
-  background: var(--surface-page);
+/* the number at the head of the title, in the logo green, a step quieter */
+.fqh-num {
+  margin-right: var(--space-2);
+  color: var(--color-ssb-light-9);
+  font-variant-numeric: tabular-nums;
 }
-@media (width >= 1056px) { .fqf { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); align-items: stretch; gap: var(--space-4); } }
+
+/* the large video and the card beside it */
+.fqf { display: grid; gap: var(--space-4); margin-top: var(--space-12); }
+@media (width >= 1056px) { .fqf { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); align-items: stretch; } }
 .fqf-video { height: 100%; aspect-ratio: auto; min-height: 0; }
 @media (width < 1056px) { .fqf-video { height: auto; aspect-ratio: 16 / 9; } }
 .fqf-card {
@@ -94,13 +72,12 @@ main [data-slot='section'].fqh { padding-top: var(--space-10); }
   border: 1px solid var(--border-decorative);
   border-radius: var(--radius-lg);
   background: var(--surface-default);
-  box-shadow: 0 16px 32px -24px rgb(0 0 0 / 0.35);
 }
-.fqf-kicker { margin: 0; font-size: var(--tp-item, 1.25rem); line-height: 1.3; color: var(--content-primary); }
+.fqf-kicker { margin: 0; font-size: var(--tp-item, 1.25rem); line-height: 1.3; color: var(--content-secondary); }
 .fqf-title { margin: 0; font-size: var(--tp-item, 1.25rem); font-weight: var(--font-weight-semibold, 600); line-height: 1.3; color: var(--content-primary); }
-.fqf-points { display: grid; gap: var(--space-2); margin: var(--space-3) 0 var(--space-4); padding: 0; list-style: none; }
-.fqf-points li { display: flex; gap: var(--space-2-5, 10px); align-items: flex-start; font-size: var(--type-body-sm-size); line-height: 1.45; color: var(--content-secondary); }
-.fqf-points svg { flex: none; width: 1.125rem; height: 1.125rem; margin-top: 1px; color: var(--color-ssb-light-9); }
+.fqf-points { display: grid; gap: var(--space-2-5, 10px); margin: var(--space-4) 0 var(--space-5); padding: 0; list-style: none; }
+.fqf-points li { display: flex; gap: var(--space-2-5, 10px); align-items: flex-start; font-size: var(--type-body-sm-size); line-height: 1.45; color: var(--content-primary); }
+.fqf-points svg { flex: none; width: 1.25rem; height: 1.25rem; color: var(--color-ssb-light-9); }
 .fqf-cta { width: 100%; justify-content: center; margin-top: auto; }
 
 /* ── frequently asked questions ─────────────────────────────────────────────────────────────────── */
@@ -113,63 +90,60 @@ main [data-slot='section'].fqh { padding-top: var(--space-10); }
   .fq-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: var(--space-4); align-items: start; }
 }
 
-/* the categories: a list at the left; the chosen one on the grey with a dark bar at its right */
-.fq-tabs { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+/* the categories (2026-11-13: the main page's FAQ, made to carry them): a quiet list at the left, each
+   with its count; the chosen one on the pale brand green with a green edge, as the page's other picks */
+.fq-tabs { display: flex; flex-direction: column; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
 .fq-tabs button {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--space-3);
   width: 100%;
-  padding: var(--space-3) var(--space-3);
-  border: 0;
-  border-right: 3px solid transparent;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
   background: transparent;
-  color: var(--content-primary);
+  color: var(--content-secondary);
   font-size: var(--type-body-size);
   line-height: 1.4;
   text-align: left;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.fq-tabs button:hover { background: var(--surface-sunken); }
-.fq-tab-caret { display: none; width: 1rem; height: 1rem; color: var(--content-secondary); }
+.fq-tabs button > span { flex: 1; }
+.fq-tabs button small {
+  flex: none;
+  min-width: 1.5rem;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--surface-sunken);
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--content-secondary);
+}
+.fq-tabs button:hover { background: var(--surface-sunken); color: var(--content-primary); }
+.fq-tab-caret { display: none; flex: none; width: 1rem; height: 1rem; color: var(--content-secondary); }
 @media (width >= 1056px) {
-  .fq-tabs { position: sticky; top: calc(var(--sn-h, 69px) + var(--space-8)); margin-top: var(--space-12); border-right: 1px solid var(--border-decorative); }
-  .fq-tabs button[aria-pressed='true'] { border-right-color: var(--content-primary); background: var(--surface-sunken); font-weight: var(--font-weight-medium); }
+  .fq-tabs { position: sticky; top: calc(var(--sn-h, 69px) + var(--space-8)); }
+  .fq-tabs button[aria-pressed='true'] { border-color: var(--color-ssb-light-6); background: var(--color-ssb-light-2); color: var(--color-ssb-light-11); font-weight: var(--font-weight-medium); }
+  .fq-tabs button[aria-pressed='true'] small { background: var(--surface-default); color: var(--color-ssb-light-11); }
 }
 
-/* the questions: the category's title, then hairline rows, a caret at the right turning when open */
+/* the questions: the category's title, then the main page's accordion (deck-finale.css: hairline rows,
+   the square plus turning to a minus on green), each question led by its number */
 .fq-panel { min-width: 0; }
-.fq-cat { display: flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-3); font-size: var(--tp-item, 1.25rem); font-weight: var(--font-weight-semibold, 600); line-height: 1.3; }
+.fq-cat { display: flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-4); font-size: var(--tp-item, 1.25rem); font-weight: var(--font-weight-semibold, 600); line-height: 1.3; }
 .fq-back { display: none; align-items: center; justify-content: center; width: 2rem; height: 2rem; margin-left: calc(var(--space-2) * -1); padding: 0; border: 0; background: none; color: var(--content-primary); cursor: pointer; }
 .fq-back svg { width: 1.125rem; height: 1.125rem; }
-.fq-list { margin: 0; padding: 0; list-style: none; }
-.fq-item { border-bottom: 1px solid var(--border-decorative); }
-.fq-q { margin: 0; }
-.fq-q button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  width: 100%;
-  padding: var(--space-4) var(--space-2);
-  border: 0;
-  background: none;
-  color: var(--content-primary);
-  font-size: var(--type-body-size);
-  font-weight: var(--font-weight-regular, 400);
-  line-height: 1.45;
-  text-align: left;
-  cursor: pointer;
-}
-.fq-q button:hover span { color: var(--color-ssb-light-9); }
-.fq-q svg { flex: none; width: 1rem; height: 1rem; color: var(--content-secondary); transition: transform 0.25s ease; }
-.fq-item[data-open] .fq-q svg { transform: rotate(180deg); }
-.fq-q button:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; border-radius: var(--radius-md); }
+.fq .dkf-q button { justify-content: flex-start; }
+.fq .dkf-q-text { flex: 1; }
+.fq-q-num { flex: none; min-width: 1.75rem; color: var(--color-ssb-light-9); font-size: var(--type-body-sm-size); font-weight: var(--font-weight-medium); font-variant-numeric: tabular-nums; }
+.fq .dkf-a-inner { min-width: 0; }
+.fq .dkf-a { grid-template-columns: minmax(0, 1fr); }
 
 /* the answers: reading text in the secondary ink; lists with the admissions list's green squares; the
    video at the top, as the live page shows it */
-.fq-a { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; padding: 0 var(--space-2) var(--space-5); }
-.fq-a p { margin: 0; font-size: var(--type-body-size); line-height: 1.6; color: var(--content-secondary); }
+.fq-a { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; padding: 0 var(--space-12) var(--space-6) 2.75rem; }
+.fq .dkf-a .fq-a p { margin: 0; padding: 0; font-size: var(--type-body-size); line-height: 1.6; color: var(--content-secondary); }
 .fq-a p b,
 .fq-a .fq-a-lead { color: var(--content-primary); font-weight: var(--font-weight-medium); }
 .fq-a a { color: var(--color-ssb-light-9); font-weight: var(--font-weight-medium); text-decoration: underline; text-underline-offset: 3px; }
@@ -177,7 +151,7 @@ main [data-slot='section'].fqh { padding-top: var(--space-10); }
 .fq-a ul { display: grid; gap: var(--space-1-5, 6px); margin: 0; padding: 0; list-style: none; }
 .fq-a li { position: relative; padding-left: var(--space-5); font-size: var(--type-body-size); line-height: 1.55; color: var(--content-secondary); }
 .fq-a li::before { content: ''; position: absolute; left: 2px; top: 0.6em; width: 6px; height: 6px; border-radius: 2px; background: var(--surface-brand-solid); }
-.fq-a-video { width: min(35rem, 100%); }
+.fq-a-video { width: min(26rem, 100%); }
 .fq-a-table { overflow-x: auto; border: 1px solid var(--border-decorative); border-radius: var(--radius-lg); }
 .fq-a-table table { width: 100%; min-width: 34rem; border-collapse: collapse; font-size: var(--type-body-sm-size); line-height: 1.5; }
 .fq-a-table :is(th, td) { padding: var(--space-3) var(--space-4); border-top: 1px solid var(--border-subtle); text-align: left; vertical-align: top; color: var(--content-secondary); white-space: pre-line; }
@@ -194,7 +168,8 @@ main [data-slot='section'].fqh { padding-top: var(--space-10); }
 /* ── phones ─────────────────────────────────────────────────────────────────────────────────────── */
 @media (width < 1056px) {
   /* the categories as a list with carets; a pick swaps the list for its questions and a back link */
-  .fq-tabs button { padding: var(--space-3) 0; border-right: 0; border-bottom: 1px solid var(--border-subtle); }
+  .fq-tabs { gap: 0; }
+  .fq-tabs button { padding: var(--space-4) 0; border: 0; border-bottom: 1px solid var(--border-decorative); border-radius: 0; color: var(--content-primary); }
   .fq-tabs button:hover { background: none; }
   .fq-tab-caret { display: block; }
   .fq-grid:not([data-opened]) .fq-panel { display: none; }
@@ -204,12 +179,11 @@ main [data-slot='section'].fqh { padding-top: var(--space-10); }
 @media (width < 672px) {
   main [data-slot='section'].fqh { padding-top: var(--space-8); }
   .fqh-three { margin-top: var(--space-8); }
-  .fqh-num { font-size: 4.5rem; }
   .fqf { margin-top: var(--space-8); }
   .fqf-card { padding: var(--space-5) var(--space-4); }
   .fq-intro { padding-bottom: var(--space-6); }
   .fq-grid { margin-top: var(--space-6); }
-  .fq-q button { padding: var(--space-4) 0; }
-  .fq-a { padding: 0 0 var(--space-5); }
+  .fq-a { padding: 0 0 var(--space-5) 2.25rem; }
+  .fq-q-num { min-width: 1.5rem; }
   .fqr-grid { margin-top: var(--space-6); }
 }

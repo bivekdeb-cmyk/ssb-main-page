@@ -2,20 +2,21 @@
 
 import * as React from 'react';
 import { Button, Container, Heading, Section, Text } from '@kishanscaler/ssx-ui';
-import { CaretDown, CaretLeft, CaretRight, Check, GraduationCap, PlayIcon } from '@phosphor-icons/react';
+import { ArrowRight, CaretLeft, CaretRight, CheckCircle, PlayIcon } from '@phosphor-icons/react';
 
 import type { FaqBlock, FaqCategory, FaqVideo } from '@/content/faq';
 import { faqCategories, faqFeature, faqHero, faqIntro, faqRecommended } from '@/content/faq';
 import { Lightbox } from '@/sections/learn-by-doing/LearnByDoingSection';
 import '@/sections/learn-by-doing/learn-by-doing.css';
+import '@/sections/deck/deck-finale.css';
 import './faq.css';
 
 /**
  * The FAQ page's sections (/faq, 2026-11-13, the user's asks: the live FAQ page's layout and words
  * exactly, in our type scale and icons, light only). Top to bottom as on scaler.com: the breadcrumb and
- * title over the three numbered videos on a band; the large video beside the "India's Only B-School"
- * card, the band behind their top half; "Frequently Asked Questions" with the categories at the left and
- * the questions at the right (a phone lists the categories, and a category opens its questions with a
+ * title over the three numbered videos; the large video beside the "India's Only B-School" card;
+ * "Frequently Asked Questions" with the categories at the left and the questions at the right on the
+ * main page's FAQ accordion (a phone lists the categories, and a category opens its questions with a
  * back link); "Recommended for you" as a 3-column grid of the twelve videos. Every video opens the
  * learn-by-doing lightbox (YouTube). Copy: content/faq.ts; styles: faq.css.
  */
@@ -68,13 +69,11 @@ export function FaqHero() {
         <ol className="fqh-three">
           {c.videos.map((v, i) => (
             <li key={v.id} className="fqh-item">
-              <div className="fqh-media">
-                <VideoThumb video={v} onPlay={play} eager />
-                <span className="fqh-num" aria-hidden="true">
-                  {i + 1}
-                </span>
-              </div>
-              <h2 className="fqh-item-title">{v.title}</h2>
+              <VideoThumb video={v} onPlay={play} eager />
+              <h2 className="fqh-item-title">
+                <span className="fqh-num">{String(i + 1).padStart(2, '0')}</span>
+                {v.title}
+              </h2>
             </li>
           ))}
         </ol>
@@ -87,15 +86,15 @@ export function FaqHero() {
             <ul className="fqf-points">
               {f.points.map((p) => (
                 <li key={p}>
-                  <Check weight="bold" aria-hidden="true" />
+                  <CheckCircle weight="fill" aria-hidden="true" />
                   {p}
                 </li>
               ))}
             </ul>
             <Button asChild size="lg" variant="primary" className="fqf-cta">
               <a href={f.cta.href}>
-                <GraduationCap weight="bold" aria-hidden="true" />
                 {f.cta.label}
+                <ArrowRight weight="bold" aria-hidden="true" />
               </a>
             </Button>
           </div>
@@ -161,27 +160,32 @@ function Answer({ blocks, video, onPlay }: { blocks: FaqBlock[]; video?: FaqVide
 }
 
 function Questions({ cat, onPlay }: { cat: FaqCategory; onPlay: (v: FaqVideo) => void }) {
-  const [open, setOpen] = React.useState(-1);
+  const [open, setOpen] = React.useState(0);
   return (
-    <ul className="fq-list">
+    <ol className="dkf-list fq-list">
       {cat.items.map((f, i) => {
         const on = open === i;
         const id = `fq-${cat.id}-${i}`;
         return (
-          <li key={f.q} className="fq-item" data-open={on ? '' : undefined}>
-            <h4 className="fq-q">
+          <li key={f.q} className="dkf-item" data-open={on ? '' : undefined}>
+            <h4 className="dkf-q">
               <button type="button" aria-expanded={on} aria-controls={id} onClick={() => setOpen(on ? -1 : i)}>
-                <span>{f.q}</span>
-                <CaretDown weight="bold" aria-hidden="true" />
+                <span className="fq-q-num" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="dkf-q-text">{f.q}</span>
+                <span className="dkf-icon" aria-hidden="true" />
               </button>
             </h4>
-            <div id={id} role="region" className="fq-a-wrap" hidden={!on}>
-              <Answer blocks={f.a} video={f.video} onPlay={onPlay} />
+            <div id={id} role="region" className="dkf-a" aria-hidden={!on}>
+              <div className="dkf-a-inner">
+                <Answer blocks={f.a} video={f.video} onPlay={onPlay} />
+              </div>
             </div>
           </li>
         );
       })}
-    </ul>
+    </ol>
   );
 }
 
@@ -192,7 +196,7 @@ export function FaqBrowser() {
   const [opened, setOpened] = React.useState(false);
   const c = faqCategories[cat];
   return (
-    <Section id="faq" density="roomy" aria-labelledby="fq-title" className="fq">
+    <Section id="faq" density="roomy" aria-labelledby="fq-title" className="dkf fq">
       <Container>
         <div className="fq-intro">
           <Heading as="h2" size="display" id="fq-title" className="fq-title">
@@ -214,7 +218,8 @@ export function FaqBrowser() {
                     setOpened(true);
                   }}
                 >
-                  {x.tab}
+                  <span>{x.tab}</span>
+                  <small>{x.items.length}</small>
                   <CaretRight weight="bold" aria-hidden="true" className="fq-tab-caret" />
                 </button>
               </li>
@@ -227,7 +232,7 @@ export function FaqBrowser() {
               </button>
               {c.title}
             </h3>
-            {/* keyed by category, so each starts closed */}
+            {/* keyed by category, so each opens on its first question */}
             <Questions key={c.id} cat={c} onPlay={play} />
           </div>
         </div>
