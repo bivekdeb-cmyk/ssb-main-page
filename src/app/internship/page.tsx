@@ -74,14 +74,14 @@ export default async function InternshipPage() {
             peers={<InternshipCloser content={internshipCloser} logos={logos} />}
           />
         </Tone>
+        {/* the main page's placement report banner (2026-11-13, the user's ask): after the outcomes
+            (the user's ask: above the stories), where the internships lead: the figures and the audited report, without the recruiters' grid (the page has its logos) */}
+        <Tone>
+          <DeckOutcomes ticker recruiters={false} />
+        </Tone>
         {/* "What Our Students Are Saying": the five students' videos on the home page's reel row */}
         <Tone>
           <InternshipReels content={internshipStories} />
-        </Tone>
-        {/* the main page's placement report banner (2026-11-13, the user's ask): where the internships
-            lead, the figures and the audited report, without the recruiters' grid (the page has its logos) */}
-        <Tone>
-          <DeckOutcomes ticker recruiters={false} />
         </Tone>
         {/* request a callback, the last thing before the footer */}
         <Tone>

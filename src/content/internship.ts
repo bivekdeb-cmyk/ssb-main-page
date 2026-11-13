@@ -193,6 +193,6 @@ export const internshipCallback: CloseContent = {
 export const internshipNav: BottomNavItem[] = [
   { label: 'Companies', target: 'int-top' },
   { label: 'Outcomes', target: 'alumni-title' },
-  { label: 'Stories', target: 'stories-title' },
   { label: 'Placements', target: 'placements-showcase-title' },
+  { label: 'Stories', target: 'stories-title' },
 ];
