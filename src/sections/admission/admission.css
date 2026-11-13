@@ -565,3 +565,13 @@ main[data-page='v7'] .ad4[data-parts='scholarships'] .ad4-sch-head p { max-width
   color: var(--content-secondary);
 }
 .adm-fees-link { padding-inline: var(--space-1) !important; }
+/* the open intake filled (2026-11-13, the user's ask): the row on the solid brand green, its text white,
+   the "Open now" pill white with green text */
+.adm-fees-card .ad4-tr[data-now] {
+  background: var(--surface-brand-solid);
+  box-shadow: none;
+  color: var(--pg-white);
+}
+.adm-fees-card .ad4-tr[data-now] .ad4-fee,
+.adm-fees-card .ad4-tr[data-now] time { color: var(--pg-white); }
+.adm-fees-card .ad4-tr[data-now] .adm-fees-pill { background: var(--pg-white); color: var(--surface-brand-solid); }
