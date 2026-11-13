@@ -150,13 +150,18 @@
   }
 }
 
-/* the black version (2026-11-13, the user's ask): the whole band black, edge to edge, the type white,
-   the secondary button a white outline as on the main hero's film; the title at medium weight; the
-   figures as the career prep's cards on its dark band (deck-career.css .dcp-stat under .tn-dark): a
-   #171717 fill, a 14% white edge, the numbers in its green */
+/* the black version (2026-11-13, the user's asks): a black banner inset from the window as the main
+   hero's frame (16px clear, 8px corners), the type white, the title at medium weight on a tighter line;
+   the figures keep their layout and take the career prep cards' colours and corners on its dark band
+   (deck-career.css .dcp-stat under .tn-dark: #171717, a 14% white edge, its green #6bee9f) */
 .pgh {
+  padding: var(--space-4) var(--space-4) 0 !important;
+  background: var(--surface-page);
+}
+.pgh-frame {
+  padding: var(--space-10) 0 var(--space-12);
+  border-radius: var(--radius-lg);
   background: #0b0b0b;
-  padding-bottom: var(--space-16) !important;
 }
 .pgh-crumbs ol {
   color: rgb(255 255 255 / 0.55);
@@ -168,6 +173,8 @@
 .pgh-title {
   color: #fff !important;
   font-weight: var(--font-weight-medium, 500) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em;
 }
 .pgh-short {
   color: rgb(255 255 255 / 0.55);
@@ -185,21 +192,14 @@
   background: rgb(255 255 255 / 0.1) !important;
 }
 .pgh-fig {
-  justify-content: flex-start;
-  gap: var(--space-2);
-  min-height: 0;
-  padding: var(--space-6);
   border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: var(--radius-lg);
   background: #171717;
 }
 .pgh-fig dd {
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
-  font-weight: var(--font-weight-medium, 500);
   color: #6bee9f;
 }
 .pgh-fig dt {
-  font-size: var(--type-label-size, 0.875rem);
-  line-height: 1.4;
   color: #fff;
 }
 .pgh-fig dt small {
@@ -207,17 +207,13 @@
 }
 @media (width < 672px) {
   .pgh {
-    padding-bottom: var(--space-10) !important;
+    padding: var(--space-2) var(--space-2) 0 !important;
   }
-  .pgh-fig {
-    gap: var(--space-1-5, 6px);
-    padding: var(--space-4);
+  .pgh-frame {
+    padding: var(--space-6) 0 var(--space-8);
   }
-  .pgh-fig dd {
-    font-size: 1.75rem;
-  }
-  .pgh-fig dt {
-    font-size: var(--type-caption-size, 0.75rem);
+  .pgh-title {
+    line-height: 1.2 !important;
   }
   /* phones: the two buttons smaller, side by side (they were full-width, large) */
   .pgh-actions {
@@ -229,8 +225,9 @@
     flex: 0 1 auto !important;
     height: 2.5rem !important;
     min-height: 0 !important;
-    padding-inline: var(--space-4) !important;
+    padding-inline: var(--space-3) !important;
     font-size: 0.875rem !important;
+    white-space: nowrap;
   }
   .pgh .pgh-actions > * svg {
     width: 0.875rem;

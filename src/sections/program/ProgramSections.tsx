@@ -42,6 +42,7 @@ function Header({ id, eyebrow, title, sub }: { id: string; eyebrow: string; titl
 export function ProgramHero() {
   return (
     <Section density="roomy" aria-labelledby="pgh-title" className="pgh">
+      <div className="pgh-frame">
       <Container>
         <nav aria-label="Breadcrumb" className="pgh-crumbs">
           <ol>
@@ -90,6 +91,7 @@ export function ProgramHero() {
           </dl>
         </div>
       </Container>
+      </div>
     </Section>
   );
 }
