@@ -136,3 +136,20 @@ main .h-tail, main .sj-ai-accent { color: var(--content-secondary) !important; }
   /* 32px (2026-11-11, the user's ask; was 40) */
   main [data-slot='section'][data-density='roomy'], .pv-page.pv-home { padding-block: var(--space-8); }
 }
+
+/* Phones (2026-11-13, the user's ask: "the CTAs are too big on mweb, fix it on all the pages"): every
+   button, large or medium, one quieter size on a phone: 40px tall, 14px text, 16px icons. Widths are
+   the sections' own (full-width CTAs stay full width). !important: some sections set their own heights. */
+@media (width < 672px) {
+  html body [data-slot='button']:is([data-size='lg'], [data-size='md']) {
+    height: 40px !important;
+    min-height: 40px !important;
+    padding-inline: var(--space-4) !important;
+    font-size: 0.875rem !important;
+  }
+  html body [data-slot='button']:is([data-size='lg'], [data-size='md']) svg { width: 16px !important; height: 16px !important; }
+}
+/* the fixed apply bar at a phone's foot, a step smaller again (the same ask): 36px, 14px */
+@media (width < 672px) {
+  html body .bn-apply .bn-apply-btn[data-slot='button'] { height: 36px !important; min-height: 36px !important; font-size: 0.875rem !important; }
+}
