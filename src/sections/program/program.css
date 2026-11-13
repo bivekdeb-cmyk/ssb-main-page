@@ -497,7 +497,10 @@ html body main[data-route='program'] .tn:has(.sj-ai-track) {
   overflow-x: clip;
 }
 html body main[data-route='program'] .sj-ai-track {
-  /* the right side only: the carousel's script scrolls by each card's offset, so the left stays put */
-  margin-right: calc(50% - 50vw) !important;
-  padding-right: calc(50vw - 50%) !important;
+  /* the gap outside the content column, in units that mean the same on the margin, the padding and
+     the scroll padding (a percentage scroll padding is of the row itself, not its column) */
+  --pg-bleed: calc((100vw - min(100vw, var(--size-container-max)) + 2 * var(--space-gutter)) / 2);
+  margin-inline: calc(-1 * var(--pg-bleed)) !important;
+  padding-inline: var(--pg-bleed) !important;
+  scroll-padding-inline: var(--pg-bleed) !important;
 }
