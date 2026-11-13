@@ -8,6 +8,7 @@ import { deckClose, deckFaqs } from '@/content/deck';
 import { useSectionEntrance } from '@/sections/faculty/useSectionEntrance';
 import { CtaIcon } from '@/sections/hero/CtaIcon';
 import type { CtaIconName } from '@/sections/hero/types';
+import type { Faq } from '@/content/admissions';
 import { Title } from '@/sections/shared/Title';
 import './deck-finale.css';
 
@@ -21,7 +22,12 @@ import './deck-finale.css';
  * the questions as hairline rows, a square plus that turns to a minus on a green tile, the answer
  * opening by its height and fading up. One open at a time, the first to start.
  */
-export function DeckFaqSection() {
+/** `items`, `title` and `sub` default to the home page's; another page (the admission page) passes its own. */
+export function DeckFaqSection({
+  items = deckFaqs,
+  title = 'Questions, answered.|For candidates and parents.',
+  sub = 'What applicants ask most, answered.',
+}: { items?: Faq[]; title?: string; sub?: string } = {}) {
   const ref = React.useRef<HTMLElement>(null);
   const [open, setOpen] = React.useState(0);
   useSectionEntrance(ref, { decks: [] });
@@ -36,10 +42,10 @@ export function DeckFaqSection() {
               FAQ
             </Heading>
             <Heading as="h2" size="display" id="faq-title" data-enter="headline">
-              <Title text="Questions, answered.|For candidates and parents." />
+              <Title text={title} />
             </Heading>
             <Text size="lg" tone="secondary" data-enter="sub">
-              What applicants ask most, answered.
+              {sub}
             </Text>
             {/* the page's own CTA (2026-10-28, the user's ask: "as the other CTAs"): the design system's
                 primary button with the shared arrow, as the closing card's Apply Now */}
@@ -52,7 +58,7 @@ export function DeckFaqSection() {
           </div>
 
           <ol className="dkf-list" data-enter="block">
-            {deckFaqs.map((f, i) => {
+            {items.map((f, i) => {
               const on = open === i;
               const id = `dkf-${i}`;
               return (

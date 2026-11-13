@@ -1,6 +1,7 @@
 import type { BottomNavItem } from '@/content/bottom-nav';
 import { bottomNav } from '@/content/bottom-nav';
-import { admissionsV4 } from '@/content/admissions';
+import { admissionsV4, faqs } from '@/content/admissions';
+import type { Faq } from '@/content/admissions';
 import { deckClose } from '@/content/deck';
 import type { AdmissionsContent } from '@/sections/admissions/AdmissionsV4';
 import type { CloseContent } from '@/sections/deck/DeckFinale';
@@ -203,6 +204,71 @@ export const admissionVideo = {
   },
 };
 
+/** "Important Dates and Fees" (2026-11-13, the user's ask: the live page's table was missing): the
+ *  live page's one intake row, its notes and the detailed fee structure's brochure, as read on
+ *  scaler.com/school-of-business/admission/ that day. */
+export const admissionFees = {
+  eyebrow: 'Dates & fees',
+  title: 'Important dates and fees.|For the 2027 cohort.',
+  sub: 'Admissions run in weekly phases that close every Sunday. Apply early for a better chance of a seat and a scholarship.',
+  columns: ['Intake', 'Deadline', 'Application fee', 'Course fee'],
+  rows: [
+    {
+      intake: 'Early Bird Intake',
+      status: 'Open now',
+      deadline: '15 Nov 2026',
+      deadlineIso: '2026-11-15',
+      appFee: '₹1,500',
+      courseFee: '₹23,00,000',
+    },
+  ],
+  apply: { label: 'Apply Now', href: APPLY },
+  notes: [
+    'The application fee is non-refundable',
+    'Course fees may be revised in future, with market conditions, inflation or regulatory requirements',
+    'The batch begins in August 2027',
+  ],
+  brochure: {
+    title: 'Want the detailed fee structure?',
+    line: 'Download the brochure for the full fee structure.',
+    cta: { label: 'Download Brochure', href: BROCHURE },
+  },
+};
+
+/** The FAQ (2026-11-13): the home page's FAQ section with admission questions, every answer from the
+ *  live admission page (scaler.com/school-of-business/admission/, read that day) or the home page's FAQ. */
+export const admissionFaqs: Faq[] = [
+  {
+    question: 'Who can apply?',
+    answer:
+      'Anyone who has completed Class 12 and holds a bachelor’s degree from an accredited institution, graduating between 2017 and 2027. A year of work experience is ideal, but freshers with internships, leadership roles in college, good projects or side hustles are welcome.',
+  },
+  ...faqs.filter((f) => /entrance score/i.test(f.question)),
+  {
+    question: 'Is the application fee refundable?',
+    answer: 'No. The ₹1,500 application fee is non-refundable. You have 7 days from paying it to submit your application.',
+  },
+  {
+    question: 'When will I hear back after my interview?',
+    answer:
+      'Admission results are communicated within 3 to 5 days of completing your interviews. Successful candidates then have 7 days to decide whether to join.',
+  },
+  {
+    question: 'Who awards the scholarships?',
+    answer:
+      'Every scholarship is awarded by the Scaler Impact Foundation, supported by industry stalwarts. Applying early gives the admissions team time to review your application before the scholarship committee; decisions are final.',
+  },
+  {
+    question: 'Can I get a loan for the fees?',
+    answer:
+      'Yes. We offer easy financing through our banking partners, and our counselling team can connect you with financial service providers.',
+  },
+  {
+    question: 'When does the batch begin?',
+    answer: 'The 2027 cohort begins in August 2027.',
+  },
+];
+
 /** The scholarships, on the home page's admissions section (`parts="scholarships"`): its four
  *  scholarships and the foundation's backers, with the live page's notes. */
 export const admissionScholarships: AdmissionsContent = {
@@ -216,7 +282,7 @@ export const admissionScholarships: AdmissionsContent = {
     title: 'Scholarships up to 100%.|Four ways to qualify.',
     // the fee table's fine print, short, under the title (2026-11-11)
     notes: [
-      '₹1,000 application fee, non-refundable',
+      '₹1,500 application fee, non-refundable',
       'Scholarships apply to tuition fees',
       'Fees may be revised',
     ],
@@ -278,8 +344,10 @@ export const admissionCallback: CloseContent = {
 /** The bottom navigation: the live page's sections bar, on this page's sections. The first fold is
  *  first, so "Dates & fees" leads back to the top. */
 export const admissionNav: BottomNavItem[] = [
-  { label: 'Dates & fees', target: 'adm-top' },
+  { label: 'Overview', target: 'adm-top' },
   { label: 'Process', target: 'adm-steps' },
+  { label: 'Dates & fees', target: 'fees' },
   { label: 'Scholarships', target: 'scholarships' },
   { label: 'Financing', target: 'financing' },
+  { label: 'FAQ', target: 'faq-title' },
 ];

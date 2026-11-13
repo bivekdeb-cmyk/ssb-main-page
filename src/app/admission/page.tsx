@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import {
   admissionCallback,
   admissionDeadline,
+  admissionFaqs,
+  admissionFees,
   admissionFinancing,
   admissionNav,
   admissionScholarships,
@@ -11,11 +13,13 @@ import {
   admissionVideo,
 } from '@/content/admission';
 import { AdmissionTimeline } from '@/sections/admission/AdmissionTimeline';
+import { AdmissionFees } from '@/sections/admission/AdmissionFees';
 import { AdmissionFinancing } from '@/sections/admission/AdmissionFinancing';
 import { AdmissionTop } from '@/sections/admission/AdmissionTop';
 import { AdmissionVideo } from '@/sections/admission/AdmissionVideo';
 import { AdmissionsV4 } from '@/sections/admissions/AdmissionsV4';
-import { DeckCloseSection } from '@/sections/deck/DeckFinale';
+import { DeckCloseSection, DeckFaqSection } from '@/sections/deck/DeckFinale';
+import { DeckOutcomes } from '@/sections/deck/DeckOutcomes';
 import { DeckFooter } from '@/sections/deck/DeckFooter';
 import { HeroFrameDeadline } from '@/sections/hero/frame/HeroFrame';
 import { HomeNav, ScrollRefresh } from '@/sections/home/client';
@@ -68,14 +72,32 @@ export default function AdmissionPage() {
         <Tone>
           <AdmissionVideo content={admissionVideo} />
         </Tone>
-        {/* "Scholarships", dark as on the live page, with a headline of its own; the home page's
-            programme fee table under them (2026-11-11, the user's ask) */}
+        {/* "Important Dates and Fees" (2026-11-13, the user's ask): the live page's table, its notes and
+            the detailed fee structure's brochure, where the live page has them, after the video */}
+        <Tone>
+          <AdmissionFees content={admissionFees} />
+        </Tone>
+        {/* "Scholarships", dark as on the live page, with a headline of its own (the home page's fee
+            table beside it until 2026-11-13: its intakes and fees were the home page's, not this page's) */}
         <Tone dark>
-          <AdmissionsV4 content={admissionScholarships} parts="scholarships" backers={false} withFees />
+          <AdmissionsV4 content={admissionScholarships} parts="scholarships" backers={false} />
         </Tone>
         {/* "Financing": the pointers and the partners' logos beside the students' photo */}
         <Tone>
           <AdmissionFinancing content={admissionFinancing} />
+        </Tone>
+        {/* the main page's placement highlights and audited report (2026-11-13): where the programme
+            leads, before the questions; the recruiters' grid left to the home page */}
+        <Tone>
+          <DeckOutcomes ticker recruiters={false} />
+        </Tone>
+        {/* the home page's FAQ, with the admission questions */}
+        <Tone>
+          <DeckFaqSection
+            items={admissionFaqs}
+            title="Questions, answered.|Before you apply."
+            sub="What applicants ask most about the process, fees and scholarships."
+          />
         </Tone>
         {/* request a callback, the last thing before the footer */}
         <Tone>
