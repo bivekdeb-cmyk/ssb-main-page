@@ -140,10 +140,11 @@ export function InternshipCloser({
             <span className="int-num-k">{c.companies.num}</span>
             {c.companies.title}
           </h4>
+          {/* all 24 companies up front (2026-11-13, the user's ask): a tile each, so nothing turns over */}
           <PeersFlip
-            logos={[...logos.slice(12), ...logos.slice(0, 12)]}
+            logos={logos}
             label={c.companies.title}
-            cells={12}
+            cells={logos.length}
             className="int-co-flip"
           />
         </div>
