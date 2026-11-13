@@ -176,13 +176,13 @@ export function AdmissionsV4({ backers = true }: { backers?: boolean } = {}) {
               <DialogDescription>{sch.lede}</DialogDescription>
             </DialogHeader>
             <DialogBody>
-              <p className="ad4-dlg-h">Who it is for</p>
+              <p className="ad4-dlg-h">Eligibility Criteria</p>
               <ul className="ad4-dlg-list">
                 {sch.c.map((x) => (
                   <li key={x}>{x}</li>
                 ))}
               </ul>
-              <p className="ad4-dlg-note">Decided after your interview. Apply early to be considered.</p>
+              <p className="ad4-dlg-note">Applying early significantly enhances the chances of receiving a scholarship.</p>
             </DialogBody>
             <DialogFooter>
               <Button variant="secondary" onClick={() => setOpen(null)}>

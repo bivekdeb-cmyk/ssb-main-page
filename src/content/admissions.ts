@@ -80,11 +80,13 @@ export const admissionsV4 = {
   fine: 'Application fee ₹1,000 for every intake, non-refundable. Fees may be revised. Financing is available through our banking partners.',
   scholarshipsTitle: 'Scholarships up to 100%.',
   scholarshipsText: 'Merit-based and decided after your interview. Every scholarship is awarded by the Scaler Impact Foundation. Applying early improves your chances.',
+  // the four scholarships in the live admission page's own words (scaler.com/school-of-business/admission/,
+  // read 2026-11-13, the user's ask: the same content everywhere the section is used)
   scholarships: [
-    { k: 'For founders', t: 'Future Business Innovators', full: 'Future Business Innovators Scholarship', lede: 'Rewarding entrepreneurial spirit and innovation in business.', c: ['You are a founder or co-founder, or built a startup with measurable impact', 'You have closed a funding round with VCs', 'You were a founding team member at a startup'] },
-    { k: 'For achievers', t: 'Extraordinary Achievements', full: 'Extraordinary Achievements Scholarship', lede: 'Recognising outstanding academic achievement and potential.', c: ['Academics: a top rank in national or international management entrance tests, or a merit rank at undergraduate level', 'Competitions: gold medal or equivalent in business case competitions, Olympiads or prestigious contests', 'Sport: exceptional accomplishments at national or international level'] },
-    { k: 'For professionals', t: 'Industry Leaders', full: 'Industry Leaders Scholarship', lede: 'Valuing professionals with impactful work and leadership.', c: ['Recognised accomplishments in your field with an established company', 'Consultant at a tier 1 or tier 2 consulting firm'] },
-    { k: 'For women leaders', t: 'Women in Leadership', full: 'Women in Leadership Scholarship', lede: 'Helping women into leadership roles in business.', c: ['Proven leadership and strong professional achievements', 'A leadership position in an organisation or college club'] },
+    { k: 'For founders', t: 'Future Business Innovators', full: 'Future Business Innovators Scholarship', lede: 'Rewarding entrepreneurial spirit and innovation in business', c: ['Is a founder/co-founder or built a startup with a measurable impact', 'Successfully closed a funding round with VCs', 'Founding team member at a startup'] },
+    { k: 'For achievers', t: 'Extraordinary Achievements', full: 'Extraordinary Achievements Scholarship', lede: 'This scholarship recognises outstanding academic achievement and potential', c: ['Academic Performance: Top rank in national/international management entrance tests or merit rank at the undergraduate level', 'Competitions: Gold medal or equivalent in business case competitions, Olympiads, or prestigious contests', 'Athletic Achievements: Exceptional accomplishments in sports at national/international levels'] },
+    { k: 'For professionals', t: 'Industry Leaders', full: 'Industry Leaders Scholarship', lede: 'Valuing professionals with impactful work and leadership', c: ['Recognised accomplishments in the field of work with an established company', 'Consultant at tier 1/2 consulting firms'] },
+    { k: 'For women leaders', t: 'Women in Leadership', full: 'Women in Leadership Scholarship', lede: 'Empowering women to achieve leadership roles in business', c: ['Proven leadership and strong professional achievements', 'Leadership position in organisations/college clubs'] },
   ],
   backersLabel: 'The Scaler Impact Foundation is backed by',
   backers: [
