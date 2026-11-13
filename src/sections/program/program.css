@@ -199,7 +199,9 @@
   border-color: rgb(255 255 255 / 0.4) !important;
 }
 .pgh .pgh-secondary.pgh-secondary:hover {
-  background: rgb(255 255 255 / 0.1) !important;
+  /* no fill, ever: only the edge brightens a little */
+  background: transparent !important;
+  border-color: rgb(255 255 255 / 0.6) !important;
 }
 .pgh-fig {
   border: 1px solid rgb(255 255 255 / 0.12);
@@ -601,4 +603,62 @@ html body main[data-route='program'] .sj-ai-track {
   margin-inline: calc(-1 * var(--pg-bleed)) !important;
   padding-inline: var(--pg-bleed) !important;
   scroll-padding-inline: var(--pg-bleed) !important;
+}
+
+/* career prep on /program, styled as the hero (the user's ask): its dark band becomes a banner in the
+   brand's deep green (#134a2f) inset 16px from the window with 8px corners (edge to edge on phones); its
+   figure cards a darker fill, a faint white edge and the brighter green numbers (#8affbd) */
+html body main[data-route='program'] .tn-dark:has(> .dcp) {
+  padding-inline: var(--space-4);
+  background: #fff;
+}
+html body main[data-route='program'] .tn-dark > .dcp {
+  border-radius: var(--radius-lg);
+  background: #134a2f;
+}
+html body main[data-route='program'] .tn-dark .dcp-stat {
+  /* the hero's figure cards exactly: the number at the top, the label at the foot */
+  justify-content: space-between;
+  gap: var(--space-6);
+  min-height: 9rem;
+  padding: var(--space-5);
+  border: 1px solid rgb(255 255 255 / 0.12) !important;
+  border-radius: var(--radius-lg);
+  background: rgb(0 0 0 / 0.18) !important;
+}
+html body main[data-route='program'] .tn-dark .dcp-stat dd {
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 500;
+  color: #8affbd !important;
+}
+html body main[data-route='program'] .tn-dark .dcp-stat dt {
+  font-size: var(--type-label-size);
+  line-height: 1.35;
+  font-weight: 500;
+  color: #fff;
+}
+@media (width < 672px) {
+  html body main[data-route='program'] .tn-dark .dcp-stat {
+    min-height: 0;
+    gap: var(--space-4);
+    padding: var(--space-4);
+  }
+  html body main[data-route='program'] .tn-dark .dcp-stat dd {
+    font-size: 1.75rem;
+  }
+  html body main[data-route='program'] .tn-dark .dcp-stat dt {
+    font-size: var(--type-caption-size);
+  }
+  html body main[data-route='program'] .tn-dark:has(> .dcp) {
+    padding-inline: 0;
+  }
+  html body main[data-route='program'] .tn-dark > .dcp {
+    border-radius: 0;
+  }
+}
+
+/* /program: nothing scrolls the page sideways (the learn-by-doing cards ran ~7px past the window).
+   clip, not hidden: it makes no scroll container, so the sticky rails and navs keep working */
+html body main[data-route='program'] {
+  overflow-x: clip;
 }
