@@ -457,3 +457,29 @@ html body .int-reels .in-reel-line {
   font-size: var(--tp-item, 1.25rem) !important;
   line-height: 1.25 !important;
 }
+
+/* phones (2026-11-13, the user's ask: more logos in the first fold): 4 × 3, twelve tiles, each a step
+   smaller (the hero's 3 × 2 before) */
+@media (width < 672px) {
+  main[data-page='v7'] .peers-flip.int-hero-flip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-1-5, 6px);
+  }
+  main[data-page='v7'] .int-hero-flip .peers-flip-cell {
+    height: 3.25rem;
+  }
+  main[data-page='v7'] .int-hero-flip .peers-flip-cell:nth-child(n + 7) {
+    display: block;
+  }
+  main[data-page='v7'] .int-hero-flip .peers-flip-cell:nth-child(n + 13) {
+    display: none;
+  }
+  main[data-page='v7'] .int-hero-flip .peers-flip-face {
+    padding: 0 var(--space-1, 4px);
+  }
+  main[data-page='v7'] .int-hero-flip .peers-flip-logo[style] {
+    width: min(calc(var(--w) * 0.75), 100%);
+    max-width: 88%;
+    max-height: 1.5rem;
+  }
+}
