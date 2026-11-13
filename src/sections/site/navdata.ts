@@ -38,7 +38,7 @@ export const SSB_NAV: NavContent = {
     // '/…' (2026-11-11): the site has more than one page now, so the home page's anchors carry its path
     { label: 'Home', href: '/#top' },
     { label: 'Admission & Fees', href: '/admission' },
-    { label: 'Program', href: `${SSB}/program/` },
+    { label: 'Program', href: '/program' },
     { label: 'Internship', href: '/internship' },
     { label: 'Campus Life', href: `${SSB}/campus-life/` },
     { label: 'Events', href: `${SSB}/events` },

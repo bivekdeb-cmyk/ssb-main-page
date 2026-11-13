@@ -29,7 +29,7 @@ export const bottomNav: {
     label: 'Apply now',
     tabs: [
       { label: 'Admission & Fees', href: '/admission' },
-      { label: 'Program', href: '/#curriculum' },
+      { label: 'Program', href: '/program' },
       { label: 'Internship', href: '/internship' },
       { label: 'Campus Life', href: '/#campus-title' },
     ],
