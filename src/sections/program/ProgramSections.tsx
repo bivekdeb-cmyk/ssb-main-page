@@ -63,7 +63,7 @@ export function ProgramHero() {
               {hero.line}
             </Text>
             <div className="pgh-actions" data-brand="ssb" data-theme="light">
-              <Button asChild size="lg" variant="primary">
+              <Button asChild size="lg" variant="primary" className="pgh-primary">
                 <a href={hero.primaryCta.href}>
                   {hero.primaryCta.label}
                   <ArrowUpRight weight="bold" aria-hidden="true" />

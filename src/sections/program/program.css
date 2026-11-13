@@ -150,10 +150,11 @@
   }
 }
 
-/* the black version (2026-11-13, the user's asks): a black banner inset from the window as the main
-   hero's frame (16px clear, 8px corners), the type white, the title at medium weight on a tighter line;
-   the figures keep their layout and take the career prep cards' colours and corners on its dark band
-   (deck-career.css .dcp-stat under .tn-dark: #171717, a 14% white edge, its green #6bee9f) */
+/* the brand version (2026-11-13, the user's asks): a banner in the brand's deep green (the main page's
+   footer card, deck-footer.css .dkft: #134a2f) inset from the window as the main hero's frame (16px
+   clear, 8px corners); the type white, the title at medium weight on a tighter line; Apply Now white
+   with green text and the brochure a white outline, as on that footer; the figures keep their layout,
+   as translucent white cards with the career prep's green numbers (#6bee9f) */
 .pgh {
   padding: var(--space-4) var(--space-4) 0 !important;
   background: var(--surface-page);
@@ -161,7 +162,7 @@
 .pgh-frame {
   padding: var(--space-10) 0 var(--space-12);
   border-radius: var(--radius-lg);
-  background: #0b0b0b;
+  background: #134a2f;
 }
 .pgh-crumbs ol {
   color: rgb(255 255 255 / 0.55);
@@ -183,6 +184,14 @@
 .pgh-copy > p {
   color: rgb(255 255 255 / 0.78) !important;
 }
+.pgh .pgh-primary.pgh-primary {
+  border-color: #fff !important;
+  background: #fff !important;
+  color: var(--color-ssb-light-11) !important;
+}
+.pgh .pgh-primary.pgh-primary:hover {
+  background: rgb(255 255 255 / 0.9) !important;
+}
 .pgh .pgh-secondary.pgh-secondary {
   background: transparent !important;
   color: #fff !important;
@@ -192,9 +201,9 @@
   background: rgb(255 255 255 / 0.1) !important;
 }
 .pgh-fig {
-  border: 1px solid rgb(255 255 255 / 0.14);
+  border: 1px solid rgb(255 255 255 / 0.16);
   border-radius: var(--radius-lg);
-  background: #171717;
+  background: rgb(255 255 255 / 0.06);
 }
 .pgh-fig dd {
   color: #6bee9f;
