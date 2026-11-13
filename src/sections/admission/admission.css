@@ -575,3 +575,9 @@ main[data-page='v7'] .ad4[data-parts='scholarships'] .ad4-sch-head p { max-width
 .adm-fees-card .ad4-tr[data-now] .ad4-fee,
 .adm-fees-card .ad4-tr[data-now] time { color: var(--pg-white); }
 .adm-fees-card .ad4-tr[data-now] .adm-fees-pill { background: var(--pg-white); color: var(--surface-brand-solid); }
+/* the step number centred on its title's first line at every size (2026-11-13, the user's ask: the
+   numbers sat a little above the titles on desktop, below them on a phone): no fixed padding over the
+   body; the title moved down by half of (the marker's height less its own line, 1.2em) */
+.adm-tl-body,
+.adm-tl-step .adm-tl-body { padding-top: 0; }
+.adm-tl-title { margin-top: calc((var(--adm-m) - 1.2em) / 2); }
