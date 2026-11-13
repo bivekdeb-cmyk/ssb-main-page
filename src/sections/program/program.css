@@ -154,7 +154,7 @@
    footer card, deck-footer.css .dkft: #134a2f) inset from the window as the main hero's frame (16px
    clear, 8px corners); the type white, the title at medium weight on a tighter line; Apply Now white
    with green text and the brochure a white outline, as on that footer; the figures keep their layout,
-   as translucent white cards with the career prep's green numbers (#6bee9f) */
+   as a slightly darker fill with brighter green numbers (#8affbd); on phones edge to edge */
 .pgh {
   padding: var(--space-4) var(--space-4) 0 !important;
   background: var(--surface-page);
@@ -195,18 +195,18 @@
 .pgh .pgh-secondary.pgh-secondary {
   background: transparent !important;
   color: #fff !important;
-  border-color: rgb(255 255 255 / 0.85) !important;
+  border-color: rgb(255 255 255 / 0.4) !important;
 }
 .pgh .pgh-secondary.pgh-secondary:hover {
   background: rgb(255 255 255 / 0.1) !important;
 }
 .pgh-fig {
-  border: 1px solid rgb(255 255 255 / 0.16);
+  border: 1px solid rgb(255 255 255 / 0.12);
   border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(0 0 0 / 0.18);
 }
 .pgh-fig dd {
-  color: #6bee9f;
+  color: #8affbd;
 }
 .pgh-fig dt {
   color: #fff;
@@ -215,24 +215,28 @@
   color: rgb(255 255 255 / 0.55);
 }
 @media (width < 672px) {
+  /* phones: the banner edge to edge, no margin, no corners */
   .pgh {
-    padding: var(--space-2) var(--space-2) 0 !important;
+    padding: 0 !important;
   }
   .pgh-frame {
     padding: var(--space-6) 0 var(--space-8);
+    border-radius: 0;
   }
   .pgh-title {
     line-height: 1.2 !important;
   }
-  /* phones: the two buttons smaller, side by side (they were full-width, large) */
+  /* phones: the two buttons one over the other, each the full width, a size down from large */
   .pgh-actions {
+    flex-direction: column;
     flex-wrap: nowrap;
-    width: auto;
+    width: 100%;
     gap: var(--space-2);
   }
   .pgh .pgh-actions > * {
-    flex: 0 1 auto !important;
-    height: 2.5rem !important;
+    flex: none !important;
+    width: 100% !important;
+    height: 2.75rem !important;
     min-height: 0 !important;
     padding-inline: var(--space-3) !important;
     font-size: 0.875rem !important;
