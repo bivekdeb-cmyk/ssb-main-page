@@ -11,6 +11,7 @@ import {
 } from '@/content/internship';
 import { AlumniSection } from '@/sections/alumni/AlumniSection';
 import { DeckCloseSection } from '@/sections/deck/DeckFinale';
+import { DeckOutcomes } from '@/sections/deck/DeckOutcomes';
 import { DeckFooter } from '@/sections/deck/DeckFooter';
 import { HeroFrameDeadline } from '@/sections/hero/frame/HeroFrame';
 import { HomeNav, ScrollRefresh } from '@/sections/home/client';
@@ -76,6 +77,11 @@ export default async function InternshipPage() {
         {/* "What Our Students Are Saying": the five students' videos on the home page's reel row */}
         <Tone>
           <InternshipReels content={internshipStories} />
+        </Tone>
+        {/* the main page's placement report banner (2026-11-13, the user's ask): where the internships
+            lead, the figures and the audited report, without the recruiters' grid (the page has its logos) */}
+        <Tone>
+          <DeckOutcomes ticker recruiters={false} />
         </Tone>
         {/* request a callback, the last thing before the footer */}
         <Tone>
