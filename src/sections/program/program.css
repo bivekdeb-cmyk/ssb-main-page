@@ -187,8 +187,8 @@
 .pgh .pgh-primary.pgh-primary {
   border-color: #fff !important;
   background: #fff !important;
-  /* the logo's green, so the text reads green (the deepest brand green, #004a1e, read as black) */
-  color: var(--color-ssb-light-9) !important;
+  /* a deep brand green, a step darker than the logo's (#004a1e, the deepest, read as black) */
+  color: var(--color-ssb-light-10) !important;
 }
 .pgh .pgh-primary.pgh-primary:hover {
   background: rgb(255 255 255 / 0.9) !important;

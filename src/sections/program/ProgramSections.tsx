@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Container, Heading, Logo, Section, Text } from '@kishanscaler/ssx-ui';
-import { ArrowUpRight, CheckCircle, DownloadSimple, MinusCircle } from '@phosphor-icons/react/ssr';
+import { ArrowRight, CheckCircle, DownloadSimple, MinusCircle } from '@phosphor-icons/react/ssr';
 
 import { programCompare as cmp, programHero as hero } from '@/content/program';
 import { Title } from '@/sections/shared/Title';
@@ -66,7 +66,7 @@ export function ProgramHero() {
               <Button asChild size="lg" variant="primary" className="pgh-primary">
                 <a href={hero.primaryCta.href}>
                   {hero.primaryCta.label}
-                  <ArrowUpRight weight="bold" aria-hidden="true" />
+                  <ArrowRight weight="bold" aria-hidden="true" />
                 </a>
               </Button>
               <Button asChild size="lg" variant="secondary" className="pgh-secondary">
