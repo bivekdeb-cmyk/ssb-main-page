@@ -27,7 +27,7 @@ export const programHero = {
   eyebrow: 'Program',
   title: 'PGP in Management & Technology',
   short: 'PGP-MT',
-  line: 'Full-time, on campus in Bangalore. Built with the industry.',
+  line: 'An 18-month programme, built term by term with the industry: core business, functional and industry specialisations, real company projects and a 3-month internship.',
   primaryCta: { label: 'Apply Now', href: '#apply' },
   secondaryCta: { label: 'Download Brochure', href: '#brochure' },
   note: 'Admissions for the 2026 cohort are now open',

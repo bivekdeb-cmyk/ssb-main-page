@@ -34,11 +34,10 @@ function Header({ id, eyebrow, title, sub }: { id: string; eyebrow: string; titl
 /* ── the first fold ─────────────────────────────────────────────────────────────────────────────── */
 
 /**
- * The first fold, text and figures only (the user's asks: no photo, a short line, the main page's
- * actions, every figure alike): the breadcrumb; the eyebrow, the name and one line at the left, the two
- * actions at the right on the title's foot (the main page's large primary and secondary buttons); under
- * them the six figures as one hairline strip of equal cells (the main page's placement figures).
- * Phones: one column, the buttons full width, the figures 2 × 3.
+ * The first fold, text and figures only (the user's asks: no photo, no eyebrow, the title at the main
+ * hero's size): the breadcrumb; at the left the name, its line and the main page's two large buttons
+ * under it; at the right the six figures as equal cards, 3 × 2. Phones: one column, the buttons full
+ * width, the figures 2 × 3.
  */
 export function ProgramHero() {
   return (
@@ -56,43 +55,40 @@ export function ProgramHero() {
 
         <div className="pgh-top">
           <div className="pgh-copy">
-            <Heading as="p" size="eyebrow" className="text-content-brand">
-              {hero.eyebrow}
-            </Heading>
             <Heading as="h1" size="display" id="pgh-title" className="pgh-title">
               {hero.title} <span className="pgh-short">({hero.short})</span>
             </Heading>
-            <Text size="lg" tone="secondary">
+            <Text size="lg" tone="secondary" className="pgh-line">
               {hero.line}
             </Text>
-          </div>
-          <div className="pgh-actions" data-brand="ssb" data-theme="light">
-            <Button asChild size="lg" variant="primary">
-              <a href={hero.primaryCta.href}>
-                {hero.primaryCta.label}
-                <ArrowUpRight weight="bold" aria-hidden="true" />
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="secondary">
-              <a href={hero.secondaryCta.href}>
-                {hero.secondaryCta.label}
-                <DownloadSimple weight="bold" aria-hidden="true" />
-              </a>
-            </Button>
-          </div>
-        </div>
-
-        <dl className="pgh-figs">
-          {hero.figures.map((f) => (
-            <div key={f.label} className="pgh-fig">
-              <dd>{f.value}</dd>
-              <dt>
-                {f.label}
-                {f.note ? <small>{f.note}</small> : null}
-              </dt>
+            <div className="pgh-actions" data-brand="ssb" data-theme="light">
+              <Button asChild size="lg" variant="primary">
+                <a href={hero.primaryCta.href}>
+                  {hero.primaryCta.label}
+                  <ArrowUpRight weight="bold" aria-hidden="true" />
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="secondary">
+                <a href={hero.secondaryCta.href}>
+                  {hero.secondaryCta.label}
+                  <DownloadSimple weight="bold" aria-hidden="true" />
+                </a>
+              </Button>
             </div>
-          ))}
-        </dl>
+          </div>
+
+          <dl className="pgh-figs">
+            {hero.figures.map((f) => (
+              <div key={f.label} className="pgh-fig">
+                <dd>{f.value}</dd>
+                <dt>
+                  {f.label}
+                  {f.note ? <small>{f.note}</small> : null}
+                </dt>
+              </div>
+            ))}
+          </dl>
+        </div>
       </Container>
     </Section>
   );

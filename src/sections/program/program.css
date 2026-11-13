@@ -35,55 +35,66 @@
 }
 .pgh-top {
   display: grid;
-  gap: var(--space-6);
-  margin-top: var(--space-8);
+  gap: var(--space-10);
+  margin-top: var(--space-6);
 }
 @media (width >= 1056px) {
   .pgh-top {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
-    gap: var(--space-12);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-16);
   }
 }
 .pgh-copy {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  max-width: 46rem;
+  align-items: flex-start;
+  gap: var(--space-4);
 }
+/* the main hero's title size: 40px on desktop, semibold */
 .pgh-title {
-  font-size: clamp(2.25rem, 4.6vw, 4rem) !important;
-  line-height: 1.05 !important;
-  letter-spacing: -0.035em;
+  margin: 0;
+  font-size: var(--type-hero-size) !important;
+  line-height: var(--type-display-lh, 1.2) !important;
+  letter-spacing: -0.01em;
+  font-weight: var(--font-weight-semibold, 600) !important;
+}
+@media (width >= 1056px) {
+  .pgh-title {
+    font-size: 2.5rem !important;
+  }
 }
 .pgh-short {
   color: var(--content-secondary);
   white-space: nowrap;
 }
+.pgh-line {
+  max-width: 34rem;
+}
 .pgh-actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
+  margin-top: var(--space-2);
   background: none;
 }
 
-/* the six figures: one hairline strip of equal cells (the main page's placement figures) */
+/* the six figures: equal cards, 3 × 2 at the right */
 .pgh-figs {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 1px;
-  margin: var(--space-10) 0 0;
-  overflow: hidden;
-  border: 1px solid var(--border-decorative);
-  border-radius: var(--radius-lg);
-  background: var(--border-decorative);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
 }
 .pgh-fig {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: var(--space-6);
-  padding: var(--space-6);
+  min-height: 9rem;
+  padding: var(--space-5);
+  border: 1px solid var(--border-decorative);
+  border-radius: var(--radius-lg);
   background: var(--surface-default);
 }
 .pgh-fig dd {
@@ -109,26 +120,26 @@
   font-weight: 400;
   color: var(--content-secondary);
 }
-@media (672px <= width < 1056px) {
-  .pgh-figs {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
 @media (width < 672px) {
   .pgh {
     padding-top: var(--space-6) !important;
   }
   .pgh-top {
+    gap: var(--space-8);
     margin-top: var(--space-5);
+  }
+  .pgh-actions {
+    width: 100%;
   }
   .pgh-actions > * {
     flex: 1 1 100%;
   }
   .pgh-figs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: var(--space-8);
+    gap: var(--space-2);
   }
   .pgh-fig {
+    min-height: 0;
     gap: var(--space-4);
     padding: var(--space-4);
   }
