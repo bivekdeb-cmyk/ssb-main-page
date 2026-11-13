@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle, DownloadSimple, MinusCircle } from '@phosphor-
 
 import { programCompare as cmp, programHero as hero } from '@/content/program';
 import { Title } from '@/sections/shared/Title';
+import { CompareSwipe } from './CompareSwipe';
 import './program.css';
 
 /**
@@ -143,6 +144,8 @@ export function ProgramCompare() {
             </ul>
           </div>
         </div>
+        {/* phones: a carousel, one aspect a card */}
+        <CompareSwipe />
       </Container>
     </Section>
   );
