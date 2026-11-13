@@ -35,7 +35,7 @@
   padding: 0;
   list-style: none;
   font-size: var(--type-caption-size);
-  color: var(--color-content-secondary);
+  color: var(--content-secondary);
 }
 .pgh-crumbs li + li::before {
   content: '/';
@@ -48,7 +48,7 @@
 }
 .pgh-crumbs a:hover,
 .pgh-crumbs [aria-current] {
-  color: var(--color-content);
+  color: var(--content-primary);
 }
 .pgh-chip {
   margin: var(--space-2) 0 0;
@@ -65,7 +65,7 @@
   letter-spacing: -0.03em;
 }
 .pgh-short {
-  color: var(--color-content-secondary);
+  color: var(--content-secondary);
   white-space: nowrap;
 }
 .pgh-line {
@@ -83,8 +83,8 @@
   align-items: center;
   gap: var(--space-2);
   padding-bottom: 2px;
-  border-bottom: 1px solid var(--color-border-subtle);
-  color: var(--color-content);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--content-primary);
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
@@ -117,9 +117,9 @@
   gap: var(--space-6);
   min-height: 9.5rem;
   padding: var(--space-5);
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  background: var(--color-surface-raised);
+  background: var(--surface-raised);
 }
 .pgh-fig dd {
   margin: 0;
@@ -137,12 +137,12 @@
   font-size: var(--type-label-size);
   line-height: 1.35;
   font-weight: 500;
-  color: var(--color-content);
+  color: var(--content-primary);
 }
 .pgh-fig dt small {
   font-size: var(--type-caption-size);
   font-weight: 400;
-  color: var(--color-content-secondary);
+  color: var(--content-secondary);
 }
 .pgh-fig[data-lead] {
   border-color: var(--color-ssb-light-5);
@@ -243,14 +243,14 @@
 
 /* SSB's card: white, a green edge, green marks: the one in focus */
 .pgc-ssb {
-  --pgc-line: var(--color-border-subtle);
+  --pgc-line: var(--border-subtle);
   border: 1.5px solid var(--color-ssb-light-7);
-  background: var(--color-surface-raised);
-  color: var(--color-content);
+  background: var(--surface-raised);
+  color: var(--content-primary);
 }
 .pgc-prog {
   padding-left: var(--space-3);
-  border-left: 1px solid var(--color-border-subtle);
+  border-left: 1px solid var(--border-subtle);
   font-size: var(--type-label-size);
   font-weight: 600;
   color: var(--color-ssb-light-11);
@@ -264,25 +264,25 @@
 
 /* the conventional programmes' card: a disabled fill, everything faded */
 .pgc-trad {
-  --pgc-line: var(--color-border-subtle);
-  border: 1px solid var(--color-border-subtle);
-  background: var(--color-surface-disabled, var(--color-surface-sunken));
-  color: var(--color-content-disabled, var(--color-content-secondary));
+  --pgc-line: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-disabled, var(--surface-sunken));
+  color: var(--content-disabled, var(--content-secondary));
 }
 .pgc-trad-name {
   font-size: 1.125rem;
   font-weight: 500;
-  color: var(--color-content-secondary);
+  color: var(--content-secondary);
 }
 .pgc-trad .pgc-aspect {
-  color: var(--color-content-disabled, var(--color-content-secondary));
+  color: var(--content-secondary);
+  opacity: 0.8;
 }
 .pgc-trad .pgc-text {
-  color: var(--color-content-secondary);
-  opacity: 0.85;
+  color: var(--content-secondary);
 }
 .pgc-trad li svg {
-  color: var(--color-content-disabled, var(--color-content-secondary));
+  color: var(--content-disabled, var(--content-secondary));
 }
 @media (width < 672px) {
   .pgc-card {
@@ -300,18 +300,18 @@
 .pgk {
   --k-class: var(--color-ssb-light-3);
   --k-class-ink: var(--color-ssb-light-11);
-  --k-workshop: var(--color-ssb-light-11);
-  --k-workshop-ink: #fff;
+  --k-workshop: var(--color-ssb-light-2);
+  --k-workshop-ink: var(--color-ssb-light-11);
   --k-immersion: var(--color-info-light-3);
   --k-immersion-ink: var(--color-info-light-11);
   --k-study: var(--color-ssb-light-6);
   --k-study-ink: var(--color-ssb-light-12, #0b2e1c);
   --k-experience: var(--color-warning-light-3);
   --k-experience-ink: var(--color-warning-light-11);
-  --k-free: var(--color-surface-sunken);
-  --k-free-ink: var(--color-content-secondary);
+  --k-free: var(--surface-sunken);
+  --k-free-ink: var(--content-secondary);
   --k-break: transparent;
-  --k-break-ink: var(--color-content-secondary);
+  --k-break-ink: var(--content-secondary);
 }
 .pgk-legend {
   display: flex;
@@ -321,7 +321,7 @@
   padding: 0;
   list-style: none;
   font-size: var(--type-caption-size);
-  color: var(--color-content-secondary);
+  color: var(--content-secondary);
 }
 .pgk-legend li {
   display: flex;
@@ -352,9 +352,9 @@
   gap: 4px;
   margin-top: var(--space-5);
   padding: var(--space-2);
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  background: var(--color-surface-raised);
+  background: var(--surface-raised);
 }
 .pgk-corner,
 .pgk-day,
@@ -364,11 +364,11 @@
   padding: var(--space-2);
   font-size: var(--type-caption-size);
   font-weight: 600;
-  color: var(--color-content-secondary);
+  color: var(--content-secondary);
 }
 .pgk-day {
   justify-content: center;
-  color: var(--color-content);
+  color: var(--content-primary);
 }
 .pgk-time {
   font-weight: 500;
@@ -387,8 +387,13 @@
   font-weight: 500;
   text-align: center;
 }
+.pgk-block[data-kind='workshop'],
+.pgk-legend [data-kind='workshop'] span,
+.pgk-list li[data-kind='workshop'] {
+  box-shadow: inset 0 0 0 1.5px var(--color-ssb-light-7) !important;
+}
 .pgk-block[data-kind='break'] {
-  border: 1px dashed var(--color-border-subtle);
+  border: 1px dashed var(--border-subtle);
   font-weight: 400;
 }
 .pgk-phone {
@@ -416,14 +421,14 @@
     gap: var(--space-1);
     padding: var(--space-1);
     border-radius: var(--radius-full);
-    background: var(--color-surface-sunken);
+    background: var(--surface-sunken);
   }
   .pgk-pills button {
     padding: var(--space-2) 0;
     border: 0;
     border-radius: var(--radius-full);
     background: none;
-    color: var(--color-content-secondary);
+    color: var(--content-secondary);
     font: inherit;
     font-size: var(--type-caption-size);
     font-weight: 600;
@@ -451,7 +456,7 @@
     color: var(--k-ink);
   }
   .pgk-list li[data-kind='break'] {
-    border: 1px dashed var(--color-border-subtle);
+    border: 1px dashed var(--border-subtle);
   }
   .pgk-list-time {
     font-size: 0.75rem;
@@ -481,9 +486,9 @@
   flex-direction: column;
   margin: 0;
   overflow: hidden;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  background: var(--color-surface-raised);
+  background: var(--surface-raised);
 }
 .pgy-city img {
   display: block;
@@ -537,7 +542,7 @@
   gap: var(--space-4);
   padding: var(--space-6);
   border-radius: var(--radius-lg);
-  background: var(--color-surface-sunken);
+  background: var(--surface-sunken);
 }
 .pgy-campus h3 {
   margin: 0;
@@ -550,7 +555,7 @@
   margin: var(--space-2) 0 0;
   font-size: 0.9375rem;
   line-height: 1.5;
-  color: var(--color-content-secondary);
+  color: var(--content-secondary);
 }
 .pgy-campus ul {
   display: grid;
@@ -630,7 +635,7 @@
   padding: var(--space-1) var(--space-3);
   border: 1px solid var(--color-ssb-light-5);
   border-radius: var(--radius-full);
-  background: var(--color-surface-raised);
+  background: var(--surface-raised);
   font-size: var(--type-caption-size);
   font-weight: 500;
   color: var(--color-ssb-light-11);

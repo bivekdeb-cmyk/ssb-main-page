@@ -22,6 +22,7 @@ import { Curriculum, HomeNav, ScrollRefresh } from '@/sections/home/client';
 import { LiveProjectsSection } from '@/sections/live-projects/LiveProjectsSection';
 import { PeopleTabsSection } from '@/sections/people-tabs/PeopleTabsSection';
 import { ProgramCity, ProgramCompare, ProgramCta, ProgramHero } from '@/sections/program/ProgramSections';
+import { PinLight } from '@/sections/program/PinLight';
 import { ProgramWeek } from '@/sections/program/ProgramWeek';
 import { BottomNav } from '@/sections/site/BottomNav';
 import { CalmEntrance } from '@/sections/shared/CalmEntrance';
@@ -42,6 +43,7 @@ export const metadata: Metadata = { title: 'PGP in Management & Technology | Sca
 export default function ProgramPage() {
   return (
     <>
+      <PinLight />
       <main data-page="v7" data-route="program" data-entrance="calm" data-brand="ssb" data-theme="light" className="bg-page text-content">
         <ScrollRefresh />
         <CalmEntrance />
