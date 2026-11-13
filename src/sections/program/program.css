@@ -488,3 +488,16 @@
     align-items: start;
   }
 }
+
+/* the 150-hour AI curriculum on /program: the row of cards runs edge to edge (the user's ask, as the
+   faculty row): the track widened to the window (50vw either side of its column's centre), its first
+   card still on the content edge. The curriculum nests size containers, so cqw can't reach the window;
+   the few pixels of the scrollbar that 100vw counts are clipped by the section's tone wrapper. */
+html body main[data-route='program'] .tn:has(.sj-ai-track) {
+  overflow-x: clip;
+}
+html body main[data-route='program'] .sj-ai-track {
+  /* the right side only: the carousel's script scrolls by each card's offset, so the left stays put */
+  margin-right: calc(50% - 50vw) !important;
+  padding-right: calc(50vw - 50%) !important;
+}

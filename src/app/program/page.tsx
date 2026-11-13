@@ -4,7 +4,7 @@ import { deckAlumni, deckLiveLogos, deckUsps } from '@/content/deck';
 import { programNav } from '@/content/program';
 import { AlumniSection } from '@/sections/alumni/AlumniSection';
 import { PeersTicker } from '@/sections/alumni/PeersTicker';
-import { CampusLifeSection } from '@/sections/community/CommunitySections';
+import { CampusLifeSection, SuperMentorsSection } from '@/sections/community/CommunitySections';
 import { CurriculumRail } from '@/sections/curriculum/CurriculumRail';
 import { DeckCareerPrep } from '@/sections/deck/DeckCareerPrep';
 import { DeckCloseSection } from '@/sections/deck/DeckFinale';
@@ -119,6 +119,10 @@ export default function ProgramPage() {
         </Tone>
         <Tone>
           <Curriculum part="ai" aiCarousel deck />
+        </Tone>
+        {/* super mentor sessions, under the AI journey (the user's ask), as on the main page */}
+        <Tone>
+          <SuperMentorsSection />
         </Tone>
         {/* who are your instructors: faculty, then mentors */}
         <Tone>
