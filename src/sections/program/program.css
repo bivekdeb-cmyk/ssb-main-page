@@ -38,7 +38,8 @@
   z-index: -1;
   background:
     radial-gradient(110% 80% at 0% 100%, rgb(0 74 30 / 0.4), transparent 60%),
-    linear-gradient(90deg, rgb(8 10 9 / 0.88) 0%, rgb(8 10 9 / 0.7) 42%, rgb(8 10 9 / 0.45) 72%, rgb(8 10 9 / 0.38) 100%);
+    linear-gradient(90deg, rgb(8 10 9 / 0.3) 0%, rgb(8 10 9 / 0.1) 45%, transparent 70%),
+    rgb(8 10 9 / 0.62);
 }
 .pgh-inner {
   padding-top: var(--space-10);
