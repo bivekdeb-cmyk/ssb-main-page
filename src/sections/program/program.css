@@ -481,3 +481,10 @@
     grid-auto-columns: 21.5rem;
   }
 }
+
+/* career prep on /program: the heading and the figures top-aligned (the user's ask), not centred */
+@media (width >= 1056px) {
+  html body main[data-route='program'] .dcp-wrap {
+    align-items: start;
+  }
+}
