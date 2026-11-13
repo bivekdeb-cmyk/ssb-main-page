@@ -68,7 +68,7 @@ export function ProgramHero() {
                   <ArrowUpRight weight="bold" aria-hidden="true" />
                 </a>
               </Button>
-              <Button asChild size="lg" variant="secondary">
+              <Button asChild size="lg" variant="secondary" className="pgh-secondary">
                 <a href={hero.secondaryCta.href}>
                   {hero.secondaryCta.label}
                   <DownloadSimple weight="bold" aria-hidden="true" />

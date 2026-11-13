@@ -150,6 +150,55 @@
   }
 }
 
+/* the black version (2026-11-13, the user's ask): the whole band black, edge to edge, the type white,
+   the figures on a dark grey fill, the secondary button a white outline as on the main hero's film */
+.pgh {
+  background: #0b0b0b;
+  padding-bottom: var(--space-16) !important;
+}
+.pgh-crumbs ol {
+  color: rgb(255 255 255 / 0.55);
+}
+.pgh-crumbs a:hover,
+.pgh-crumbs [aria-current] {
+  color: #fff;
+}
+.pgh-title {
+  color: #fff !important;
+}
+.pgh-short {
+  color: rgb(255 255 255 / 0.55);
+}
+.pgh-copy .pgh-line,
+.pgh-copy > p {
+  color: rgb(255 255 255 / 0.78) !important;
+}
+.pgh .pgh-secondary.pgh-secondary {
+  background: transparent !important;
+  color: #fff !important;
+  border-color: rgb(255 255 255 / 0.85) !important;
+}
+.pgh .pgh-secondary.pgh-secondary:hover {
+  background: rgb(255 255 255 / 0.1) !important;
+}
+.pgh-fig {
+  background: rgb(255 255 255 / 0.07);
+}
+.pgh-fig dd {
+  color: var(--color-ssb-dark-11);
+}
+.pgh-fig dt {
+  color: rgb(255 255 255 / 0.9);
+}
+.pgh-fig dt small {
+  color: rgb(255 255 255 / 0.55);
+}
+@media (width < 672px) {
+  .pgh {
+    padding-bottom: var(--space-10) !important;
+  }
+}
+
 /* ── SSB vs traditional: two cards, subtle ──────────────────────────────────────────────────── */
 .pgc-pair {
   display: grid;
