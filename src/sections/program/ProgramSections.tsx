@@ -84,7 +84,6 @@ export function ProgramHero() {
                 <dd>{f.value}</dd>
                 <dt>
                   {f.label}
-                  {f.note ? <small>{f.note}</small> : null}
                 </dt>
               </div>
             ))}

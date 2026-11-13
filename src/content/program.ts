@@ -32,7 +32,7 @@ export const programHero = {
   secondaryCta: { label: 'Download Brochure', href: '#brochure' },
   note: 'Admissions for the 2026 cohort are now open',
   figures: [
-    { value: '6', label: 'Terms', note: '3 months each' },
+    { value: '6', label: 'Terms (3\u00a0months\u00a0each)' },
     { value: '22', label: 'Core Courses' },
     { value: '20', label: 'Functional Specialisations' },
     { value: '4', label: 'Industry Specialisations' },
