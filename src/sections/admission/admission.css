@@ -540,54 +540,26 @@ main[data-page='v7'] .ad4[data-parts='scholarships'] .ad4-sch-head p { max-width
    band's forest green. Phones: each row a stack of label and value. Tokens only. */
 .adm-fees-grid { display: grid; gap: var(--space-4); margin-top: var(--space-10); }
 @media (width >= 1056px) { .adm-fees-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); align-items: stretch; } }
-.adm-fees-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  padding: var(--space-2) var(--space-2) var(--space-6);
-  border: 1px solid var(--border-decorative);
-  border-radius: var(--radius-lg);
-  background: var(--surface-default);
-}
-.adm-fees-table { width: 100%; border-collapse: separate; border-spacing: 0; text-align: left; }
-.adm-fees-table thead th {
-  padding: var(--space-3) var(--space-4);
-  background: var(--surface-sunken);
-  font-size: var(--type-label-size);
+/* the table: the main page's "Programme fee" card (admissions-v4.css) in its light colours, four
+   columns here (the application fee added); the course fee in ink, semibold */
+.adm-fees-card { display: flex; flex-direction: column; }
+.adm-fees-table .ad4-tr { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+.adm-fees-table .ad4-fee { font-weight: var(--font-weight-semibold); }
+.adm-fees-pill {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface-brand-solid);
+  color: var(--content-on-brand, #fff);
+  font-size: 0.75rem;
+  font-style: normal;
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
-  color: var(--content-secondary);
-  white-space: nowrap;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: 2px;
 }
-.adm-fees-table thead th:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
-.adm-fees-table thead th:last-child { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
-.adm-fees-table tbody :is(th, td) {
-  padding: var(--space-5) var(--space-4);
-  border-bottom: 1px solid var(--border-decorative);
-  vertical-align: middle;
-  font-size: var(--type-body-size);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.4;
-  color: var(--content-primary);
-}
-.adm-fees-table tbody th { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1-5, 6px); }
-.adm-fees-intake { font-weight: var(--font-weight-semibold); }
-.adm-fees-status {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1-5, 6px);
-  padding: 2px var(--space-2);
-  border-radius: var(--radius-md);
-  background: var(--color-ssb-light-2);
-  font-size: var(--type-label-size);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-ssb-light-11);
-}
-.adm-fees-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-ssb-light-9); }
-.adm-fees-table .adm-fees-course { font-size: var(--tp-item, 1.25rem); font-weight: var(--font-weight-semibold); white-space: nowrap; }
-.adm-fees-act { text-align: right; }
-.adm-fees-notes { padding: 0 var(--space-4); }
-
+.adm-fees-card .ad4-fine { max-width: none; margin-top: auto; padding-top: var(--space-4); }
 .adm-fees-brochure {
   display: flex;
   flex-direction: column;
@@ -614,19 +586,13 @@ main[data-page='v7'] .ad4[data-parts='scholarships'] .ad4-sch-head p { max-width
 .adm-fees-brochure-cta { margin-top: var(--space-3); }
 
 @media (width < 672px) {
-  .adm-fees-card { padding: var(--space-4) var(--space-4) var(--space-5); }
-  .adm-fees-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  .adm-fees-table, .adm-fees-table tbody, .adm-fees-table tr { display: block; }
-  .adm-fees-table tbody :is(th, td) { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); padding: var(--space-3) 0; }
-  .adm-fees-table tbody th { flex-direction: row; flex-wrap: wrap; padding-top: 0; }
-  .adm-fees-table tbody td::before {
-    content: attr(data-label);
-    font-size: var(--type-label-size);
-    color: var(--content-secondary);
-  }
-  .adm-fees-act { padding-bottom: 0 !important; border-bottom: 0 !important; }
-  .adm-fees-act > * { width: 100%; }
-  .adm-fees-notes { padding: 0; }
+  /* phones: the intake with its deadline and application fee under it, the course fee at the right */
+  .adm-fees-table .ad4-tr { grid-template-columns: 1fr auto; row-gap: var(--space-1); }
+  .adm-fees-table .ad4-tr > span:nth-child(2) { grid-area: 2 / 1; margin-top: 0; }
+  .adm-fees-table .ad4-tr > span:nth-child(3) { grid-area: 3 / 1; font-size: var(--type-caption-size); color: var(--content-secondary); }
+  .adm-fees-table .ad4-tr:not(.ad4-th) > span:nth-child(3)::before { content: attr(data-label) ' '; }
+  .adm-fees-table .ad4-th > span:nth-child(3) { display: none; }
+  .adm-fees-table .ad4-tr > span:last-child { grid-area: 1 / 2 / 4; }
   .adm-fees-brochure { padding: var(--space-6); }
   .adm-fees-brochure-cta { width: 100%; }
 }
@@ -648,4 +614,10 @@ main[data-page='v7'] .ad4[data-parts='scholarships'] .ad4-sch-head p { max-width
   .adm-fees-brochure-line { grid-column: 2; }
   .adm-fees-brochure-cta { grid-column: 3; grid-row: 1 / span 2; margin: 0; }
 }
-@media (width < 672px) { .adm-fees-table .adm-fees-act::before { content: none; } }
+/* both cards their own height (2026-11-13): stretched to the brochure's, the table left a gap above its notes */
+@media (width >= 1056px) {
+  .adm-fees-grid { align-items: start; }
+  .adm-fees-card .ad4-fine { margin-top: 0; }
+  .adm-fees-brochure-icon { margin-bottom: 0; }
+  .adm-fees-brochure-title { margin-top: var(--space-3); }
+}

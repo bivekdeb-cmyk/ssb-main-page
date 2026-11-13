@@ -211,6 +211,7 @@ export const admissionFees = {
   eyebrow: 'Dates & fees',
   title: 'Important dates and fees.|For the 2027 cohort.',
   sub: 'Admissions run in weekly phases that close every Sunday. Apply early for a better chance of a seat and a scholarship.',
+  chip: 'Early bird open',
   columns: ['Intake', 'Deadline', 'Application fee', 'Course fee'],
   rows: [
     {

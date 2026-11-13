@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Button, Container, Heading, Section, Text } from '@kishanscaler/ssx-ui';
-import { ArrowRight, DownloadSimple } from '@phosphor-icons/react/ssr';
+import { DownloadSimple } from '@phosphor-icons/react/ssr';
 
 import type { admissionFees } from '@/content/admission';
 import { Header } from '@/sections/deck/DeckSections';
+import '@/sections/admissions/admissions-v4.css';
 import './admission.css';
 
 /**
@@ -19,57 +20,47 @@ export function AdmissionFees({ content: c }: { content: typeof admissionFees })
       <Container>
         <Header id="fees" eyebrow={c.eyebrow} title={c.title} sub={c.sub} />
         <div className="adm-fees-grid">
-          <div className="adm-fees-card">
-            <table className="adm-fees-table">
-              <caption className="sr-only">Intakes, deadlines and fees for the 2027 cohort</caption>
-              <thead>
-                <tr>
-                  {c.columns.map((h) => (
-                    <th key={h} scope="col">
-                      {h}
-                    </th>
-                  ))}
-                  <th scope="col">
-                    <span className="sr-only">Apply</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {c.rows.map((r) => (
-                  <tr key={r.intake}>
-                    <th scope="row" data-label={c.columns[0]}>
-                      <span className="adm-fees-intake">{r.intake}</span>
-                      {r.status ? (
-                        <span className="adm-fees-status">
-                          <span className="adm-fees-dot" aria-hidden="true" />
-                          {r.status}
-                        </span>
-                      ) : null}
-                    </th>
-                    <td data-label={c.columns[1]}>
-                      <time dateTime={r.deadlineIso}>{r.deadline}</time>
-                    </td>
-                    <td data-label={c.columns[2]}>{r.appFee}</td>
-                    <td data-label={c.columns[3]} className="adm-fees-course">
-                      {r.courseFee}
-                    </td>
-                    <td className="adm-fees-act">
-                      <Button asChild size="md" variant="primary">
-                        <a href={c.apply.href}>
-                          {c.apply.label}
-                          <ArrowRight weight="bold" aria-hidden="true" />
-                        </a>
-                      </Button>
-                    </td>
-                  </tr>
+          {/* the main page's fee table (the admissions section's "Programme fee" card, admissions-v4.css),
+              in its light colours (2026-11-13, the user's ask): the card's title and status chip, the
+              uppercase column heads, hairline rows, the open intake on the brand tint with its bar and
+              an "Open now" pill; the live page's notes as its fine print */}
+          <div className="ad4-card ad4-fees adm-fees-card">
+            <div className="ad4-card-h">
+              <h3>Programme fee</h3>
+              {c.rows[0]?.status ? (
+                <span className="ad4-live">
+                  <span className="ad4-dot" aria-hidden="true" />
+                  {c.chip}
+                </span>
+              ) : null}
+            </div>
+            <div className="ad4-table adm-fees-table" role="table" aria-label="Intakes, deadlines and fees">
+              <div className="ad4-tr ad4-th" role="row">
+                {c.columns.map((h) => (
+                  <span key={h} role="columnheader">
+                    {h}
+                  </span>
                 ))}
-              </tbody>
-            </table>
-            <ul className="adm-points adm-fees-notes">
-              {c.notes.map((n) => (
-                <li key={n}>{n}</li>
+              </div>
+              {c.rows.map((r) => (
+                <div key={r.intake} className="ad4-tr" role="row" data-now={r.status ? '' : undefined}>
+                  <span role="cell">
+                    {r.intake}
+                    {r.status ? <em className="adm-fees-pill">{r.status}</em> : null}
+                  </span>
+                  <span role="cell">
+                    <time dateTime={r.deadlineIso}>{r.deadline}</time>
+                  </span>
+                  <span role="cell" data-label="Application fee">
+                    {r.appFee}
+                  </span>
+                  <span role="cell">
+                    <span className="ad4-fee">{r.courseFee}</span>
+                  </span>
+                </div>
               ))}
-            </ul>
+            </div>
+            <p className="ad4-fine">{c.notes.join('. ')}.</p>
           </div>
 
           <div className="adm-fees-brochure" data-brand="ssb" data-theme="dark">
