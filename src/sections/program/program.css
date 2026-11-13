@@ -1,0 +1,108 @@
+/* SSB vs traditional B-schools (/program): one card, a row per dimension. */
+.pc-table {
+  margin-top: var(--space-10);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface-raised);
+}
+
+.pc-row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.6fr) 1.2fr 1fr;
+}
+.pc-row + .pc-row {
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.pc-row > span {
+  padding: var(--space-5) var(--space-6);
+}
+
+.pc-label {
+  font-weight: 600;
+  color: var(--color-content);
+}
+
+/* SSB's column: a pale brand-green wash, the line in ink */
+.pc-ssb {
+  background: var(--color-ssb-light-2);
+  color: var(--color-content);
+}
+.pc-trad {
+  color: var(--color-content-secondary);
+}
+
+.pc-head > span {
+  padding-block: var(--space-4);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.pc-head .pc-ssb {
+  color: var(--color-ssb-light-11);
+}
+
+.pc-line {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.pc-line svg {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+}
+.pc-ssb .pc-line svg {
+  color: var(--color-ssb-light-9);
+}
+.pc-trad .pc-line svg {
+  color: var(--color-neutral-light-9, currentColor);
+}
+
+/* the column's name over each line, phones only */
+.pc-kicker {
+  display: none;
+}
+
+@media (width < 672px) {
+  .pc-table {
+    margin-top: var(--space-8);
+  }
+  .pc-head {
+    display: none;
+  }
+  .pc-row {
+    grid-template-columns: 1fr;
+  }
+  .pc-row + .pc-row {
+    border-top: 0;
+  }
+  .pc-row:not(.pc-head) + .pc-row {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .pc-row > span {
+    padding: var(--space-4);
+  }
+  .pc-label {
+    padding-bottom: var(--space-2) !important;
+  }
+  .pc-ssb,
+  .pc-trad {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .pc-kicker {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pc-ssb .pc-kicker {
+    color: var(--color-ssb-light-11);
+  }
+}
