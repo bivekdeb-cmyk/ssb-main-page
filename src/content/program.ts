@@ -31,7 +31,6 @@ export const programHero = {
   primaryCta: { label: 'Apply Now', href: '#apply' },
   secondaryCta: { label: 'Download Brochure', href: '#brochure' },
   note: 'Admissions for the 2026 cohort are now open',
-  image: { src: '/campus/classroom.webp' },
   figures: [
     { value: '6', label: 'Terms', note: '3 months each' },
     { value: '22', label: 'Core Courses' },
