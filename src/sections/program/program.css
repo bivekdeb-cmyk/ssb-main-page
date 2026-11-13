@@ -7,9 +7,43 @@
   max-width: var(--size-measure-max, 48rem);
 }
 
-/* ── the first fold: the name, one line, the actions, the figures ─────────────────────────────── */
+/* ── the first fold: the classroom photo in the main hero's inset frame, blurred and darkened ─────── */
 .pgh {
-  padding-top: var(--space-10) !important;
+  padding: var(--space-4) var(--space-4) 0;
+  background: var(--surface-page);
+}
+.pgh-frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #101412;
+  color: #fff;
+}
+/* the photo, softly blurred; scaled up so the blur's transparent rim falls outside the frame */
+.pgh-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+  filter: blur(6px) saturate(0.9);
+  transform: scale(1.08);
+}
+/* the wash: deepest behind the copy at the left, a touch of the brand's green at the foot */
+.pgh-wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(120% 90% at 0% 100%, rgb(0 74 30 / 0.45), transparent 60%),
+    linear-gradient(90deg, rgb(8 10 9 / 0.86) 0%, rgb(8 10 9 / 0.7) 48%, rgb(8 10 9 / 0.5) 100%);
+}
+.pgh-inner {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-12);
 }
 .pgh-crumbs ol {
   display: flex;
@@ -18,7 +52,7 @@
   padding: 0;
   list-style: none;
   font-size: var(--type-caption-size);
-  color: var(--content-secondary);
+  color: rgb(255 255 255 / 0.62);
 }
 .pgh-crumbs li + li::before {
   content: '/';
@@ -31,12 +65,12 @@
 }
 .pgh-crumbs a:hover,
 .pgh-crumbs [aria-current] {
-  color: var(--content-primary);
+  color: #fff;
 }
 .pgh-top {
   display: grid;
   gap: var(--space-10);
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
 }
 @media (width >= 1056px) {
   .pgh-top {
@@ -54,6 +88,7 @@
 /* the main hero's title size: 40px on desktop, semibold */
 .pgh-title {
   margin: 0;
+  color: #fff !important;
   font-size: var(--type-hero-size) !important;
   line-height: var(--type-display-lh, 1.2) !important;
   letter-spacing: -0.01em;
@@ -65,11 +100,12 @@
   }
 }
 .pgh-short {
-  color: var(--content-secondary);
+  color: rgb(255 255 255 / 0.62);
   white-space: nowrap;
 }
 .pgh-line {
   max-width: 34rem;
+  color: rgb(255 255 255 / 0.84) !important;
 }
 .pgh-actions {
   display: flex;
@@ -78,8 +114,17 @@
   margin-top: var(--space-2);
   background: none;
 }
+/* the secondary as on the main hero's film: a white outline */
+.pgh .pgh-secondary {
+  background: transparent;
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.85);
+}
+.pgh .pgh-secondary:hover {
+  background: rgb(255 255 255 / 0.12);
+}
 
-/* the six figures: equal cards, 3 × 2 at the right */
+/* the six figures: frosted glass cards, 3 × 2 */
 .pgh-figs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -90,21 +135,23 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: var(--space-6);
-  min-height: 9rem;
+  gap: var(--space-5);
+  min-height: 8rem;
   padding: var(--space-5);
-  border: 1px solid var(--border-decorative);
+  border: 1px solid rgb(255 255 255 / 0.18);
   border-radius: var(--radius-lg);
-  background: var(--surface-default);
+  background: rgb(255 255 255 / 0.07);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 .pgh-fig dd {
   margin: 0;
-  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-size: clamp(2rem, 2.8vw, 2.5rem);
   line-height: 1;
   letter-spacing: -0.04em;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
-  color: var(--color-ssb-light-9);
+  color: #fff;
 }
 .pgh-fig dt {
   display: flex;
@@ -113,16 +160,25 @@
   font-size: var(--type-label-size);
   line-height: 1.35;
   font-weight: 500;
-  color: var(--content-primary);
+  color: rgb(255 255 255 / 0.88);
 }
 .pgh-fig dt small {
   font-size: var(--type-caption-size);
   font-weight: 400;
-  color: var(--content-secondary);
+  color: rgb(255 255 255 / 0.6);
 }
 @media (width < 672px) {
   .pgh {
-    padding-top: var(--space-6) !important;
+    padding: var(--space-2) var(--space-2) 0;
+  }
+  .pgh-inner {
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-6);
+  }
+  .pgh-wash {
+    background:
+      radial-gradient(120% 70% at 0% 100%, rgb(0 74 30 / 0.45), transparent 60%),
+      linear-gradient(180deg, rgb(8 10 9 / 0.82) 0%, rgb(8 10 9 / 0.74) 100%);
   }
   .pgh-top {
     gap: var(--space-8);

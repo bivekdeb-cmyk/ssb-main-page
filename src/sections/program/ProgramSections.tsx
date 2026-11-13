@@ -34,63 +34,70 @@ function Header({ id, eyebrow, title, sub }: { id: string; eyebrow: string; titl
 /* ── the first fold ─────────────────────────────────────────────────────────────────────────────── */
 
 /**
- * The first fold, text and figures only (the user's asks: no photo, no eyebrow, the title at the main
- * hero's size): the breadcrumb; at the left the name, its line and the main page's two large buttons
- * under it; at the right the six figures as equal cards, 3 × 2. Phones: one column, the buttons full
- * width, the figures 2 × 3.
+ * The first fold (2026-11-13, the user's ask: the classroom photo behind it, as the main page's hero,
+ * shorter, darkened and blurred so the type reads): one rounded frame inset from the window as the main
+ * hero's (hero-frame.css .hf-frame), the students in the lecture hall blurred and under a charcoal wash
+ * that is deepest behind the copy. In it the breadcrumb; at the left the name, its line and the main
+ * page's two large buttons (the secondary a white outline, as on the main hero's film); at the right
+ * the six figures as frosted glass cards, 3 × 2. Phones: one column, the figures 2 × 3.
  */
 export function ProgramHero() {
   return (
-    <Section density="roomy" aria-labelledby="pgh-title" className="pgh">
-      <Container>
-        <nav aria-label="Breadcrumb" className="pgh-crumbs">
-          <ol>
-            {hero.crumbs.map((c, i) => (
-              <li key={c.href}>
-                {i === hero.crumbs.length - 1 ? <span aria-current="page">{c.label}</span> : <a href={c.href}>{c.label}</a>}
-              </li>
-            ))}
-          </ol>
-        </nav>
+    <section aria-labelledby="pgh-title" className="pgh">
+      <div className="pgh-frame">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="pgh-photo" src={hero.image.src} alt="" aria-hidden="true" loading="eager" decoding="async" />
+        <span className="pgh-wash" aria-hidden="true" />
+        <Container className="pgh-inner">
+          <nav aria-label="Breadcrumb" className="pgh-crumbs">
+            <ol>
+              {hero.crumbs.map((c, i) => (
+                <li key={c.href}>
+                  {i === hero.crumbs.length - 1 ? <span aria-current="page">{c.label}</span> : <a href={c.href}>{c.label}</a>}
+                </li>
+              ))}
+            </ol>
+          </nav>
 
-        <div className="pgh-top">
-          <div className="pgh-copy">
-            <Heading as="h1" size="display" id="pgh-title" className="pgh-title">
-              {hero.title} <span className="pgh-short">({hero.short})</span>
-            </Heading>
-            <Text size="lg" tone="secondary" className="pgh-line">
-              {hero.line}
-            </Text>
-            <div className="pgh-actions" data-brand="ssb" data-theme="light">
-              <Button asChild size="lg" variant="primary">
-                <a href={hero.primaryCta.href}>
-                  {hero.primaryCta.label}
-                  <ArrowUpRight weight="bold" aria-hidden="true" />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="secondary">
-                <a href={hero.secondaryCta.href}>
-                  {hero.secondaryCta.label}
-                  <DownloadSimple weight="bold" aria-hidden="true" />
-                </a>
-              </Button>
-            </div>
-          </div>
-
-          <dl className="pgh-figs">
-            {hero.figures.map((f) => (
-              <div key={f.label} className="pgh-fig">
-                <dd>{f.value}</dd>
-                <dt>
-                  {f.label}
-                  {f.note ? <small>{f.note}</small> : null}
-                </dt>
+          <div className="pgh-top">
+            <div className="pgh-copy">
+              <Heading as="h1" size="display" id="pgh-title" className="pgh-title">
+                {hero.title} <span className="pgh-short">({hero.short})</span>
+              </Heading>
+              <Text size="lg" className="pgh-line">
+                {hero.line}
+              </Text>
+              <div className="pgh-actions" data-brand="ssb" data-theme="light">
+                <Button asChild size="lg" variant="primary">
+                  <a href={hero.primaryCta.href}>
+                    {hero.primaryCta.label}
+                    <ArrowUpRight weight="bold" aria-hidden="true" />
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="secondary" className="pgh-secondary">
+                  <a href={hero.secondaryCta.href}>
+                    {hero.secondaryCta.label}
+                    <DownloadSimple weight="bold" aria-hidden="true" />
+                  </a>
+                </Button>
               </div>
-            ))}
-          </dl>
-        </div>
-      </Container>
-    </Section>
+            </div>
+
+            <dl className="pgh-figs">
+              {hero.figures.map((f) => (
+                <div key={f.label} className="pgh-fig">
+                  <dd>{f.value}</dd>
+                  <dt>
+                    {f.label}
+                    {f.note ? <small>{f.note}</small> : null}
+                  </dt>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </Container>
+      </div>
+    </section>
   );
 }
 
