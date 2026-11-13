@@ -7,26 +7,9 @@
   max-width: var(--size-measure-max, 48rem);
 }
 
-/* ── the first fold: text and figures only ──────────────────────────────────────────────────── */
+/* ── the first fold: the name, one line, the actions, the figures ─────────────────────────────── */
 .pgh {
-  padding-top: var(--space-12) !important;
-}
-.pgh-grid {
-  display: grid;
-  gap: var(--space-10);
-  align-items: center;
-}
-@media (width >= 1056px) {
-  .pgh-grid {
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    gap: var(--space-16);
-  }
-}
-.pgh-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-4);
+  padding-top: var(--space-10) !important;
 }
 .pgh-crumbs ol {
   display: flex;
@@ -50,76 +33,58 @@
 .pgh-crumbs [aria-current] {
   color: var(--content-primary);
 }
-.pgh-chip {
-  margin: var(--space-2) 0 0;
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-full);
-  background: var(--color-ssb-light-3);
-  color: var(--color-ssb-light-11);
-  font-size: var(--type-label-size);
-  font-weight: 600;
+.pgh-top {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+@media (width >= 1056px) {
+  .pgh-top {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--space-12);
+  }
+}
+.pgh-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 46rem;
 }
 .pgh-title {
-  font-size: clamp(2.25rem, 4.4vw, 3.5rem) !important;
-  line-height: 1.08 !important;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.25rem, 4.6vw, 4rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.035em;
 }
 .pgh-short {
   color: var(--content-secondary);
   white-space: nowrap;
 }
-.pgh-line {
-  max-width: 34rem;
-}
-/* the actions as quiet links: the brand green with an arrow, then the brochure in ink */
-.pgh-links {
+.pgh-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2) var(--space-6);
-  margin: var(--space-2) 0 0;
-}
-.pgh-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding-bottom: 2px;
-  border-bottom: 1px solid var(--border-subtle);
-  color: var(--content-primary);
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: border-color 160ms ease, gap 160ms ease;
-}
-.pgh-link svg {
-  width: 1rem;
-  height: 1rem;
-}
-.pgh-link:hover {
   gap: var(--space-3);
-  border-color: currentColor;
-}
-.pgh-link-primary {
-  color: var(--color-ssb-light-9);
-  border-color: var(--color-ssb-light-6);
+  background: none;
 }
 
-/* the six figures as cards, 3 × 2 */
+/* the six figures: one hairline strip of equal cells (the main page's placement figures) */
 .pgh-figs {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-3);
-  margin: 0;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  margin: var(--space-10) 0 0;
+  overflow: hidden;
+  border: 1px solid var(--border-decorative);
+  border-radius: var(--radius-lg);
+  background: var(--border-decorative);
 }
 .pgh-fig {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: var(--space-6);
-  min-height: 9.5rem;
-  padding: var(--space-5);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  background: var(--surface-raised);
+  padding: var(--space-6);
+  background: var(--surface-default);
 }
 .pgh-fig dd {
   margin: 0;
@@ -144,26 +109,26 @@
   font-weight: 400;
   color: var(--content-secondary);
 }
-.pgh-fig[data-lead] {
-  border-color: var(--color-ssb-light-5);
-  background: var(--color-ssb-light-2);
-}
-.pgh-fig[data-lead] dd {
-  color: var(--color-ssb-light-11);
+@media (672px <= width < 1056px) {
+  .pgh-figs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 @media (width < 672px) {
   .pgh {
     padding-top: var(--space-6) !important;
   }
-  .pgh-grid {
-    gap: var(--space-8);
+  .pgh-top {
+    margin-top: var(--space-5);
+  }
+  .pgh-actions > * {
+    flex: 1 1 100%;
   }
   .pgh-figs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-2);
+    margin-top: var(--space-8);
   }
   .pgh-fig {
-    min-height: 0;
     gap: var(--space-4);
     padding: var(--space-4);
   }
@@ -470,200 +435,27 @@
   }
 }
 
-/* ── Bangalore: the city and the campus, light ──────────────────────────────────────────────── */
-.pgy-bento {
-  display: grid;
-  gap: var(--space-4);
-  margin-top: var(--space-10);
+/* ── Bangalore: the main page's Singapore stage (deck-global.css), its slots without a time column ── */
+.pgy .dkg-slots li.pgy-slot {
+  grid-template-columns: minmax(0, 1fr);
 }
-@media (width >= 1056px) {
-  .pgy-bento {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  }
+/* a photo whose subject sits low (Vidhana Soudha): the blur only behind the copy */
+.pgy .dkg-stage[data-blur='low'] .dkg-img-blur {
+  mask-image: linear-gradient(to top, #000 0%, #000 24%, rgb(0 0 0 / 0.5) 34%, transparent 44%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 24%, rgb(0 0 0 / 0.5) 34%, transparent 44%);
 }
-.pgy-city {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  background: var(--surface-raised);
-}
-.pgy-city img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-.pgy-city figcaption {
-  padding: var(--space-5) var(--space-6) var(--space-6);
-}
-.pgy-kicker {
-  margin: 0;
-  font-size: var(--type-caption-size);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-ssb-light-9);
-}
-.pgy-city ul {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-4);
-  margin: var(--space-3) 0 0;
-  padding: 0;
-  list-style: none;
-}
-.pgy-city li {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  font-size: 0.9375rem;
-  line-height: 1.35;
-  font-weight: 500;
-}
-.pgy-icon {
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius-lg);
-  background: var(--color-ssb-light-2);
-  color: var(--color-ssb-light-9);
-}
-.pgy-icon svg {
-  width: 1.375rem;
-  height: 1.375rem;
-}
-.pgy-campus {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-6);
-  border-radius: var(--radius-lg);
-  background: var(--surface-sunken);
-}
-.pgy-campus h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  line-height: 1.2;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-.pgy-campus-copy > p {
-  margin: var(--space-2) 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  color: var(--content-secondary);
-}
-.pgy-campus ul {
-  display: grid;
-  gap: var(--space-2);
-  margin: var(--space-4) 0 0;
-  padding: 0;
-  list-style: none;
-}
-.pgy-campus li {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: 0.9375rem;
-  font-weight: 500;
-}
-.pgy-campus li svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--color-ssb-light-9);
-}
-.pgy-photos {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3);
-  margin-top: auto;
-}
-.pgy-photos img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
+.pgy .dkg-pillars {
+  margin-top: var(--space-4);
 }
 .pgy-actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
+  background: none;
 }
 @media (width < 672px) {
-  .pgy-city figcaption {
-    padding: var(--space-4);
-  }
-  .pgy-city ul {
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
-  }
-  .pgy-city li {
-    flex-direction: row;
-    align-items: center;
-  }
-  .pgy-campus {
-    padding: var(--space-5);
-  }
   .pgy-actions > * {
-    flex: 1 1 100%;
-  }
-}
-
-/* ── the call to apply, light ───────────────────────────────────────────────────────────────── */
-.pga-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-5);
-  padding: var(--space-16) var(--space-8);
-  border: 1px solid var(--color-ssb-light-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-ssb-light-2);
-  text-align: center;
-}
-.pga-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin: 0;
-  padding: var(--space-1) var(--space-3);
-  border: 1px solid var(--color-ssb-light-5);
-  border-radius: var(--radius-full);
-  background: var(--surface-raised);
-  font-size: var(--type-caption-size);
-  font-weight: 500;
-  color: var(--color-ssb-light-11);
-}
-.pga-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: var(--radius-full);
-  background: var(--color-ssb-light-9);
-  box-shadow: 0 0 0 4px var(--color-ssb-light-4);
-}
-.pga-title {
-  max-width: 46rem;
-}
-.pga-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-3);
-}
-@media (width < 672px) {
-  .pga-card {
-    padding: var(--space-10) var(--space-5);
-  }
-  .pga-actions {
-    width: 100%;
-  }
-  .pga-actions > * {
     flex: 1 1 100%;
   }
 }

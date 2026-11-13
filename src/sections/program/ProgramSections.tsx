@@ -1,18 +1,8 @@
 import * as React from 'react';
 import { Button, Container, Heading, Logo, Section, Text } from '@kishanscaler/ssx-ui';
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Buildings,
-  CheckCircle,
-  DownloadSimple,
-  ForkKnife,
-  MapPin,
-  MinusCircle,
-  Train,
-} from '@phosphor-icons/react/ssr';
+import { ArrowUpRight, CheckCircle, DownloadSimple, MinusCircle } from '@phosphor-icons/react/ssr';
 
-import { programCity as city, programCompare as cmp, programCta as cta, programHero as hero } from '@/content/program';
+import { programCompare as cmp, programHero as hero } from '@/content/program';
 import { Title } from '@/sections/shared/Title';
 import './program.css';
 
@@ -44,56 +34,65 @@ function Header({ id, eyebrow, title, sub }: { id: string; eyebrow: string; titl
 /* ── the first fold ─────────────────────────────────────────────────────────────────────────────── */
 
 /**
- * The first fold, text and figures only (the user's ask: no photo): at the left the breadcrumb, the
- * programme's name and its line, the two actions as quiet text links; at the right the six figures
- * as cards in a 3 × 2 grid, the terms first on the pale green. Phones: the figures 2 × 3 under it.
+ * The first fold, text and figures only (the user's asks: no photo, a short line, the main page's
+ * actions, every figure alike): the breadcrumb; the eyebrow, the name and one line at the left, the two
+ * actions at the right on the title's foot (the main page's large primary and secondary buttons); under
+ * them the six figures as one hairline strip of equal cells (the main page's placement figures).
+ * Phones: one column, the buttons full width, the figures 2 × 3.
  */
 export function ProgramHero() {
   return (
     <Section density="roomy" aria-labelledby="pgh-title" className="pgh">
       <Container>
-        <div className="pgh-grid">
+        <nav aria-label="Breadcrumb" className="pgh-crumbs">
+          <ol>
+            {hero.crumbs.map((c, i) => (
+              <li key={c.href}>
+                {i === hero.crumbs.length - 1 ? <span aria-current="page">{c.label}</span> : <a href={c.href}>{c.label}</a>}
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div className="pgh-top">
           <div className="pgh-copy">
-            <nav aria-label="Breadcrumb" className="pgh-crumbs">
-              <ol>
-                {hero.crumbs.map((c, i) => (
-                  <li key={c.href}>
-                    {i === hero.crumbs.length - 1 ? <span aria-current="page">{c.label}</span> : <a href={c.href}>{c.label}</a>}
-                  </li>
-                ))}
-              </ol>
-            </nav>
-            <p className="pgh-chip">{hero.eyebrow}</p>
+            <Heading as="p" size="eyebrow" className="text-content-brand">
+              {hero.eyebrow}
+            </Heading>
             <Heading as="h1" size="display" id="pgh-title" className="pgh-title">
               {hero.title} <span className="pgh-short">({hero.short})</span>
             </Heading>
-            <Text size="lg" tone="secondary" className="pgh-line">
+            <Text size="lg" tone="secondary">
               {hero.line}
             </Text>
-            <p className="pgh-links">
-              <a href={hero.primaryCta.href} className="pgh-link pgh-link-primary">
+          </div>
+          <div className="pgh-actions" data-brand="ssb" data-theme="light">
+            <Button asChild size="lg" variant="primary">
+              <a href={hero.primaryCta.href}>
                 {hero.primaryCta.label}
-                <ArrowRight weight="bold" aria-hidden="true" />
+                <ArrowUpRight weight="bold" aria-hidden="true" />
               </a>
-              <a href={hero.secondaryCta.href} className="pgh-link">
+            </Button>
+            <Button asChild size="lg" variant="secondary">
+              <a href={hero.secondaryCta.href}>
                 {hero.secondaryCta.label}
                 <DownloadSimple weight="bold" aria-hidden="true" />
               </a>
-            </p>
+            </Button>
           </div>
-
-          <dl className="pgh-figs">
-            {hero.figures.map((f, i) => (
-              <div key={f.label} className="pgh-fig" data-lead={i === 0 ? '' : undefined}>
-                <dd>{f.value}</dd>
-                <dt>
-                  {f.label}
-                  {f.note ? <small>{f.note}</small> : null}
-                </dt>
-              </div>
-            ))}
-          </dl>
         </div>
+
+        <dl className="pgh-figs">
+          {hero.figures.map((f) => (
+            <div key={f.label} className="pgh-fig">
+              <dd>{f.value}</dd>
+              <dt>
+                {f.label}
+                {f.note ? <small>{f.note}</small> : null}
+              </dt>
+            </div>
+          ))}
+        </dl>
       </Container>
     </Section>
   );
@@ -145,125 +144,6 @@ export function ProgramCompare() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-/* ── Bangalore ──────────────────────────────────────────────────────────────────────────────────── */
-
-const COMFORT_ICONS = { transport: Train, food: ForkKnife, hub: Buildings } as const;
-
-/**
- * Located in Bangalore, light: at the left the city (Vidhana Soudha) in a white card, its three
- * comforts under the photo; at the right the campus, its line and points over two photos; the
- * actions under.
- */
-export function ProgramCity() {
-  return (
-    <Section id="city" density="roomy" aria-labelledby="city-title" className="pgy">
-      <Container>
-        <Header id="city" eyebrow={city.eyebrow} title={city.title} sub={city.sub} />
-        <div className="pgy-bento">
-          <figure className="pgy-city">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={city.image.src}
-              srcSet={`${city.image.src} 1280w, ${city.image.srcLarge} 2560w`}
-              sizes="(width >= 1056px) 60vw, 100vw"
-              alt={city.image.alt}
-              width={1280}
-              height={853}
-              loading="lazy"
-            />
-            <figcaption>
-              <p className="pgy-kicker">{city.comfortLabel}</p>
-              <ul>
-                {city.comforts.map((c) => {
-                  const I = COMFORT_ICONS[c.icon];
-                  return (
-                    <li key={c.label}>
-                      <span className="pgy-icon" aria-hidden="true">
-                        <I weight="duotone" />
-                      </span>
-                      {c.label}
-                    </li>
-                  );
-                })}
-              </ul>
-            </figcaption>
-          </figure>
-
-          <div className="pgy-campus">
-            <div className="pgy-campus-copy">
-              <h3>{city.campus.title}</h3>
-              <p>{city.campus.line}</p>
-              <ul>
-                {city.campus.points.map((p) => (
-                  <li key={p}>
-                    <CheckCircle weight="fill" aria-hidden="true" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="pgy-photos">
-              {city.campus.photos.map((p) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={p.src} src={p.src} alt={p.alt} width={800} height={600} loading="lazy" />
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="pgy-actions">
-          <Button asChild size="lg" variant="primary">
-            <a href={city.ctas.brochure.href}>
-              {city.ctas.brochure.label}
-              <DownloadSimple weight="bold" aria-hidden="true" />
-            </a>
-          </Button>
-          <Button asChild size="lg" variant="secondary">
-            <a href={city.ctas.locate.href} target="_blank" rel="noreferrer">
-              <MapPin weight="bold" aria-hidden="true" />
-              {city.ctas.locate.label}
-            </a>
-          </Button>
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-/* ── the call to apply ──────────────────────────────────────────────────────────────────────────── */
-
-/** The last band, light: one pale-green card, the program page's line, the two actions. */
-export function ProgramCta() {
-  return (
-    <Section density="roomy" aria-labelledby="pga-title" className="pga">
-      <Container>
-        <div className="pga-card">
-          <p className="pga-eyebrow">
-            <span className="pga-dot" aria-hidden="true" />
-            {cta.eyebrow}
-          </p>
-          <Heading as="h2" size="display" id="pga-title" className="pga-title">
-            <Title text={cta.title} />
-          </Heading>
-          <div className="pga-actions">
-            <Button asChild size="lg" variant="primary">
-              <a href={cta.primaryCta.href}>
-                {cta.primaryCta.label}
-                <ArrowUpRight weight="bold" aria-hidden="true" />
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="secondary">
-              <a href={cta.secondaryCta.href}>
-                {cta.secondaryCta.label}
-                <DownloadSimple weight="bold" aria-hidden="true" />
-              </a>
-            </Button>
           </div>
         </div>
       </Container>

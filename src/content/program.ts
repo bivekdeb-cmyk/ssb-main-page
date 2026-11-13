@@ -24,10 +24,10 @@ export const programHero = {
     { label: 'Home', href: '/' },
     { label: 'Program', href: '/program' },
   ],
-  eyebrow: 'Full-time · On campus in Bangalore',
+  eyebrow: 'Program',
   title: 'PGP in Management & Technology',
   short: 'PGP-MT',
-  line: 'An 18-month programme, built term by term with the industry: core business, functional and industry specialisations, real company projects and a 3-month internship.',
+  line: 'Full-time, on campus in Bangalore. Built with the industry.',
   primaryCta: { label: 'Apply Now', href: '#apply' },
   secondaryCta: { label: 'Download Brochure', href: '#brochure' },
   note: 'Admissions for the 2026 cohort are now open',
@@ -138,34 +138,62 @@ export const programWeek = {
   ] as { d: number; r: number; ds?: number; rs?: number; label: string; kind: SlotKind | 'break' }[],
 };
 
-/** Located in Bangalore: the Silicon Valley of India (the program page's campus and city blocks). */
+/** Located in Bangalore: the Silicon Valley of India (the program page's campus and city copy), laid
+ *  out as the main page's week in Singapore: a stage of places, each a photo with its points. */
 export const programCity = {
   eyebrow: 'Located in Bangalore',
   title: 'The Silicon Valley of India.|Your campus at its centre.',
-  sub: 'Situated in India’s Silicon Valley, our campus places students at the heart of real-world startup action and innovation.',
-  image: { src: '/media/bengaluru-vidhana-soudha-1280.webp', srcLarge: '/media/bengaluru-vidhana-soudha-2560.webp', alt: 'Vidhana Soudha, Bengaluru' },
-  comfortLabel: 'For your comfort',
-  comforts: [
-    { icon: 'transport', label: 'Easy access to transportation' },
-    { icon: 'food', label: 'Proximity to restaurants and eateries' },
-    { icon: 'hub', label: 'Campus located in the startup hub' },
-  ] as { icon: 'transport' | 'food' | 'hub'; label: string }[],
-  campus: {
-    title: 'A campus built to build.',
-    line: 'State-of-the-art infrastructure with cutting-edge business tools and technologies, designed to boost productivity and foster innovation.',
-    points: ['Campus close to top companies', 'Modern amenities', 'Innovation from day one'],
-    photos: [
-      { src: '/campus/building.webp', alt: 'The SSB campus building' },
-      { src: '/campus/arch.webp', alt: 'The campus arch' },
-    ],
-  },
+  sub: 'Our campus places students at the heart of real-world startup action and innovation.',
+  places: [
+    {
+      label: 'Bangalore',
+      title: 'India’s Silicon Valley',
+      chip: 'Bengaluru',
+      image: { src: '/media/bengaluru-vidhana-soudha-1280.webp', alt: 'Vidhana Soudha, Bengaluru', position: '50% 50%' },
+      blur: 'low',
+      points: [
+        { icon: 'hub', text: 'Campus located in the startup hub' },
+        { icon: 'company', text: 'Close to top companies and startups' },
+      ],
+    },
+    {
+      label: 'The campus',
+      title: 'A campus built to build',
+      chip: 'SSB campus',
+      image: { src: '/media/campus-entrance-1280.webp', alt: 'The SSB campus entrance', position: '50% 50%' },
+      points: [
+        { icon: 'spark', text: 'Innovation from day one' },
+        { icon: 'building', text: 'Modern amenities across the campus' },
+      ],
+    },
+    {
+      label: 'Classrooms',
+      title: 'Tools of the modern business',
+      chip: 'Lecture hall',
+      image: { src: '/campus/classroom.webp', alt: 'SSB students in the lecture hall', position: '50% 50%' },
+      points: [
+        { icon: 'tools', text: 'Cutting-edge business tools and technologies' },
+        { icon: 'spark', text: 'Designed to boost productivity and foster innovation' },
+      ],
+    },
+    {
+      label: 'Around campus',
+      title: 'Everything close by',
+      chip: 'Neighbourhood',
+      image: { src: '/campus/building.webp', alt: 'The SSB campus building', position: '50% 50%' },
+      points: [
+        { icon: 'transport', text: 'Easy access to transportation' },
+        { icon: 'food', text: 'Restaurants and eateries nearby' },
+      ],
+    },
+  ] as { label: string; title: string; chip: string; image: { src: string; alt: string; position: string }; blur?: 'low'; points: { icon: CityIcon; text: string }[] }[],
+  pillarsLabel: 'For your comfort',
+  pillars: [
+    { icon: 'transport', title: 'Easy access to transportation', text: 'Well connected to the rest of the city.' },
+    { icon: 'food', title: 'Restaurants and eateries', text: 'Plenty of places to eat around the campus.' },
+    { icon: 'hub', title: 'In the startup hub', text: 'Surrounded by startups and top companies.' },
+    { icon: 'building', title: 'Modern amenities', text: 'A fully residential campus, built for productivity.' },
+  ] as { icon: CityIcon; title: string; text: string }[],
   ctas: { brochure: { label: 'Download Brochure', href: '#brochure' }, locate: { label: 'Locate Campus', href: 'https://maps.google.com/?q=Scaler+School+of+Business+Bengaluru' } },
 };
-
-/** The call to apply. */
-export const programCta = {
-  eyebrow: 'Admissions for the 2026 cohort are now open',
-  title: 'Take the first step towards becoming part of the top 1% of business leaders.',
-  primaryCta: { label: 'Apply Now', href: '#apply' },
-  secondaryCta: { label: 'Download Brochure', href: '#brochure' },
-};
+export type CityIcon = 'hub' | 'company' | 'spark' | 'building' | 'tools' | 'transport' | 'food';

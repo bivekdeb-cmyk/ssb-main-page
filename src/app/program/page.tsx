@@ -7,6 +7,7 @@ import { PeersTicker } from '@/sections/alumni/PeersTicker';
 import { CampusLifeSection } from '@/sections/community/CommunitySections';
 import { CurriculumRail } from '@/sections/curriculum/CurriculumRail';
 import { DeckCareerPrep } from '@/sections/deck/DeckCareerPrep';
+import { DeckCloseSection } from '@/sections/deck/DeckFinale';
 import { DeckFooter } from '@/sections/deck/DeckFooter';
 import { DeckGlobalImmersion } from '@/sections/deck/DeckGlobalImmersion';
 import {
@@ -21,7 +22,8 @@ import { HeroFrameDeadline } from '@/sections/hero/frame/HeroFrame';
 import { Curriculum, HomeNav, ScrollRefresh } from '@/sections/home/client';
 import { LiveProjectsSection } from '@/sections/live-projects/LiveProjectsSection';
 import { PeopleTabsSection } from '@/sections/people-tabs/PeopleTabsSection';
-import { ProgramCity, ProgramCompare, ProgramCta, ProgramHero } from '@/sections/program/ProgramSections';
+import { ProgramCity } from '@/sections/program/ProgramCity';
+import { ProgramCompare, ProgramHero } from '@/sections/program/ProgramSections';
 import { PinLight } from '@/sections/program/PinLight';
 import { ProgramWeek } from '@/sections/program/ProgramWeek';
 import { BottomNav } from '@/sections/site/BottomNav';
@@ -105,13 +107,14 @@ export default function ProgramPage() {
             ]}
           />
         </Tone>
-        {/* the main page's future-proof curriculum, career prep and AI curriculum (all light here) */}
+        {/* the main page's future-proof curriculum, career prep and AI curriculum */}
         <Tone>
           <div id="program-curriculum">
             <Curriculum part="terms" termsStack termsVersion={4} deck />
           </div>
         </Tone>
-        <Tone>
+        {/* career prep on its dark band, as on the main page */}
+        <Tone dark>
           <DeckCareerPrep />
         </Tone>
         <Tone>
@@ -145,8 +148,9 @@ export default function ProgramPage() {
         <Tone>
           <ProgramCity />
         </Tone>
+        {/* the main page's closing banner */}
         <Tone>
-          <ProgramCta />
+          <DeckCloseSection />
         </Tone>
       </main>
       <Tone>
