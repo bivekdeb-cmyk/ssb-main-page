@@ -75,9 +75,9 @@ export default async function InternshipPage() {
           />
         </Tone>
         {/* the main page's placement report banner (2026-11-13, the user's ask): after the outcomes
-            (the user's ask: above the stories), where the internships lead: the figures and the audited report, without the recruiters' grid (the page has its logos) */}
+            (the user's ask: above the stories), where the internships lead: the figures and the audited report, then the recruiters' grid under it as on the main page (the user's ask) */}
         <Tone>
-          <DeckOutcomes ticker recruiters={false} />
+          <DeckOutcomes ticker />
         </Tone>
         {/* "What Our Students Are Saying": the five students' videos on the home page's reel row */}
         <Tone>
