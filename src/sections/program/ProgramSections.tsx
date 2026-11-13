@@ -1,62 +1,31 @@
 import * as React from 'react';
-import { Button, Container, Heading, Section, Text } from '@kishanscaler/ssx-ui';
+import { Button, Container, Heading, Logo, Section, Text } from '@kishanscaler/ssx-ui';
 import {
+  ArrowRight,
   ArrowUpRight,
   Buildings,
-  CalendarBlank,
-  ChartBar,
-  ChartLineUp,
   CheckCircle,
-  Clock,
-  CurrencyEth,
-  CurrencyInr,
-  Database,
   DownloadSimple,
-  FileText,
-  Flask,
   ForkKnife,
-  Kanban,
-  Lightbulb,
-  LinkedinLogo,
   MapPin,
-  MicrosoftExcelLogo,
-  MicrosoftPowerpointLogo,
-  PaintBrush,
-  PenNib,
-  PuzzlePiece,
-  Robot,
-  Sparkle,
+  MinusCircle,
   Train,
-  TrendUp,
-  UsersThree,
-  VideoCamera,
-  XCircle,
-
 } from '@phosphor-icons/react/ssr';
 
-import {
-  programCity as city,
-  programCompare as cmp,
-  programCta as cta,
-  programHero as hero,
-  programProjects as proj,
-  programWorkshops as ws,
-  type WorkshopIcon,
-} from '@/content/program';
-import type { Icon } from '@phosphor-icons/react';
+import { programCity as city, programCompare as cmp, programCta as cta, programHero as hero } from '@/content/program';
 import { Title } from '@/sections/shared/Title';
 import './program.css';
 
 /**
- * The program page's own sections (/program, 2026-11-13): the copy of scaler.com's program page, in
- * the SSB pages' vocabulary (the section header, 8px cards, hairline bento cells, the brand green
- * only for figures and marks). Server components; the page's CalmEntrance fades each one in.
+ * The program page's own sections (/program, 2026-11-13): the copy of scaler.com's program page in
+ * the SSB pages' vocabulary, all light (the user's ask: no dark anywhere). Everything else on the
+ * page is the main page's own section, unchanged. Server components; CalmEntrance fades them in.
  */
 
 /** The page's section header: eyebrow, "Lead.|Tail." title, line. */
-function Header({ id, eyebrow, title, sub, center }: { id: string; eyebrow: string; title: string; sub?: string; center?: boolean }) {
+function Header({ id, eyebrow, title, sub }: { id: string; eyebrow: string; title: string; sub?: string }) {
   return (
-    <div className="pg-head" data-center={center ? '' : undefined}>
+    <div className="pg-head">
       <Heading as="p" size="eyebrow" className="text-content-brand">
         {eyebrow}
       </Heading>
@@ -75,70 +44,56 @@ function Header({ id, eyebrow, title, sub, center }: { id: string; eyebrow: stri
 /* ── the first fold ─────────────────────────────────────────────────────────────────────────────── */
 
 /**
- * The programme's first fold (in place of the home page's film): the breadcrumb, then the name and
- * its line with the two actions at the left, a campus photo at the right; under them the six
- * figures in one hairline strip (the home page's bento cells), the first, the terms, on the brand's
- * pale green.
+ * The first fold, text and figures only (the user's ask: no photo): at the left the breadcrumb, the
+ * programme's name and its line, the two actions as quiet text links; at the right the six figures
+ * as cards in a 3 × 2 grid, the terms first on the pale green. Phones: the figures 2 × 3 under it.
  */
 export function ProgramHero() {
   return (
     <Section density="roomy" aria-labelledby="pgh-title" className="pgh">
       <Container>
-        <nav aria-label="Breadcrumb" className="pgh-crumbs">
-          <ol>
-            {hero.crumbs.map((c, i) => (
-              <li key={c.href}>
-                {i === hero.crumbs.length - 1 ? <span aria-current="page">{c.label}</span> : <a href={c.href}>{c.label}</a>}
-              </li>
-            ))}
-          </ol>
-        </nav>
-
         <div className="pgh-grid">
           <div className="pgh-copy">
+            <nav aria-label="Breadcrumb" className="pgh-crumbs">
+              <ol>
+                {hero.crumbs.map((c, i) => (
+                  <li key={c.href}>
+                    {i === hero.crumbs.length - 1 ? <span aria-current="page">{c.label}</span> : <a href={c.href}>{c.label}</a>}
+                  </li>
+                ))}
+              </ol>
+            </nav>
             <p className="pgh-chip">{hero.eyebrow}</p>
             <Heading as="h1" size="display" id="pgh-title" className="pgh-title">
-              {hero.title} <span className="h-tail">({hero.short})</span>
+              {hero.title} <span className="pgh-short">({hero.short})</span>
             </Heading>
             <Text size="lg" tone="secondary" className="pgh-line">
               {hero.line}
             </Text>
-            <div className="pgh-actions">
-              <Button asChild size="lg" variant="primary">
-                <a href={hero.primaryCta.href}>
-                  {hero.primaryCta.label}
-                  <ArrowUpRight weight="bold" aria-hidden="true" />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="secondary">
-                <a href={hero.secondaryCta.href}>
-                  {hero.secondaryCta.label}
-                  <DownloadSimple weight="bold" aria-hidden="true" />
-                </a>
-              </Button>
-            </div>
-            <p className="pgh-note">
-              <CalendarBlank aria-hidden="true" />
-              {hero.note}
+            <p className="pgh-links">
+              <a href={hero.primaryCta.href} className="pgh-link pgh-link-primary">
+                {hero.primaryCta.label}
+                <ArrowRight weight="bold" aria-hidden="true" />
+              </a>
+              <a href={hero.secondaryCta.href} className="pgh-link">
+                {hero.secondaryCta.label}
+                <DownloadSimple weight="bold" aria-hidden="true" />
+              </a>
             </p>
           </div>
-          <div className="pgh-photo">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={hero.image.src} alt={hero.image.alt} width={1200} height={900} loading="eager" />
-          </div>
-        </div>
 
-        <dl className="pgh-figs">
-          {hero.figures.map((f, i) => (
-            <div key={f.label} className="pgh-fig" data-lead={i === 0 ? '' : undefined}>
-              <dd>{f.value}</dd>
-              <dt>
-                {f.label}
-                {f.note ? <small>{f.note}</small> : null}
-              </dt>
-            </div>
-          ))}
-        </dl>
+          <dl className="pgh-figs">
+            {hero.figures.map((f, i) => (
+              <div key={f.label} className="pgh-fig" data-lead={i === 0 ? '' : undefined}>
+                <dd>{f.value}</dd>
+                <dt>
+                  {f.label}
+                  {f.note ? <small>{f.note}</small> : null}
+                </dt>
+              </div>
+            ))}
+          </dl>
+        </div>
       </Container>
     </Section>
   );
@@ -147,10 +102,10 @@ export function ProgramHero() {
 /* ── SSB vs traditional ─────────────────────────────────────────────────────────────────────────── */
 
 /**
- * The comparison as two cards side by side (the earlier table read flat): SSB's a dark-green island,
- * raised, each row its aspect over a line with a green check; the conventional programmes' a quiet
- * grey card, the same rows with grey crosses, so the two read across, row by row. Phones: the two
- * cards stacked, SSB's first.
+ * The comparison as two cards side by side, subtle (the user's ask: no gradient, the green one in
+ * focus): SSB's white with a green edge, the Scaler School of Business logo at its head, green checks;
+ * the conventional programmes' a disabled-looking grey fill, faded text and grey minus marks. The
+ * rows line up across. Phones: stacked, SSB's first.
  */
 export function ProgramCompare() {
   return (
@@ -158,13 +113,11 @@ export function ProgramCompare() {
       <Container>
         <Header id="compare" eyebrow={cmp.eyebrow} title={cmp.title} sub={cmp.sub} />
         <div className="pgc-pair">
-          <div className="pgc-card pgc-ssb" data-brand="ssb" data-theme="dark">
-            <p className="pgc-name">
-              <span className="pgc-mark" aria-hidden="true">
-                SSB
-              </span>
-              {cmp.ssbLabel}
-            </p>
+          <div className="pgc-card pgc-ssb">
+            <div className="pgc-name">
+              <Logo brand="ssb" size="md" surface="light" />
+              <span className="pgc-prog">{cmp.ssbLabel}</span>
+            </div>
             <ul>
               {cmp.rows.map((r) => (
                 <li key={r.label}>
@@ -177,15 +130,14 @@ export function ProgramCompare() {
               ))}
             </ul>
           </div>
-          <div className="pgc-vs" aria-hidden="true">
-            vs
-          </div>
           <div className="pgc-card pgc-trad">
-            <p className="pgc-name">{cmp.traditionalLabel}</p>
+            <div className="pgc-name">
+              <span className="pgc-trad-name">{cmp.traditionalLabel}</span>
+            </div>
             <ul>
               {cmp.rows.map((r) => (
                 <li key={r.label}>
-                  <XCircle aria-hidden="true" />
+                  <MinusCircle aria-hidden="true" />
                   <div>
                     <span className="pgc-aspect">{r.label}</span>
                     <span className="pgc-text">{r.traditional}</span>
@@ -200,128 +152,14 @@ export function ProgramCompare() {
   );
 }
 
-/* ── projects ───────────────────────────────────────────────────────────────────────────────────── */
-
-/**
- * Real-world projects as a bento: first the 18 months as one bar split by phase (6, 6, 3, 3), then
- * a tile per phase: the specialisation phase large at the right with its eleven projects in two
- * columns; the fundamentals and the internship stacked at its left; the AI build across the foot.
- */
-export function ProgramProjects() {
-  const total = proj.phases.reduce((n, p) => n + p.months, 0);
-  return (
-    <Section id="projects" density="roomy" aria-labelledby="projects-title" className="pgp">
-      <Container>
-        <Header id="projects" eyebrow={proj.eyebrow} title={proj.title} sub={proj.sub} />
-
-        <ol className="pgp-bar" aria-label={`${total} months, by phase`}>
-          {proj.phases.map((p) => (
-            <li key={p.num} style={{ flexGrow: p.months }}>
-              <span>Phase {p.num}</span>
-              <span>{p.months} months</span>
-            </li>
-          ))}
-        </ol>
-
-        <div className="pgp-bento">
-          {proj.phases.map((p) => (
-            <article key={p.num} className="pgp-tile" data-phase={p.num}>
-              <header className="pgp-tile-head">
-                <p className="pgp-phase">Phase {p.num}</p>
-                <h3>{p.name}</h3>
-                <p className="pgp-months">
-                  <Clock aria-hidden="true" />
-                  {p.months} months{p.projects.length > 1 ? ` · ${p.projects.length} projects` : ''}
-                </p>
-              </header>
-              <ul className="pgp-list">
-                {p.projects.map((x) => (
-                  <li key={x.title}>
-                    <h4>{x.title}</h4>
-                    <p>{x.desc}</p>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-/* ── workshops ──────────────────────────────────────────────────────────────────────────────────── */
-
-const WS_ICONS: Record<WorkshopIcon, Icon> = {
-  excel: MicrosoftExcelLogo,
-  powerpoint: MicrosoftPowerpointLogo,
-  idea: Lightbulb,
-  robot: Robot,
-  design: PenNib,
-  sql: Database,
-  finance: CurrencyInr,
-  linkedin: LinkedinLogo,
-  kanban: Kanban,
-  canva: PaintBrush,
-  sparkle: Sparkle,
-  lab: Flask,
-  resume: FileText,
-  analytics: ChartLineUp,
-  puzzle: PuzzlePiece,
-  bars: ChartBar,
-  people: UsersThree,
-  video: VideoCamera,
-  crypto: CurrencyEth,
-  trend: TrendUp,
-};
-
-/**
- * Practical workshops as a bento of six tiles: the "20+" figure on the pale green, then a tile per
- * term with its four workshops, each an icon on a small tile and its name.
- */
-export function ProgramWorkshops() {
-  return (
-    <Section id="workshops" density="roomy" aria-labelledby="workshops-title" className="pgw">
-      <Container>
-        <Header id="workshops" eyebrow={ws.eyebrow} title={ws.title} sub={ws.sub} />
-        <div className="pgw-bento">
-          <div className="pgw-lead">
-            <p className="pgw-value">{ws.lead.value}</p>
-            <p className="pgw-label">{ws.lead.label}</p>
-            <p className="pgw-line">{ws.lead.line}</p>
-          </div>
-          {ws.terms.map((t) => (
-            <article key={t.term} className="pgw-tile">
-              <h3 className="pgw-term">Term {t.term}</h3>
-              <ul>
-                {t.items.map((it) => {
-                  const I = WS_ICONS[it.icon];
-                  return (
-                    <li key={it.name}>
-                      <span className="pgw-icon" aria-hidden="true">
-                        <I weight="duotone" />
-                      </span>
-                      {it.name}
-                    </li>
-                  );
-                })}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
 /* ── Bangalore ──────────────────────────────────────────────────────────────────────────────────── */
 
 const COMFORT_ICONS = { transport: Train, food: ForkKnife, hub: Buildings } as const;
 
 /**
- * Located in Bangalore: a bento of the city and the campus. At the left, Bengaluru (Vidhana Soudha)
- * large, the city's line and its three comforts over it on a dark frost; at the right the campus,
- * its line and points over two photos; the actions under.
+ * Located in Bangalore, light: at the left the city (Vidhana Soudha) in a white card, its three
+ * comforts under the photo; at the right the campus, its line and points over two photos; the
+ * actions under.
  */
 export function ProgramCity() {
   return (
@@ -329,7 +167,7 @@ export function ProgramCity() {
       <Container>
         <Header id="city" eyebrow={city.eyebrow} title={city.title} sub={city.sub} />
         <div className="pgy-bento">
-          <figure className="pgy-city" data-brand="ssb" data-theme="dark">
+          <figure className="pgy-city">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={city.image.src}
@@ -347,7 +185,9 @@ export function ProgramCity() {
                   const I = COMFORT_ICONS[c.icon];
                   return (
                     <li key={c.label}>
-                      <I weight="regular" aria-hidden="true" />
+                      <span className="pgy-icon" aria-hidden="true">
+                        <I weight="duotone" />
+                      </span>
                       {c.label}
                     </li>
                   );
@@ -398,13 +238,12 @@ export function ProgramCity() {
 
 /* ── the call to apply ──────────────────────────────────────────────────────────────────────────── */
 
-/** The last band: one deep-green card, the program page's line, the two actions. */
+/** The last band, light: one pale-green card, the program page's line, the two actions. */
 export function ProgramCta() {
   return (
     <Section density="roomy" aria-labelledby="pga-title" className="pga">
       <Container>
-        <div className="pga-card" data-brand="ssb" data-theme="dark">
-          <div className="pga-rings" aria-hidden="true" />
+        <div className="pga-card">
           <p className="pga-eyebrow">
             <span className="pga-dot" aria-hidden="true" />
             {cta.eyebrow}
@@ -412,7 +251,7 @@ export function ProgramCta() {
           <Heading as="h2" size="display" id="pga-title" className="pga-title">
             <Title text={cta.title} />
           </Heading>
-          <div className="pga-actions" data-brand="ssb" data-theme="light">
+          <div className="pga-actions">
             <Button asChild size="lg" variant="primary">
               <a href={cta.primaryCta.href}>
                 {cta.primaryCta.label}

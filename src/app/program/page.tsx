@@ -1,22 +1,27 @@
 import type { Metadata } from 'next';
 import { heroFrame } from '@/content/home';
-import { deckAlumni } from '@/content/deck';
+import { deckAlumni, deckLiveLogos, deckUsps } from '@/content/deck';
 import { programNav } from '@/content/program';
 import { AlumniSection } from '@/sections/alumni/AlumniSection';
 import { PeersTicker } from '@/sections/alumni/PeersTicker';
 import { CampusLifeSection } from '@/sections/community/CommunitySections';
+import { CurriculumRail } from '@/sections/curriculum/CurriculumRail';
+import { DeckCareerPrep } from '@/sections/deck/DeckCareerPrep';
 import { DeckFooter } from '@/sections/deck/DeckFooter';
+import { DeckGlobalImmersion } from '@/sections/deck/DeckGlobalImmersion';
+import {
+  DeckAiProductsSection,
+  DeckBusinessFacts,
+  DeckBusinessSection,
+  DeckImmersionsSection,
+  DeckUsp,
+  DeckUspHead,
+} from '@/sections/deck/DeckSections';
 import { HeroFrameDeadline } from '@/sections/hero/frame/HeroFrame';
 import { Curriculum, HomeNav, ScrollRefresh } from '@/sections/home/client';
+import { LiveProjectsSection } from '@/sections/live-projects/LiveProjectsSection';
 import { PeopleTabsSection } from '@/sections/people-tabs/PeopleTabsSection';
-import {
-  ProgramCity,
-  ProgramCompare,
-  ProgramCta,
-  ProgramHero,
-  ProgramProjects,
-  ProgramWorkshops,
-} from '@/sections/program/ProgramSections';
+import { ProgramCity, ProgramCompare, ProgramCta, ProgramHero } from '@/sections/program/ProgramSections';
 import { ProgramWeek } from '@/sections/program/ProgramWeek';
 import { BottomNav } from '@/sections/site/BottomNav';
 import { CalmEntrance } from '@/sections/shared/CalmEntrance';
@@ -27,16 +32,17 @@ import '@/sections/deck/tokens.css';
 export const metadata: Metadata = { title: 'PGP in Management & Technology | Scaler School of Business' };
 
 /**
- * /program (2026-11-13, the user's asks): the programme page. The order and copy of
- * scaler.com/school-of-business/program, in the SSB pages' style: its own first fold (the programme's
- * name and six figures), SSB vs traditional as two cards, the main page's term-wise curriculum, the
- * projects and workshops as bentos, the instructors, a week at SSB as a timetable, the learners,
- * campus life, Bangalore, then the call to apply (content/program.ts, sections/program/).
+ * /program (2026-11-13, the user's asks): the programme page, light throughout. The order of
+ * scaler.com/school-of-business/program; its own first fold (the name and six figures, no photo),
+ * SSB vs traditional, a week at SSB and Bangalore (content/program.ts, sections/program/). Learn by
+ * doing ("How you learn": the four USPs on their rail), the curriculum, career prep, the AI
+ * curriculum, the faculty, mentors, alumni and campus life are the main page's (/) own sections,
+ * unchanged, except that the alumni, faculty and mentor cards share one size here (program.css).
  */
 export default function ProgramPage() {
   return (
     <>
-      <main data-page="v7" data-entrance="calm" data-brand="ssb" data-theme="light" className="bg-page text-content">
+      <main data-page="v7" data-route="program" data-entrance="calm" data-brand="ssb" data-theme="light" className="bg-page text-content">
         <ScrollRefresh />
         <CalmEntrance />
         <HeroFrameDeadline deadline={heroFrame.deadline} />
@@ -49,17 +55,65 @@ export default function ProgramPage() {
         <Tone>
           <ProgramCompare />
         </Tone>
-        {/* term-wise curriculum: the main page's terms, each opening its courses */}
+        {/* learn by doing: the main page's "How you learn", whole */}
+        <Tone>
+          <DeckUspHead />
+          <CurriculumRail
+            sections={[
+              {
+                ...deckUsps.items[0],
+                line: undefined,
+                node: (
+                  <DeckUsp num="01" label={deckUsps.items[0].label}>
+                    <DeckBusinessSection />
+                    <DeckBusinessFacts />
+                  </DeckUsp>
+                ),
+              },
+              {
+                ...deckUsps.items[1],
+                line: undefined,
+                node: (
+                  <DeckUsp num="02" label={deckUsps.items[1].label}>
+                    <DeckAiProductsSection />
+                  </DeckUsp>
+                ),
+              },
+              {
+                ...deckUsps.items[3],
+                num: '03',
+                line: undefined,
+                node: (
+                  <DeckUsp num="03" label={deckUsps.items[3].label}>
+                    <LiveProjectsSection logos={deckLiveLogos} />
+                  </DeckUsp>
+                ),
+              },
+              {
+                ...deckUsps.items[2],
+                num: '04',
+                line: undefined,
+                node: (
+                  <DeckUsp num="04" label={deckUsps.items[2].label}>
+                    <DeckImmersionsSection />
+                    <DeckGlobalImmersion />
+                  </DeckUsp>
+                ),
+              },
+            ]}
+          />
+        </Tone>
+        {/* the main page's future-proof curriculum, career prep and AI curriculum (all light here) */}
         <Tone>
           <div id="program-curriculum">
             <Curriculum part="terms" termsStack termsVersion={4} deck />
           </div>
         </Tone>
         <Tone>
-          <ProgramProjects />
+          <DeckCareerPrep />
         </Tone>
         <Tone>
-          <ProgramWorkshops />
+          <Curriculum part="ai" aiCarousel deck />
         </Tone>
         {/* who are your instructors: faculty, then mentors */}
         <Tone>

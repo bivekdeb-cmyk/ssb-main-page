@@ -1,4 +1,4 @@
-/* The program page's own sections (/program). Tokens only; 8px cards (--radius-lg). */
+/* The program page's own sections (/program). Light only; tokens; 8px cards (--radius-lg). */
 
 .pg-head {
   display: flex;
@@ -7,9 +7,26 @@
   max-width: var(--size-measure-max, 48rem);
 }
 
-/* ── the first fold ─────────────────────────────────────────────────────────────────────────── */
+/* ── the first fold: text and figures only ──────────────────────────────────────────────────── */
 .pgh {
-  padding-top: var(--space-8) !important;
+  padding-top: var(--space-12) !important;
+}
+.pgh-grid {
+  display: grid;
+  gap: var(--space-10);
+  align-items: center;
+}
+@media (width >= 1056px) {
+  .pgh-grid {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--space-16);
+  }
+}
+.pgh-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
 }
 .pgh-crumbs ol {
   display: flex;
@@ -29,33 +46,12 @@
   color: inherit;
   text-decoration: none;
 }
-.pgh-crumbs a:hover {
-  color: var(--color-content);
-}
+.pgh-crumbs a:hover,
 .pgh-crumbs [aria-current] {
   color: var(--color-content);
 }
-
-.pgh-grid {
-  display: grid;
-  gap: var(--space-8);
-  margin-top: var(--space-6);
-  align-items: center;
-}
-@media (width >= 1056px) {
-  .pgh-grid {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: var(--space-12);
-  }
-}
-.pgh-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-4);
-}
 .pgh-chip {
-  margin: 0;
+  margin: var(--space-2) 0 0;
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-full);
   background: var(--color-ssb-light-3);
@@ -68,57 +64,61 @@
   line-height: 1.08 !important;
   letter-spacing: -0.03em;
 }
-.pgh-line {
-  max-width: 36rem;
+.pgh-short {
+  color: var(--color-content-secondary);
+  white-space: nowrap;
 }
-.pgh-actions {
+.pgh-line {
+  max-width: 34rem;
+}
+/* the actions as quiet links: the brand green with an arrow, then the brochure in ink */
+.pgh-links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-2);
+  gap: var(--space-2) var(--space-6);
+  margin: var(--space-2) 0 0;
 }
-.pgh-note {
-  display: flex;
+.pgh-link {
+  display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  margin: 0;
-  font-size: var(--type-caption-size);
-  color: var(--color-content-secondary);
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-content);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 160ms ease, gap 160ms ease;
 }
-.pgh-note svg {
+.pgh-link svg {
   width: 1rem;
   height: 1rem;
 }
-.pgh-photo {
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  aspect-ratio: 4 / 3;
-  background: var(--color-surface-sunken);
+.pgh-link:hover {
+  gap: var(--space-3);
+  border-color: currentColor;
 }
-.pgh-photo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.pgh-link-primary {
+  color: var(--color-ssb-light-9);
+  border-color: var(--color-ssb-light-6);
 }
 
-/* the six figures: hairline cells, as the home page's placement bento */
+/* the six figures as cards, 3 × 2 */
 .pgh-figs {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 1px;
-  margin: var(--space-10) 0 0;
-  overflow: hidden;
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
-  background: var(--color-border-subtle);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
 }
 .pgh-fig {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-5) var(--space-6);
+  gap: var(--space-6);
+  min-height: 9.5rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
   background: var(--color-surface-raised);
 }
 .pgh-fig dd {
@@ -145,27 +145,27 @@
   color: var(--color-content-secondary);
 }
 .pgh-fig[data-lead] {
+  border-color: var(--color-ssb-light-5);
   background: var(--color-ssb-light-2);
 }
 .pgh-fig[data-lead] dd {
   color: var(--color-ssb-light-11);
 }
-@media (672px <= width < 1056px) {
-  .pgh-figs {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
 @media (width < 672px) {
   .pgh {
-    padding-top: var(--space-5) !important;
+    padding-top: var(--space-6) !important;
+  }
+  .pgh-grid {
+    gap: var(--space-8);
   }
   .pgh-figs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: var(--space-8);
+    gap: var(--space-2);
   }
   .pgh-fig {
+    min-height: 0;
+    gap: var(--space-4);
     padding: var(--space-4);
-    gap: var(--space-3);
   }
   .pgh-fig dd {
     font-size: 1.75rem;
@@ -173,17 +173,10 @@
   .pgh-fig dt {
     font-size: var(--type-caption-size);
   }
-  .pgh-actions {
-    width: 100%;
-  }
-  .pgh-actions > * {
-    flex: 1 1 100%;
-  }
 }
 
-/* ── SSB vs traditional: two cards ──────────────────────────────────────────────────────────── */
+/* ── SSB vs traditional: two cards, subtle ──────────────────────────────────────────────────── */
 .pgc-pair {
-  position: relative;
   display: grid;
   gap: var(--space-4);
   margin-top: var(--space-10);
@@ -203,8 +196,16 @@
     padding: var(--space-8);
   }
 }
+.pgc-name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 2.75rem;
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--pgc-line);
+}
 .pgc-card ul {
-  margin: var(--space-6) 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -220,8 +221,8 @@
 }
 .pgc-card li svg {
   flex: none;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.375rem;
+  height: 1.375rem;
   margin-top: 0.125rem;
 }
 .pgc-card li div {
@@ -239,337 +240,59 @@
   font-size: 1.0625rem;
   line-height: 1.45;
 }
-.pgc-name {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin: 0;
-  font-size: 1.375rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-.pgc-mark {
-  display: inline-grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius-lg);
-  background: var(--color-ssb-light-9);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
 
-/* SSB's card: a deep green island, raised */
+/* SSB's card: white, a green edge, green marks: the one in focus */
 .pgc-ssb {
-  --pgc-line: rgb(255 255 255 / 0.12);
-  background:
-    radial-gradient(120% 80% at 0% 0%, rgb(29 146 91 / 0.35), transparent 60%),
-    var(--color-ssb-light-12, #0b2e1c);
-  color: #fff;
-  box-shadow: 0 24px 48px -24px rgb(0 74 30 / 0.45);
-}
-.pgc-ssb .pgc-aspect {
-  color: var(--color-ssb-light-6, #9fd8b8);
-}
-.pgc-ssb li svg {
-  color: var(--color-ssb-light-8, #4cc38a);
-}
-
-/* the conventional programmes' card: quiet grey */
-.pgc-trad {
   --pgc-line: var(--color-border-subtle);
-  background: var(--color-surface-sunken);
-  color: var(--color-content-secondary);
-}
-.pgc-trad .pgc-name {
-  color: var(--color-content);
-  min-height: 2.5rem;
-}
-.pgc-trad .pgc-aspect {
-  color: var(--color-content-secondary);
-}
-.pgc-trad li svg {
-  color: var(--color-content-secondary);
-  opacity: 0.7;
-}
-
-/* the "vs" between them, on the seam */
-.pgc-vs {
-  position: absolute;
-  top: 2.5rem;
-  left: 50%;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  translate: -50% 0;
-  border: 4px solid var(--color-surface, #fff);
-  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-ssb-light-7);
   background: var(--color-surface-raised);
   color: var(--color-content);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  text-transform: uppercase;
+}
+.pgc-prog {
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--color-border-subtle);
+  font-size: var(--type-label-size);
+  font-weight: 600;
+  color: var(--color-ssb-light-11);
+}
+.pgc-ssb .pgc-aspect {
+  color: var(--color-ssb-light-9);
+}
+.pgc-ssb li svg {
+  color: var(--color-ssb-light-9);
+}
+
+/* the conventional programmes' card: a disabled fill, everything faded */
+.pgc-trad {
+  --pgc-line: var(--color-border-subtle);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-disabled, var(--color-surface-sunken));
+  color: var(--color-content-disabled, var(--color-content-secondary));
+}
+.pgc-trad-name {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--color-content-secondary);
+}
+.pgc-trad .pgc-aspect {
+  color: var(--color-content-disabled, var(--color-content-secondary));
+}
+.pgc-trad .pgc-text {
+  color: var(--color-content-secondary);
+  opacity: 0.85;
+}
+.pgc-trad li svg {
+  color: var(--color-content-disabled, var(--color-content-secondary));
 }
 @media (width < 672px) {
-  .pgc-vs {
-    display: none;
+  .pgc-card {
+    padding: var(--space-5);
   }
   .pgc-card li {
     min-height: 0;
   }
   .pgc-text {
     font-size: 1rem;
-  }
-}
-
-/* ── projects: the bar, then the bento ──────────────────────────────────────────────────────── */
-.pgp-bar {
-  display: flex;
-  gap: var(--space-1);
-  margin: var(--space-10) 0 0;
-  padding: 0;
-  list-style: none;
-}
-.pgp-bar li {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-md, 6px);
-  background: var(--color-ssb-light-3);
-  color: var(--color-ssb-light-11);
-  font-size: var(--type-caption-size);
-  font-weight: 600;
-  white-space: nowrap;
-}
-.pgp-bar li:nth-child(2) {
-  background: var(--color-ssb-light-5);
-}
-.pgp-bar li:nth-child(3) {
-  background: var(--color-ssb-light-9);
-  color: #fff;
-}
-.pgp-bar li:nth-child(4) {
-  background: var(--color-ssb-light-11);
-  color: #fff;
-}
-
-.pgp-bento {
-  display: grid;
-  gap: var(--space-4);
-  margin-top: var(--space-4);
-}
-@media (width >= 1056px) {
-  .pgp-bento {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    grid-template-areas:
-      'p1 p2'
-      'p3 p2'
-      'p4 p4';
-  }
-  .pgp-tile[data-phase='1'] { grid-area: p1; }
-  .pgp-tile[data-phase='2'] { grid-area: p2; }
-  .pgp-tile[data-phase='3'] { grid-area: p3; }
-  .pgp-tile[data-phase='4'] { grid-area: p4; }
-  .pgp-tile[data-phase='2'] .pgp-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-.pgp-tile {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  padding: var(--space-6);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface-raised);
-}
-.pgp-tile[data-phase='2'] {
-  background: var(--color-surface-sunken);
-  border-color: transparent;
-}
-.pgp-tile[data-phase='3'] {
-  background: var(--color-ssb-light-2);
-  border-color: transparent;
-}
-.pgp-tile-head h3 {
-  margin: var(--space-1) 0 0;
-  font-size: 1.5rem;
-  line-height: 1.2;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-.pgp-phase {
-  margin: 0;
-  font-size: var(--type-caption-size);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-ssb-light-9);
-}
-.pgp-months {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin: var(--space-2) 0 0;
-  font-size: var(--type-caption-size);
-  color: var(--color-content-secondary);
-}
-.pgp-months svg {
-  width: 1rem;
-  height: 1rem;
-}
-.pgp-list {
-  display: grid;
-  gap: var(--space-3);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.pgp-list li {
-  padding: var(--space-4);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface-raised);
-  border: 1px solid var(--color-border-subtle);
-}
-.pgp-tile:not([data-phase='2']) .pgp-list li {
-  padding: 0;
-  border: 0;
-  background: none;
-}
-.pgp-tile:not([data-phase='2']) .pgp-list li + li {
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--color-border-subtle);
-}
-.pgp-list h4 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.35;
-}
-.pgp-list p {
-  margin: var(--space-1) 0 0;
-  font-size: var(--type-caption-size);
-  line-height: 1.5;
-  color: var(--color-content-secondary);
-}
-@media (width < 672px) {
-  .pgp-bar li {
-    flex-direction: column;
-    gap: 0;
-    padding: var(--space-2);
-  }
-  .pgp-tile {
-    padding: var(--space-5);
-  }
-}
-
-/* ── workshops: a bento of six ──────────────────────────────────────────────────────────────── */
-.pgw-bento {
-  display: grid;
-  gap: var(--space-4);
-  margin-top: var(--space-10);
-}
-@media (width >= 672px) {
-  .pgw-bento {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (width >= 1056px) {
-  .pgw-bento {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-.pgw-lead,
-.pgw-tile {
-  padding: var(--space-6);
-  border-radius: var(--radius-lg);
-}
-.pgw-lead {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: var(--space-2);
-  min-height: 14rem;
-  background:
-    radial-gradient(90% 70% at 100% 0%, rgb(29 146 91 / 0.18), transparent 60%),
-    var(--color-ssb-light-2);
-}
-.pgw-lead p {
-  margin: 0;
-}
-.pgw-value {
-  font-size: clamp(3.5rem, 6vw, 5rem);
-  line-height: 0.95;
-  letter-spacing: -0.05em;
-  font-weight: 500;
-  color: var(--color-ssb-light-11);
-}
-.pgw-label {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--color-ssb-light-11);
-}
-.pgw-line {
-  font-size: var(--type-caption-size);
-  line-height: 1.5;
-  color: var(--color-content-secondary);
-}
-.pgw-tile {
-  border: 1px solid var(--color-border-subtle);
-  background: var(--color-surface-raised);
-}
-.pgw-term {
-  margin: 0;
-  font-size: var(--type-caption-size);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-ssb-light-9);
-}
-.pgw-tile ul {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-4) var(--space-3);
-  margin: var(--space-5) 0 0;
-  padding: 0;
-  list-style: none;
-}
-.pgw-tile li {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  font-size: 0.9375rem;
-  line-height: 1.35;
-  font-weight: 500;
-}
-.pgw-icon {
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface-sunken);
-  color: var(--color-ssb-light-9);
-}
-.pgw-icon svg {
-  width: 1.375rem;
-  height: 1.375rem;
-}
-@media (width < 672px) {
-  .pgw-lead {
-    min-height: 0;
-  }
-  .pgw-lead,
-  .pgw-tile {
-    padding: var(--space-5);
-  }
-  .pgw-tile li {
-    font-size: 0.875rem;
   }
 }
 
@@ -742,7 +465,7 @@
   }
 }
 
-/* ── Bangalore: the city and the campus ─────────────────────────────────────────────────────── */
+/* ── Bangalore: the city and the campus, light ──────────────────────────────────────────────── */
 .pgy-bento {
   display: grid;
   gap: var(--space-4);
@@ -754,26 +477,22 @@
   }
 }
 .pgy-city {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   overflow: hidden;
-  min-height: 28rem;
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-lg);
-  background: #111;
+  background: var(--color-surface-raised);
 }
 .pgy-city img {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 .pgy-city figcaption {
-  position: absolute;
-  inset: auto 0 0;
-  padding: var(--space-16) var(--space-6) var(--space-6);
-  background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.45) 60%, transparent);
-  color: #fff;
+  padding: var(--space-5) var(--space-6) var(--space-6);
 }
 .pgy-kicker {
   margin: 0;
@@ -781,12 +500,12 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 0.75);
+  color: var(--color-ssb-light-9);
 }
 .pgy-city ul {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-3);
+  gap: var(--space-4);
   margin: var(--space-3) 0 0;
   padding: 0;
   list-style: none;
@@ -795,18 +514,22 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid rgb(255 255 255 / 0.18);
-  border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.1);
-  backdrop-filter: blur(10px);
   font-size: 0.9375rem;
   line-height: 1.35;
   font-weight: 500;
 }
-.pgy-city li svg {
-  width: 1.5rem;
-  height: 1.5rem;
+.pgy-icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-ssb-light-2);
+  color: var(--color-ssb-light-9);
+}
+.pgy-icon svg {
+  width: 1.375rem;
+  height: 1.375rem;
 }
 .pgy-campus {
   display: flex;
@@ -868,20 +591,16 @@
   margin-top: var(--space-6);
 }
 @media (width < 672px) {
-  .pgy-city {
-    min-height: 30rem;
-  }
   .pgy-city figcaption {
-    padding: var(--space-12) var(--space-4) var(--space-4);
+    padding: var(--space-4);
   }
   .pgy-city ul {
     grid-template-columns: 1fr;
-    gap: var(--space-2);
+    gap: var(--space-3);
   }
   .pgy-city li {
     flex-direction: row;
     align-items: center;
-    padding: var(--space-2) var(--space-3);
   }
   .pgy-campus {
     padding: var(--space-5);
@@ -891,72 +610,66 @@
   }
 }
 
-/* ── the call to apply ──────────────────────────────────────────────────────────────────────── */
+/* ── the call to apply, light ───────────────────────────────────────────────────────────────── */
 .pga-card {
-  position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-5);
   padding: var(--space-16) var(--space-8);
+  border: 1px solid var(--color-ssb-light-5);
   border-radius: var(--radius-lg);
-  background:
-    radial-gradient(80% 120% at 50% 120%, rgb(29 146 91 / 0.55), transparent 70%),
-    var(--color-ssb-light-12, #0b2e1c);
-  color: #fff;
+  background: var(--color-ssb-light-2);
   text-align: center;
 }
-.pga-rings {
-  position: absolute;
-  inset: 0;
-  background: repeating-radial-gradient(circle at 50% 130%, transparent 0 46px, rgb(255 255 255 / 0.05) 46px 47px);
-  pointer-events: none;
-}
 .pga-eyebrow {
-  position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   margin: 0;
   padding: var(--space-1) var(--space-3);
-  border: 1px solid rgb(255 255 255 / 0.2);
+  border: 1px solid var(--color-ssb-light-5);
   border-radius: var(--radius-full);
+  background: var(--color-surface-raised);
   font-size: var(--type-caption-size);
   font-weight: 500;
-  color: rgb(255 255 255 / 0.85);
+  color: var(--color-ssb-light-11);
 }
 .pga-dot {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: var(--radius-full);
-  background: var(--color-ssb-light-8, #4cc38a);
-  box-shadow: 0 0 0 4px rgb(76 195 138 / 0.25);
+  background: var(--color-ssb-light-9);
+  box-shadow: 0 0 0 4px var(--color-ssb-light-4);
 }
 .pga-title {
-  position: relative;
-  max-width: 48rem;
-  color: #fff;
-}
-.pga-title .h-tail {
-  color: rgb(255 255 255 / 0.6);
+  max-width: 46rem;
 }
 .pga-actions {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-3);
-  background: none;
 }
 @media (width < 672px) {
   .pga-card {
-    padding: var(--space-12) var(--space-5);
+    padding: var(--space-10) var(--space-5);
   }
   .pga-actions {
     width: 100%;
   }
   .pga-actions > * {
     flex: 1 1 100%;
+  }
+}
+
+/* ── one card size for alumni, faculty and mentors (/program only; the main page keeps its own):
+   344px wide on desktop, 3:2, between the alumni's 368 and the faculty's 320 ───────────────────── */
+@media (width >= 1056px) {
+  html body main[data-route='program'] .alumni-row {
+    grid-auto-columns: 21.5rem;
+  }
+  html body main[data-route='program'] .fc-grid.fc-grid {
+    grid-auto-columns: 21.5rem;
   }
 }

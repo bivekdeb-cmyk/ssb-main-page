@@ -11,11 +11,11 @@ import type { BottomNavItem } from './bottom-nav';
 /** The sub-navigation, in the program page's order (each target an id on /program). */
 export const programNav: BottomNavItem[] = [
   { label: 'SSB vs traditional', target: 'compare' },
+  { label: 'Learn by doing', target: 'dk-usp-title' },
   { label: 'Curriculum', target: 'program-curriculum' },
-  { label: 'Projects', target: 'projects' },
-  { label: 'Workshops', target: 'workshops' },
   { label: 'Faculty', target: 'program-faculty' },
   { label: 'Life at SSB', target: 'week' },
+  { label: 'Campus', target: 'city' },
 ];
 
 /** The first fold: the programme's name and its six figures. */
@@ -31,7 +31,6 @@ export const programHero = {
   primaryCta: { label: 'Apply Now', href: '#apply' },
   secondaryCta: { label: 'Download Brochure', href: '#brochure' },
   note: 'Admissions for the 2026 cohort are now open',
-  image: { src: '/campus/classroom.webp', alt: 'SSB students in the lecture hall' },
   figures: [
     { value: '6', label: 'Terms', note: '3 months each' },
     { value: '22', label: 'Core Courses' },
@@ -49,7 +48,7 @@ export const programCompare = {
   eyebrow: 'Why SSB',
   title: 'SSB vs traditional B‑schools.|Six differences that matter.',
   sub: 'Six ways the PGP-MT differs from a conventional MBA.',
-  ssbLabel: 'Scaler’s PGP-MT',
+  ssbLabel: 'PGP in Management & Technology',
   traditionalLabel: 'Conventional programs',
   rows: [
     {
@@ -83,118 +82,6 @@ export const programCompare = {
       traditional: 'Lack of domain-specific opportunities',
     },
   ] as CompareRow[],
-};
-
-export type Project = { title: string; desc: string };
-export type Phase = { num: number; name: string; months: number; projects: Project[] };
-
-/** Real-World Projects: four phases, 18 months. */
-export const programProjects: { eyebrow: string; title: string; sub: string; phases: Phase[] } = {
-  eyebrow: 'Learn by doing',
-  title: 'Real-world projects.|Four phases, 18 months.',
-  sub: 'Every phase is built around projects sourced from real companies.',
-  phases: [
-    {
-      num: 1,
-      name: 'Business Fundamentals',
-      months: 6,
-      projects: [
-        {
-          title: 'Business Performance Optimization',
-          desc: 'Choose a real company and analyze its operations, covering financial accounting, marketing, managerial economics, communication, sales strategies and business strategy.',
-        },
-        {
-          title: 'Hackathon: Strategy Consulting',
-          desc: 'A problem-solving marathon led by seasoned McKinsey/BCG/Bain leaders, using consulting frameworks such as issue trees and the BCG growth matrix.',
-        },
-      ],
-    },
-    {
-      num: 2,
-      name: 'Functional Specialization',
-      months: 6,
-      projects: [
-        { title: 'Strategic Investment Analysis', desc: 'Evaluate VC, PE and angel investment strategies in tech, and build funding frameworks that align business strategy with these investors’ expectations.' },
-        { title: 'The Big Brand Story: A Data-Driven Approach', desc: 'Craft a brand narrative of milestones, challenges and strategies, using business analytics and product management principles.' },
-        { title: 'New Product Launch Campaign', desc: 'Plan the marketing for a new product or service: goals, target audience, messaging and implementation.' },
-        { title: 'Portfolio Optimisation Challenge', desc: 'Build and manage a diversified investment portfolio on historical market data, using modern portfolio theory.' },
-        { title: 'Financial Health Assessment and Action Plan', desc: 'Analyze a company’s ratios and trends, benchmark it against peers and create an improvement plan.' },
-        { title: 'E-commerce Operations Transformation', desc: 'Streamline order fulfilment for an e-commerce startup within a three-week timeframe.' },
-        { title: 'Process Improvement Initiative', desc: 'Find process improvements in a SaaS company: the current process, enhancements and their benefits.' },
-        { title: 'Strategy Bootcamp: Emerging Tech', desc: 'Design and execute a market-entry strategy for a virtual reality startup.' },
-        { title: 'Competitive Landscape Analysis', desc: 'A SWOT assessment and strategic recommendations for a digital business.' },
-        { title: 'Market Basket Analysis for Retail: DMart / Zepto', desc: 'Analyze retail transaction data for buying patterns and devise targeted marketing to lift sales.' },
-        { title: 'Interview Mastery Bootcamp', desc: 'Real-world interview scenarios with expert guidance, salary negotiation workshops, peer best practices and mock interviews.' },
-      ],
-    },
-    {
-      num: 3,
-      name: 'Internship',
-      months: 3,
-      projects: [
-        { title: 'Industry Immersion', desc: 'A 3-month internship, managing real-life projects in top firms or leading startups.' },
-      ],
-    },
-    {
-      num: 4,
-      name: 'Advanced Tech-Industry Integration',
-      months: 3,
-      projects: [
-        { title: 'Build AI', desc: 'Design and develop a custom AI tool that automates or enhances a business process or customer experience in your organisation.' },
-      ],
-    },
-  ],
-};
-
-export type WorkshopIcon =
-  | 'excel' | 'powerpoint' | 'idea' | 'robot' | 'design' | 'sql' | 'finance' | 'linkedin'
-  | 'kanban' | 'canva' | 'sparkle' | 'lab' | 'resume' | 'analytics' | 'puzzle' | 'bars'
-  | 'people' | 'video' | 'crypto' | 'trend';
-
-/** Practical Workshops: four a term, five terms. */
-export const programWorkshops: {
-  eyebrow: string;
-  title: string;
-  sub: string;
-  lead: { value: string; label: string; line: string };
-  terms: { term: number; items: { name: string; icon: WorkshopIcon }[] }[];
-} = {
-  eyebrow: 'Empower your skills',
-  title: 'Practical workshops.|Tools you’ll use on day one.',
-  sub: 'Hands-on sessions every term, from Excel to algorithmic trading.',
-  lead: { value: '20+', label: 'Workshops', line: 'Four every term, across five terms, alongside your courses.' },
-  terms: [
-    { term: 1, items: [
-      { name: 'Excel Fundamentals', icon: 'excel' },
-      { name: 'PowerPoint Fundamentals', icon: 'powerpoint' },
-      { name: 'Guesstimates & Business Cases', icon: 'idea' },
-      { name: 'Build Your Own AI Chatbot', icon: 'robot' },
-    ] },
-    { term: 2, items: [
-      { name: 'Design Thinking', icon: 'design' },
-      { name: 'SQL Querying', icon: 'sql' },
-      { name: 'Personal Finance', icon: 'finance' },
-      { name: 'Profile Branding', icon: 'linkedin' },
-    ] },
-    { term: 3, items: [
-      { name: 'Tools for Project Management', icon: 'kanban' },
-      { name: 'Designing on Canva', icon: 'canva' },
-      { name: 'AI Applications in Finance', icon: 'sparkle' },
-      { name: 'Leadership Labs & Simulation', icon: 'lab' },
-    ] },
-    { term: 4, items: [
-      { name: 'Resume Building', icon: 'resume' },
-      { name: 'Mixpanel for Product Analytics', icon: 'analytics' },
-      { name: 'Supply Chain Simulation: Beer Game', icon: 'puzzle' },
-      { name: 'Fundamental Analysis using Screener', icon: 'bars' },
-    ] },
-    { term: 5, items: [
-      { name: 'Mock Interviews', icon: 'people' },
-      { name: 'Influencer Economy: Creator', icon: 'video' },
-      { name: 'Tech in Finance: Blockchain & Crypto', icon: 'crypto' },
-      { name: 'Algorithmic Trading', icon: 'trend' },
-    ] },
-  ],
 };
 
 /** A week in the life of an SSB student: the program page's timetable (Term 1). */
